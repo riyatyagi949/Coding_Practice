@@ -35,6 +35,7 @@
 // - `currentPartition` list stores at most O(N) substrings.
 // Therefore, the space complexity is O(N * 2^N) to store all the partitions.
 
+// Optimal Solution:
 class Solution {
     public ArrayList<ArrayList<String>> palinParts(String s) {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
