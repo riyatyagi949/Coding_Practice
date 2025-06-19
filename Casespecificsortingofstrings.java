@@ -20,36 +20,35 @@
 // and in the worst case, these lists can store up to N characters in total.
 
 // Optimal Solution:
+
+import java.util.*;
+
 class Solution {
     public static String caseSort(String s) {
+        int n = s.length();
+        List<Character> lower = new ArrayList<>();
+        List<Character> upper = new ArrayList<>();
+
+        for (char c : s.toCharArray()) {
+            if (Character.isLowerCase(c))
+                lower.add(c);
+            else
+                upper.add(c);
+        }
+        Collections.sort(lower);
+        Collections.sort(upper);
+
+        int l = 0, u = 0;
         StringBuilder result = new StringBuilder();
-        StringBuilder lowerCaseChars = new StringBuilder();
-        StringBuilder upperCaseChars = new StringBuilder();
 
         for (char c : s.toCharArray()) {
-            if (Character.isLowerCase(c)) {
-                lowerCaseChars.append(c);
-            } else {
-                upperCaseChars.append(c);
-            }
+            if (Character.isLowerCase(c))
+                result.append(lower.get(l++));
+            else
+                result.append(upper.get(u++));
         }
-
-        char[] lowerArr = lowerCaseChars.toString().toCharArray();
-        char[] upperArr = upperCaseChars.toString().toCharArray();
-
-        java.util.Arrays.sort(lowerArr);
-        java.util.Arrays.sort(upperArr);
-
-        int lowerPtr = 0;
-        int upperPtr = 0;
-
-        for (char c : s.toCharArray()) {
-            if (Character.isLowerCase(c)) {
-                result.append(lowerArr[lowerPtr++]);
-            } else {
-                result.append(upperArr[upperPtr++]);
-            }
-        }
-        return result.toString();
+       return result.toString();
     }
 }
+
+        
