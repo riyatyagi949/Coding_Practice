@@ -27,35 +27,32 @@
 // O(N) in the worst case for the HashMap to store frequencies of all distinct numbers.
 
 // Optimal Solution:
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 class Solution {
     public boolean validgroup(int[] arr, int k) {
-        if (arr.length % k != 0) {
-            return false;
+        if (arr.length % k != 0) return false;
+
+        TreeMap<Integer, Integer> freq = new TreeMap<>();
+        for (int num : arr) {
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
         }
 
-        Map<Integer, Integer> freqMap = new HashMap<>();
-        for (int num : arr) {
-            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
-        }
+        while (!freq.isEmpty()) {
+            int start = freq.firstKey(); // smallest available number
 
-        Arrays.sort(arr);
+            for (int i = 0; i < k; i++) {
+                int current = start + i;
+                if (!freq.containsKey(current)) return false;
 
-        for (int num : arr) {
-            if (freqMap.get(num) > 0) {
-                for (int i = 0; i < k; i++) {
-                    int currentConsecutiveNum = num + i;
-                    if (freqMap.containsKey(currentConsecutiveNum) && freqMap.get(currentConsecutiveNum) > 0) {
-                        freqMap.put(currentConsecutiveNum, freqMap.get(currentConsecutiveNum) - 1);
-                    } else {
-                        return false; 
-                    }
+                freq.put(current, freq.get(current) - 1);
+                if (freq.get(current) == 0) {
+                    freq.remove(current);
                 }
             }
         }
+
         return true;
     }
 }
+                    
