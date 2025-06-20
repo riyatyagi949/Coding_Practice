@@ -37,9 +37,8 @@ class Solution {
         for (int num : arr) {
             freq.put(num, freq.getOrDefault(num, 0) + 1);
         }
-
-        while (!freq.isEmpty()) {
-            int start = freq.firstKey(); // smallest available number
+           while (!freq.isEmpty()) {
+            int start = freq.firstKey();
 
             for (int i = 0; i < k; i++) {
                 int current = start + i;
@@ -51,8 +50,7 @@ class Solution {
                 }
             }
         }
-
-        return true;
+         return true;
     }
 }
                     
