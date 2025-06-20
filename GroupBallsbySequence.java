@@ -46,13 +46,12 @@ class Solution {
 
         for (int num : arr) {
             if (freqMap.get(num) > 0) {
-                // Try to form a group starting with 'num'
                 for (int i = 0; i < k; i++) {
                     int currentConsecutiveNum = num + i;
                     if (freqMap.containsKey(currentConsecutiveNum) && freqMap.get(currentConsecutiveNum) > 0) {
                         freqMap.put(currentConsecutiveNum, freqMap.get(currentConsecutiveNum) - 1);
                     } else {
-                        return false; // Missing consecutive number or not enough count
+                        return false; 
                     }
                 }
             }
