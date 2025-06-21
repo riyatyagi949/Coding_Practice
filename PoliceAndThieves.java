@@ -27,34 +27,34 @@
 // Optimal Solution:
 class Solution {
     public int catchThieves(char[] arr, int k) {
-        // code here
         int n = arr.length;
-        java.util.ArrayList<Integer> police = new java.util.ArrayList<>();
-        java.util.ArrayList<Integer> thief = new java.util.ArrayList<>();
-
+        Queue<Integer> police = new LinkedList<>();
+        Queue<Integer> thieves = new LinkedList<>();
+        
         for (int i = 0; i < n; i++) {
             if (arr[i] == 'P') {
                 police.add(i);
-            } else {
-                thief.add(i);
+            } else if (arr[i] == 'T') {
+                thieves.add(i);
             }
         }
 
-        int pIdx = 0;
-        int tIdx = 0;
-        int caughtThieves = 0;
+        int count = 0;
 
-        while (pIdx < police.size() && tIdx < thief.size()) {
-            if (Math.abs(police.get(pIdx) - thief.get(tIdx)) <= k) {
-                caughtThieves++;
-                pIdx++;
-                tIdx++;
-            } else if (police.get(pIdx) < thief.get(tIdx)) {
-                pIdx++;
+        while (!police.isEmpty() && !thieves.isEmpty()) {
+            int p = police.peek();
+            int t = thieves.peek();
+
+            if (Math.abs(p - t) <= k) {
+                count++;
+                police.poll();
+                thieves.poll();
+            } else if (t < p) {
+                thieves.poll();
             } else {
-                tIdx++;
+                police.poll();
             }
         }
-        return caughtThieves;
+         return count;
     }
 }
