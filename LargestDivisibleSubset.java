@@ -37,49 +37,43 @@
 
 // Optimal Solution:
 import java.util.*;
-
 class Solution {
     public ArrayList<Integer> largestSubset(int[] arr) {
         int n = arr.length;
-        if (n == 0) {
-            return new ArrayList<>();
-        }
+        Arrays.sort(arr);  
 
-        Arrays.sort(arr);
+        List<List<Integer>> dp = new ArrayList<>();
+        for (int i = 0; i < n; i++) dp.add(new ArrayList<>());
 
-        int[] dp = new int[n];
-        int[] prev = new int[n];
-        Arrays.fill(dp, 1);
-        for (int i = 0; i < n; i++) {
-            prev[i] = i;
-        }
-
-        int maxLength = 1;
-        int lastIndex = 0;
+        ArrayList<Integer> result = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
+            List<Integer> maxSubset = new ArrayList<>();
             for (int j = 0; j < i; j++) {
                 if (arr[i] % arr[j] == 0) {
-                    if (dp[j] + 1 > dp[i]) {
-                        dp[i] = dp[j] + 1;
-                        prev[i] = j;
+                    List<Integer> candidate = dp.get(j);
+                    if (candidate.size() > maxSubset.size() || 
+                       (candidate.size() == maxSubset.size() && isLexGreater(candidate, maxSubset))) {
+                        maxSubset = candidate;
                     }
                 }
             }
-            if (dp[i] > maxLength) {
-                maxLength = dp[i];
-                lastIndex = i;
+            dp.get(i).addAll(maxSubset);
+            dp.get(i).add(arr[i]);
+
+            if (dp.get(i).size() > result.size() || 
+               (dp.get(i).size() == result.size() && isLexGreater(dp.get(i), result))) {
+                result = new ArrayList<>(dp.get(i));
             }
         }
-
-        ArrayList<Integer> result = new ArrayList<>();
-        while (prev[lastIndex] != lastIndex) {
-            result.add(arr[lastIndex]);
-            lastIndex = prev[lastIndex];
-        }
-        result.add(arr[lastIndex]);
-
-        Collections.reverse(result);
         return result;
+    }
+    private boolean isLexGreater(List<Integer> a, List<Integer> b) {
+        for (int i = 0; i < Math.min(a.size(), b.size()); i++) {
+            if (!a.get(i).equals(b.get(i))) {
+                return a.get(i) > b.get(i);
+            }
+        }
+        return a.size() > b.size();
     }
 }
