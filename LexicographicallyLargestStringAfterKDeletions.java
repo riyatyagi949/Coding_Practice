@@ -28,6 +28,7 @@
 // Space Complexity:
 // The space complexity will be O(n) in the worst case, as the `result` StringBuilder can store up to `n - k` characters, which can be up to `n` characters if `k` is 0.
 
+// Optimal Solution:-
  class Solution {
     public static String maxSubseq(String s, int k) {
         int n = s.length();
