@@ -28,24 +28,21 @@
 // Space Complexity:
 // The space complexity will be O(n) in the worst case, as the `result` StringBuilder can store up to `n - k` characters, which can be up to `n` characters if `k` is 0.
 
-class Solution {
+ class Solution {
     public static String maxSubseq(String s, int k) {
-        StringBuilder result = new StringBuilder();
         int n = s.length();
-        int charsToKeep = n - k;
+        int keep = n - k; 
+        StringBuilder stack = new StringBuilder();
 
         for (int i = 0; i < n; i++) {
-            char currentChar = s.charAt(i);
-            while (result.length() > 0 && currentChar > result.charAt(result.length() - 1) && k > 0 &&
-                   (result.length() + (n - 1 - i)) >= charsToKeep) {
-                result.deleteCharAt(result.length() - 1);
+            char c = s.charAt(i);
+
+            while (stack.length() > 0 && k > 0 && stack.charAt(stack.length() - 1) < c) {
+                stack.deleteCharAt(stack.length() - 1);
                 k--;
             }
-            if (result.length() < charsToKeep) {
-                result.append(currentChar);
-            } else {
-            }
+           stack.append(c);
         }
-        return result.toString();
+        return stack.substring(0, keep);
     }
 }
