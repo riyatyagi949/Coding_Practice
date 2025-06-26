@@ -26,35 +26,34 @@ Space Complexity:
 O(M), where M is the number of distinct characters (at most 26), for storing character frequencies in a map/array and the priority queue. This is effectively O(1) constant space.
 */
 
+
+// Java Code:-
+import java.util.*;
+
 class Solution {
     public int minValue(String s, int k) {
         int[] freq = new int[26];
         for (char c : s.toCharArray()) {
             freq[c - 'a']++;
         }
-
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a); // Max-priority queue
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
         for (int f : freq) {
             if (f > 0) {
-                pq.offer(f);
+                maxHeap.offer(f);
             }
         }
-
-        while (k > 0 && !pq.isEmpty()) {
-            int currentMaxFreq = pq.poll();
-            currentMaxFreq--;
-            if (currentMaxFreq > 0) {
-                pq.offer(currentMaxFreq);
+        while (k-- > 0 && !maxHeap.isEmpty()) {
+            int top = maxHeap.poll();
+            top--; 
+            if (top > 0) {
+                maxHeap.offer(top);
             }
-            k--;
         }
-
         int result = 0;
-        while (!pq.isEmpty()) {
-            int f = pq.poll();
-            result += f * f;
+        while (!maxHeap.isEmpty()) {
+            int val = maxHeap.poll();
+            result += val * val;
         }
-
-        return result;
+         return result;
     }
 }
