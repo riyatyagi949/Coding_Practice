@@ -13,32 +13,30 @@
 // Space Complexity:
 // O(1) if we sort b in-place and store the result in a new ArrayList. If we consider the space for the sorted copy of b (if not sorting in-place) or the output ArrayList, it would be O(M) or O(N) respectively. Here, we modify the input array b, so auxiliary space is O(1) beyond the output list.
 
+
 class Solution {
     public static ArrayList<Integer> countLessEq(int a[], int b[]) {
-        java.util.Arrays.sort(b);
-
         ArrayList<Integer> result = new ArrayList<>();
 
-        for (int i = 0; i < a.length; i++) {
-            int count = upperBound(b, a[i]);
+        Arrays.sort(b);
+
+        for (int num : a) {
+            int count = upperBound(b, num);
             result.add(count);
         }
-        return result;
+         return result;
     }
-    private static int upperBound(int[] arr, int x) {
-        int low = 0;
-        int high = arr.length - 1;
-        int ans = 0; 
-
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (arr[mid] <= x) {
-                ans = mid + 1;
+    private static int upperBound(int[] b, int target) {
+        int low = 0, high = b.length;
+        while (low < high) {
+            int mid = (low + high) / 2;
+            if (b[mid] <= target) {
                 low = mid + 1;
-            } else {
-                high = mid - 1;
+            } 
+            else {
+                high = mid;
             }
         }
-        return ans;
+        return low; 
     }
 }
