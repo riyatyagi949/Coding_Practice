@@ -36,7 +36,6 @@ class Solution {
         while (left <= right) {
             if (nums[left] + nums[right] <= target) {
                 count = (count + pow[right - left]) % mod;
-                // Move left pointer right to explore more combinations
                 left++;
             } else {
                 // If the sum is too large, reduce it by moving right pointer left
