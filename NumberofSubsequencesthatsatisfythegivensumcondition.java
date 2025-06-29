@@ -20,29 +20,41 @@ import java.util.Arrays;
 
 class Solution {
     public int numSubseq(int[] nums, int target) {
-        Arrays.sort(nums);
+        // Define the modulo as per the problem constraint
+        int mod = 1_000_000_007;
         int n = nums.length;
-        int MOD = 1_000_000_007;
 
-        long[] powers = new long[n];
-        powers[0] = 1;
+        // Sort the array to apply two-pointer approach
+        Arrays.sort(nums);
+
+        // Precompute powers of 2 up to n (for all possible subsequences)
+        int[] pow = new int[n];
+        pow[0] = 1;
         for (int i = 1; i < n; i++) {
-            powers[i] = (powers[i - 1] * 2) % MOD;
+            // Each pow[i] = 2^i % mod
+            pow[i] = (pow[i - 1] * 2) % mod;
         }
 
-        int left = 0;
-        int right = n - 1;
-        long count = 0;
+        // Initialize two pointers
+        int left = 0, right = n - 1;
+        int count = 0;
 
+        // Loop until pointers cross
         while (left <= right) {
+            // If the sum of the smallest and largest in the current window <= target
             if (nums[left] + nums[right] <= target) {
-                count = (count + powers[right - left]) % MOD;
-                left++; 
-            } 
-            else {
-                right--; 
+                // All subsets from left to right are valid
+                // Number of such subsequences = 2^(right - left)
+                count = (count + pow[right - left]) % mod;
+                // Move left pointer right to explore more combinations
+                left++;
+            } else {
+                // If the sum is too large, reduce it by moving right pointer left
+                right--;
             }
         }
-        return (int) count;
+
+        // Return total valid subsequences count
+        return count;
     }
 }
