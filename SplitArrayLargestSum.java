@@ -19,39 +19,42 @@
 // Optimal Solution:
 class Solution {
     public int splitArray(int[] arr, int k) {
-        long sum = 0;
-        int maxElement = 0;
+        int max = 0, sum = 0;
         for (int num : arr) {
+            max = Math.max(max, num);
             sum += num;
-            maxElement = Math.max(maxElement, num);
         }
 
-        long low = maxElement;
-        long high = sum;
-        long ans = high;
+        int low = max, high = sum;
+        int result = sum;
 
         while (low <= high) {
-            long mid = low + (high - low) / 2;
-            if (check(arr, k, mid)) {
-                ans = mid;
+            int mid = low + (high - low) / 2;
+
+            if (isPossible(arr, k, mid)) {
+                result = mid;
                 high = mid - 1;
             } else {
                 low = mid + 1;
             }
         }
-        return (int) ans;
+
+        return result;
     }
-     private boolean check(int[] arr, int k, long maxSum) {
-        int subarrays = 1;
-        long currentSum = 0;
+
+    private boolean isPossible(int[] arr, int k, int maxSum) {
+        int count = 1, currentSum = 0;
+
         for (int num : arr) {
-            if (currentSum + num <= maxSum) {
-                currentSum += num;
-            } else {
-                subarrays++;
+            if (currentSum + num > maxSum) {
+                count++;
                 currentSum = num;
+                if (count > k) return false;
+            } else {
+                currentSum += num;
             }
         }
-        return subarrays <= k;
+
+        return true;
     }
-}
+};
