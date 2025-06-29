@@ -37,8 +37,9 @@ class Solution {
         while (left <= right) {
             if (nums[left] + nums[right] <= target) {
                 count = (count + powers[right - left]) % MOD;
-                left++; // Try to find a larger minimum
-            } else {
+                left++; 
+            } 
+            else {
                 right--; // nums[right] is too large, need a smaller maximum
             }
         }
