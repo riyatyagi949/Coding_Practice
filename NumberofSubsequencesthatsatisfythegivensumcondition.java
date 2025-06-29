@@ -36,7 +36,6 @@ class Solution {
 
         while (left <= right) {
             if (nums[left] + nums[right] <= target) {
-                // So, there are 2^(right - left) such subsequences.
                 count = (count + powers[right - left]) % MOD;
                 left++; // Try to find a larger minimum
             } else {
