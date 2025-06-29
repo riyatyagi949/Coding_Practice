@@ -25,7 +25,6 @@ class Solution {
 
         Arrays.sort(nums);
 
-        // Precompute powers of 2 up to n (for all possible subsequences)
         int[] pow = new int[n];
         pow[0] = 1;
         for (int i = 1; i < n; i++) {
