@@ -20,7 +20,6 @@ import java.util.Arrays;
 
 class Solution {
     public int numSubseq(int[] nums, int target) {
-        // Define the modulo as per the problem constraint
         int mod = 1_000_000_007;
         int n = nums.length;
 
