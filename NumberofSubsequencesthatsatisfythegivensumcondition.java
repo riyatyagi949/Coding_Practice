@@ -34,7 +34,6 @@ class Solution {
         int count = 0;
 
         while (left <= right) {
-            // If the sum of the smallest and largest in the current window <= target
             if (nums[left] + nums[right] <= target) {
                 // All subsets from left to right are valid
                 // Number of such subsequences = 2^(right - left)
