@@ -41,8 +41,6 @@ class Solution {
                 right--;
             }
         }
-
-        // Return total valid subsequences count
         return count;
     }
 }
