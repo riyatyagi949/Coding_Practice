@@ -36,7 +36,6 @@ class Solution {
 
         while (left <= right) {
             if (nums[left] + nums[right] <= target) {
-                // will satisfy the condition.
                 // The number of elements between nums[left] and nums[right] (exclusive of nums[left] itself)
                 // is (right - left).
                 // So, there are 2^(right - left) such subsequences.
