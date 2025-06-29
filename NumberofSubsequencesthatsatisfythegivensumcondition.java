@@ -35,7 +35,6 @@ class Solution {
 
         while (left <= right) {
             if (nums[left] + nums[right] <= target) {
-                // Number of such subsequences = 2^(right - left)
                 count = (count + pow[right - left]) % mod;
                 // Move left pointer right to explore more combinations
                 left++;
