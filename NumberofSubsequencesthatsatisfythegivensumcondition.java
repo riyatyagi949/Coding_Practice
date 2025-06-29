@@ -36,7 +36,6 @@ class Solution {
 
         while (left <= right) {
             if (nums[left] + nums[right] <= target) {
-                // of elements between nums[left] and nums[right] (i.e., nums[left+1]...nums[right-1])
                 // will satisfy the condition.
                 // The number of elements between nums[left] and nums[right] (exclusive of nums[left] itself)
                 // is (right - left).
