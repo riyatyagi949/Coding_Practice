@@ -38,7 +38,6 @@ class Solution {
                 count = (count + pow[right - left]) % mod;
                 left++;
             } else {
-                // If the sum is too large, reduce it by moving right pointer left
                 right--;
             }
         }
