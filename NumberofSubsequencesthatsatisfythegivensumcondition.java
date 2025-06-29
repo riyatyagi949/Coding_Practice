@@ -40,7 +40,7 @@ class Solution {
                 left++; 
             } 
             else {
-                right--; // nums[right] is too large, need a smaller maximum
+                right--; 
             }
         }
         return (int) count;
