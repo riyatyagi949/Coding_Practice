@@ -23,7 +23,6 @@ class Solution {
         int mod = 1_000_000_007;
         int n = nums.length;
 
-        // Sort the array to apply two-pointer approach
         Arrays.sort(nums);
 
         // Precompute powers of 2 up to n (for all possible subsequences)
