@@ -36,7 +36,6 @@ class Solution {
 
         while (left <= right) {
             if (nums[left] + nums[right] <= target) {
-                // If nums[left] + nums[right] <= target, then nums[left] can be the minimum
                 // Any subsequence formed by nums[left], nums[right], and any subset
                 // of elements between nums[left] and nums[right] (i.e., nums[left+1]...nums[right-1])
                 // will satisfy the condition.
