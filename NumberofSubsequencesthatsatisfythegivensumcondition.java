@@ -28,7 +28,6 @@ class Solution {
         int[] pow = new int[n];
         pow[0] = 1;
         for (int i = 1; i < n; i++) {
-            // Each pow[i] = 2^i % mod
             pow[i] = (pow[i - 1] * 2) % mod;
         }
 
