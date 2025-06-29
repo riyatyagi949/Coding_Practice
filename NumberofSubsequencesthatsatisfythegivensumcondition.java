@@ -33,7 +33,6 @@ class Solution {
         int left = 0, right = n - 1;
         int count = 0;
 
-        // Loop until pointers cross
         while (left <= right) {
             // If the sum of the smallest and largest in the current window <= target
             if (nums[left] + nums[right] <= target) {
