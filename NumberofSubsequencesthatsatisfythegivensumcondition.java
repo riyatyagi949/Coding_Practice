@@ -30,8 +30,6 @@ class Solution {
         for (int i = 1; i < n; i++) {
             pow[i] = (pow[i - 1] * 2) % mod;
         }
-
-        // Initialize two pointers
         int left = 0, right = n - 1;
         int count = 0;
 
