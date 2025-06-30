@@ -55,9 +55,7 @@ class Solution {
                 high = mid - 1;  
             }
         }
-
-        return answer; 
-        // Final maximum minimum height
+          return answer; 
     }
 
     // Helper function to check if we can achieve 'minHeight' using at most k waterings
