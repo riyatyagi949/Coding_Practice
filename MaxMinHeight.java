@@ -57,8 +57,6 @@ class Solution {
         }
           return answer; 
     }
-
-    // Helper function to check if we can achieve 'minHeight' using at most k waterings
     private boolean isPossible(int[] arr, int minHeight, int k, int w) {
         int n = arr.length;
 
