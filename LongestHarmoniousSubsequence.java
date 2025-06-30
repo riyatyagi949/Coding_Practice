@@ -46,7 +46,6 @@ import java.util.Map;
 
 class Solution {
     public int findLHS(int[] nums) {
-        // Step 1: Create a HashMap to store frequency of each number
         Map<Integer, Integer> map = new HashMap<>();
 
         // Step 2: Count the frequency of each number in the array
