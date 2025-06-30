@@ -36,13 +36,13 @@ So, the overall time complexity is O(N log(MaxHeight)). Given that MaxHeight can
 Space Complexity:
 The space complexity is O(N) due to the `diff` array used in the `check` function.
 */
+
 class Solution {
     public long maximizeMinHeight(int n, int k, int w, int[] arr) {
         long minHeight = Long.MAX_VALUE;
         for (int height : arr) {
             minHeight = Math.min(minHeight, height);
         }
-
         long low = minHeight;
         long high = minHeight + k;
         long ans = minHeight;
@@ -58,9 +58,8 @@ class Solution {
         }
         return ans;
     }
-
-    private boolean check(int n, int k, int w, int[] arr, long targetMinHeight) {
-        long[] diff = new long[n + w]; // Using n+w to avoid index out of bounds for diff[i+w]
+      private boolean check(int n, int k, int w, int[] arr, long targetMinHeight) {
+        long[] diff = new long[n + w]; 
         long totalDaysUsed = 0;
         long currentWateringEffect = 0;
 
