@@ -55,7 +55,6 @@ class Solution {
 
         for (int key : map.keySet()) {
             if (map.containsKey(key + 1)) {
-                // Calculate the combined frequency of key and key+1
                 int currentLength = map.get(key) + map.get(key + 1);
                 // Update the result if it's greater than current max
                 maxLength = Math.max(maxLength, currentLength);
