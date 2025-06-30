@@ -41,7 +41,6 @@ class Solution {
     public int maxMinHeight(int[] arr, int k, int w) {
         int n = arr.length;
 
-        // Define the search space: min possible height is min in arr, max is max in arr + k
         int low = Arrays.stream(arr).min().getAsInt();
         int high = low + k;
 
