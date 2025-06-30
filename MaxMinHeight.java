@@ -46,7 +46,6 @@ class Solution {
 
         int answer = low; 
 
-        // Binary search over the answer
         while (low <= high) {
             int mid = low + (high - low) / 2;
 
