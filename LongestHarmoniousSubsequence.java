@@ -48,7 +48,6 @@ class Solution {
     public int findLHS(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
 
-        // Step 2: Count the frequency of each number in the array
         for (int num : nums) {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
