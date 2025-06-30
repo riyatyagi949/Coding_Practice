@@ -75,7 +75,6 @@ class Solution {
                 used += delta;       
                 currAdd += delta;    
                 diff[i] += delta;    
-                 // Start of range increment
                 if (i + w < n)
                     diff[i + w] -= delta;
                      // End of range increment
