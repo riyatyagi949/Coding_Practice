@@ -80,6 +80,5 @@ class Solution {
             }
         }
         return true; 
-        // It's possible to reach the required minHeight
     }
 }
