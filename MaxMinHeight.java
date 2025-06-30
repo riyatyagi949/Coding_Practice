@@ -77,7 +77,6 @@ class Solution {
                 diff[i] += delta;    
                 if (i + w < n)
                     diff[i + w] -= delta;
-                     // End of range increment
             }
         }
         return true; 
