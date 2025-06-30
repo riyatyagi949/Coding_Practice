@@ -73,7 +73,6 @@ class Solution {
                     return false;
 
                 used += delta;       
-                 // Count operations used
                 currAdd += delta;    
                  // Apply immediately
                 diff[i] += delta;    
