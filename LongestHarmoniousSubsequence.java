@@ -53,7 +53,6 @@ class Solution {
         }
         int maxLength = 0; 
 
-        // Step 3: Iterate through each unique number in the map
         for (int key : map.keySet()) {
             // Check if there's a number whose value is exactly 1 more than the current key
             if (map.containsKey(key + 1)) {
