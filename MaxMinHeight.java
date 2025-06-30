@@ -69,7 +69,6 @@ class Solution {
             if (currentHeight < minHeight) {
                 long delta = minHeight - currentHeight;
 
-                // Check if enough operations remain
                 if (used + delta > k)
                     return false;
 
