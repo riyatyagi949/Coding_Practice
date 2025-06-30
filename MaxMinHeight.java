@@ -66,8 +66,6 @@ class Solution {
         for (int i = 0; i < n; i++) {
             currAdd += diff[i]; 
             long currentHeight = arr[i] + currAdd;
-
-            // If current height is less than minHeight, we need to add more
             if (currentHeight < minHeight) {
                 long delta = minHeight - currentHeight;
 
