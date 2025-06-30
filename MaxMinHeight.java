@@ -65,8 +65,6 @@ class Solution {
 
         for (int i = 0; i < n; i++) {
             currAdd += diff[i]; 
-            // Apply all previous increments affecting current index
-
             long currentHeight = arr[i] + currAdd;
 
             // If current height is less than minHeight, we need to add more
