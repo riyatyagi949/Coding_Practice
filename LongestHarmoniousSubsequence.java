@@ -59,8 +59,6 @@ class Solution {
                 maxLength = Math.max(maxLength, currentLength);
             }
         }
-
-        // Step 4: Return the maximum length found
         return maxLength;
     }
 }
