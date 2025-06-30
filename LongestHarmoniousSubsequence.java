@@ -54,7 +54,6 @@ class Solution {
         int maxLength = 0; 
 
         for (int key : map.keySet()) {
-            // Check if there's a number whose value is exactly 1 more than the current key
             if (map.containsKey(key + 1)) {
                 // Calculate the combined frequency of key and key+1
                 int currentLength = map.get(key) + map.get(key + 1);
