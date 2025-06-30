@@ -50,7 +50,6 @@ class Solution {
             int mid = low + (high - low) / 2;
             if (isPossible(arr, mid, k, w)) {
                 answer = mid;    
-                 // Update answer
                 low = mid + 1;   
                  // Try to find a higher possible minimum
             } else {
