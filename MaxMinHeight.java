@@ -62,7 +62,6 @@ class Solution {
         int[] diff = new int[n + 1];
         long used = 0; 
         long currAdd = 0; 
-        // Tracks current cumulative increase
 
         for (int i = 0; i < n; i++) {
             currAdd += diff[i]; 
