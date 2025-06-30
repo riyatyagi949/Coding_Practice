@@ -38,45 +38,73 @@ The space complexity is O(N) due to the `diff` array used in the `check` functio
 */
 
 class Solution {
-    public long maximizeMinHeight(int n, int k, int w, int[] arr) {
-        long minHeight = Long.MAX_VALUE;
-        for (int height : arr) {
-            minHeight = Math.min(minHeight, height);
-        }
-        long low = minHeight;
-        long high = minHeight + k;
-        long ans = minHeight;
+    public int maxMinHeight(int[] arr, int k, int w) {
+        int n = arr.length;
 
+        // Define the search space: min possible height is min in arr, max is max in arr + k
+        int low = Arrays.stream(arr).min().getAsInt();
+        int high = low + k;
+
+        int answer = low; 
+        // Stores the maximum minimum height achievable
+
+        // Binary search over the answer
         while (low <= high) {
-            long mid = low + (high - low) / 2;
-            if (check(n, k, w, arr, mid)) {
-                ans = mid;
-                low = mid + 1;
+            int mid = low + (high - low) / 2;
+
+            // If it's possible to make every flower at least height 'mid' using k operations
+            if (isPossible(arr, mid, k, w)) {
+                answer = mid;    
+                 // Update answer
+                low = mid + 1;   
+                 // Try to find a higher possible minimum
             } else {
-                high = mid - 1;
+                high = mid - 1;  
+                 // Otherwise, try with a lower minimum height
             }
         }
-        return ans;
+
+        return answer; 
+        // Final maximum minimum height
     }
-      private boolean check(int n, int k, int w, int[] arr, long targetMinHeight) {
-        long[] diff = new long[n + w]; 
-        long totalDaysUsed = 0;
-        long currentWateringEffect = 0;
+
+    // Helper function to check if we can achieve 'minHeight' using at most k waterings
+    private boolean isPossible(int[] arr, int minHeight, int k, int w) {
+        int n = arr.length;
+
+        // diff[i] tells how much increase we applied at position i
+        int[] diff = new int[n + 1];
+        long used = 0; 
+        // Total number of waterings used
+        long currAdd = 0; 
+        // Tracks current cumulative increase
 
         for (int i = 0; i < n; i++) {
-            currentWateringEffect += diff[i];
-            long currentFlowerHeight = arr[i] + currentWateringEffect;
+            currAdd += diff[i]; 
+            // Apply all previous increments affecting current index
 
-            if (currentFlowerHeight < targetMinHeight) {
-                long needed = targetMinHeight - currentFlowerHeight;
-                totalDaysUsed += needed;
-                if (totalDaysUsed > k) {
+            long currentHeight = arr[i] + currAdd;
+
+            // If current height is less than minHeight, we need to add more
+            if (currentHeight < minHeight) {
+                long delta = minHeight - currentHeight;
+
+                // Check if enough operations remain
+                if (used + delta > k)
                     return false;
-                }
-                currentWateringEffect += needed;
-                diff[i + w] -= needed;
+
+                used += delta;       
+                 // Count operations used
+                currAdd += delta;    
+                 // Apply immediately
+                diff[i] += delta;    
+                 // Start of range increment
+                if (i + w < n)
+                    diff[i + w] -= delta;
+                     // End of range increment
             }
         }
-        return true;
+        return true; 
+        // It's possible to reach the required minHeight
     }
 }
