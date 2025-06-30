@@ -51,8 +51,7 @@ class Solution {
         for (int num : nums) {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
-
-        int maxLength = 0; // To store the length of the longest harmonious subsequence
+        int maxLength = 0; 
 
         // Step 3: Iterate through each unique number in the map
         for (int key : map.keySet()) {
