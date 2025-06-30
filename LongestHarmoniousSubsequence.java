@@ -46,16 +46,28 @@ import java.util.Map;
 
 class Solution {
     public int findLHS(int[] nums) {
-        Map<Integer, Integer> freqMap = new HashMap<>();
+        // Step 1: Create a HashMap to store frequency of each number
+        Map<Integer, Integer> map = new HashMap<>();
+
+        // Step 2: Count the frequency of each number in the array
         for (int num : nums) {
-            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+            map.put(num, map.getOrDefault(num, 0) + 1);
         }
-         int maxLength = 0;
-        for (int num : freqMap.keySet()) {
-            if (freqMap.containsKey(num + 1)) {
-                maxLength = Math.max(maxLength, freqMap.get(num) + freqMap.get(num + 1));
+
+        int maxLength = 0; // To store the length of the longest harmonious subsequence
+
+        // Step 3: Iterate through each unique number in the map
+        for (int key : map.keySet()) {
+            // Check if there's a number whose value is exactly 1 more than the current key
+            if (map.containsKey(key + 1)) {
+                // Calculate the combined frequency of key and key+1
+                int currentLength = map.get(key) + map.get(key + 1);
+                // Update the result if it's greater than current max
+                maxLength = Math.max(maxLength, currentLength);
             }
         }
+
+        // Step 4: Return the maximum length found
         return maxLength;
     }
 }
