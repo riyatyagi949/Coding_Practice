@@ -59,8 +59,6 @@ class Solution {
     }
     private boolean isPossible(int[] arr, int minHeight, int k, int w) {
         int n = arr.length;
-
-        // diff[i] tells how much increase we applied at position i
         int[] diff = new int[n + 1];
         long used = 0; 
         // Total number of waterings used
