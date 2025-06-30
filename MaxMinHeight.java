@@ -48,8 +48,6 @@ class Solution {
 
         while (low <= high) {
             int mid = low + (high - low) / 2;
-
-            // If it's possible to make every flower at least height 'mid' using k operations
             if (isPossible(arr, mid, k, w)) {
                 answer = mid;    
                  // Update answer
