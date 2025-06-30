@@ -53,7 +53,6 @@ class Solution {
                 low = mid + 1;   
             } else {
                 high = mid - 1;  
-                 // Otherwise, try with a lower minimum height
             }
         }
 
