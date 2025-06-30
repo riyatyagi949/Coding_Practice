@@ -61,7 +61,6 @@ class Solution {
         int n = arr.length;
         int[] diff = new int[n + 1];
         long used = 0; 
-        // Total number of waterings used
         long currAdd = 0; 
         // Tracks current cumulative increase
 
