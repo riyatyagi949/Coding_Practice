@@ -45,7 +45,6 @@ class Solution {
         int high = low + k;
 
         int answer = low; 
-        // Stores the maximum minimum height achievable
 
         // Binary search over the answer
         while (low <= high) {
