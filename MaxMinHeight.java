@@ -51,7 +51,6 @@ class Solution {
             if (isPossible(arr, mid, k, w)) {
                 answer = mid;    
                 low = mid + 1;   
-                 // Try to find a higher possible minimum
             } else {
                 high = mid - 1;  
                  // Otherwise, try with a lower minimum height
