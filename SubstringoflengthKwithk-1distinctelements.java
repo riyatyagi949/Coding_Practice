@@ -32,7 +32,6 @@ class Solution {
             char outChar = s.charAt(i - k); 
             char inChar = s.charAt(i);      
 
-            // Decrease frequency of outgoing char
             map.put(outChar, map.get(outChar) - 1);
             if (map.get(outChar) == 0) map.remove(outChar);  // remove if count is 0
 
