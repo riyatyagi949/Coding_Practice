@@ -31,7 +31,6 @@ class Solution {
             }
              i = j; 
         }
-
-        return total;
+         return total;
     }
 }
