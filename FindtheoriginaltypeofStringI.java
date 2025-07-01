@@ -20,7 +20,6 @@ class Solution {
         int total = 1; 
         int i = 0, n = word.length();
 
-        // Traverse through the word
         while (i < n) {
             int j = i;
             // Count the length of group of same characters
