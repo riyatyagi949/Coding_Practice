@@ -33,7 +33,7 @@ class Solution {
             char inChar = s.charAt(i);      
 
             map.put(outChar, map.get(outChar) - 1);
-            if (map.get(outChar) == 0) map.remove(outChar);  // remove if count is 0
+            if (map.get(outChar) == 0) map.remove(outChar);  
 
             map.put(inChar, map.getOrDefault(inChar, 0) + 1);
             if (map.size() == k - 1) count++;
