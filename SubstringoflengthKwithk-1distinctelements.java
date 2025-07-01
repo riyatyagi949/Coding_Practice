@@ -29,8 +29,9 @@ class Solution {
         if (map.size() == k - 1) count++;
 
         for (int i = k; i < s.length(); i++) {
-            char outChar = s.charAt(i - k);  // character going out
-            char inChar = s.charAt(i);       // character coming in
+            char outChar = s.charAt(i - k); 
+            char inChar = s.charAt(i);      
+             // character coming in
 
             // Decrease frequency of outgoing char
             map.put(outChar, map.get(outChar) - 1);
