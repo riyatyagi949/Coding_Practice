@@ -22,7 +22,6 @@ class Solution {
 
         while (i < n) {
             int j = i;
-            // Count the length of group of same characters
             while (j < n && word.charAt(i) == word.charAt(j)) {
                 j++;
             }
