@@ -14,32 +14,39 @@
 // Space Complexity:
 // The space complexity will be O(1) because we use a fixed-size frequency array (of size 26) to store character counts, which does not depend on the input string size.
 
+import java.util.HashMap;
+
 class Solution {
     public int substrCount(String s, int k) {
+        // Edge case
+        if (s == null || s.length() < k) return 0;
+
         int count = 0;
-        int[] freq = new int[26];
-        int distinctCount = 0;
-        int left = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
 
-        for (int right = 0; right < s.length(); right++) {
-            char rightChar = s.charAt(right);
-            if (freq[rightChar - 'a'] == 0) {
-                distinctCount++;
-            }
-            freq[rightChar - 'a']++;
-
-            if (right - left + 1 == k) {
-                if (distinctCount == k - 1) {
-                    count++;
-                }
-                char leftChar = s.charAt(left);
-                freq[leftChar - 'a']--;
-                if (freq[leftChar - 'a'] == 0) {
-                    distinctCount--;
-                }
-                left++;
-            }
+        // Initialize the first window of size k
+        for (int i = 0; i < k; i++) {
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
         }
+        // Check the first window
+        if (map.size() == k - 1) count++;
+
+        // Slide the window
+        for (int i = k; i < s.length(); i++) {
+            char outChar = s.charAt(i - k);  // character going out
+            char inChar = s.charAt(i);       // character coming in
+
+            // Decrease frequency of outgoing char
+            map.put(outChar, map.get(outChar) - 1);
+            if (map.get(outChar) == 0) map.remove(outChar);  // remove if count is 0
+
+            // Add incoming char
+            map.put(inChar, map.getOrDefault(inChar, 0) + 1);
+
+            // Check if distinct character count is k - 1
+            if (map.size() == k - 1) count++;
+        }
+
         return count;
     }
 }
