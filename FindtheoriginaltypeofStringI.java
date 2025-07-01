@@ -29,8 +29,7 @@ class Solution {
             if (len > 1) {
                 total += (len - 1);
             }
-
-            i = j; // Move to next group
+             i = j; // Move to next group
         }
 
         return total;
