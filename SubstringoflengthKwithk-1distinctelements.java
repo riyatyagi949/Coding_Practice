@@ -26,7 +26,6 @@ class Solution {
         for (int i = 0; i < k; i++) {
             map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
         }
-        // Check the first window
         if (map.size() == k - 1) count++;
 
         // Slide the window
