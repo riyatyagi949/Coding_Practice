@@ -40,13 +40,9 @@ class Solution {
             map.put(outChar, map.get(outChar) - 1);
             if (map.get(outChar) == 0) map.remove(outChar);  // remove if count is 0
 
-            // Add incoming char
             map.put(inChar, map.getOrDefault(inChar, 0) + 1);
-
-            // Check if distinct character count is k - 1
             if (map.size() == k - 1) count++;
         }
-
-        return count;
+         return count;
     }
 }
