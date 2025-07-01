@@ -25,11 +25,11 @@ class Solution {
             while (j < n && word.charAt(i) == word.charAt(j)) {
                 j++;
             }
-             int len = j - i;
+            int len = j - i;
             if (len > 1) {
                 total += (len - 1);
             }
-             i = j; // Move to next group
+             i = j; 
         }
 
         return total;
