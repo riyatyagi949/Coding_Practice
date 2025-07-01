@@ -40,8 +40,6 @@ class Solution {
             }
             blocks.add(new Pair(currentChar, currentCount));
         }
-
-        // Case 2: Exactly one key was pressed too long
         for (int i = 0; i < blocks.size(); i++) {
             Pair currentBlock = blocks.get(i);
             if (currentBlock.count > 1) {
