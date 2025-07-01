@@ -23,7 +23,6 @@ class Solution {
         int count = 0;
         HashMap<Character, Integer> map = new HashMap<>();
 
-        // Initialize the first window of size k
         for (int i = 0; i < k; i++) {
             map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
         }
