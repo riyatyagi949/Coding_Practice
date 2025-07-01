@@ -58,14 +58,12 @@ class Solution {
         }
         return possibleStrings.size();
     }
-
-    private void appendCharRepeated(StringBuilder sb, char c, int count) {
+     private void appendCharRepeated(StringBuilder sb, char c, int count) {
         for (int i = 0; i < count; i++) {
             sb.append(c);
         }
     }
-
-    private static class Pair {
+       private static class Pair {
         char character;
         int count;
 
