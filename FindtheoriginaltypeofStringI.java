@@ -17,7 +17,7 @@
 
 class Solution {
     public int possibleStringCount(String word) {
-        int total = 1; // Original string is always valid
+        int total = 1; 
         int i = 0, n = word.length();
 
         // Traverse through the word
