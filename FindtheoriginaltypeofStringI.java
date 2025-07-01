@@ -25,10 +25,8 @@ class Solution {
             while (j < n && word.charAt(i) == word.charAt(j)) {
                 j++;
             }
+             int len = j - i;
 
-            int len = j - i;
-
-            // If this group has more than 1 character, we can remove 1..len-1 characters from it
             // These are possible original strings if this was the long-pressed group
             if (len > 1) {
                 total += (len - 1);
