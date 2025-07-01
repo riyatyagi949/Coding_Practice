@@ -18,7 +18,6 @@ import java.util.HashMap;
 
 class Solution {
     public int substrCount(String s, int k) {
-        // Edge case
         if (s == null || s.length() < k) return 0;
 
         int count = 0;
