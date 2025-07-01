@@ -26,8 +26,6 @@ class Solution {
                 j++;
             }
              int len = j - i;
-
-            // These are possible original strings if this was the long-pressed group
             if (len > 1) {
                 total += (len - 1);
             }
