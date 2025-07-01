@@ -31,7 +31,6 @@ class Solution {
         for (int i = k; i < s.length(); i++) {
             char outChar = s.charAt(i - k); 
             char inChar = s.charAt(i);      
-             // character coming in
 
             // Decrease frequency of outgoing char
             map.put(outChar, map.get(outChar) - 1);
