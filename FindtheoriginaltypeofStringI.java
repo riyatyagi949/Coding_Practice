@@ -23,7 +23,7 @@ import java.util.Set;
 class Solution {
     public int possibleStringCount(String word) {
         Set<String> possibleStrings = new HashSet<>();
-        possibleStrings.add(word); // Case 1: No repetition occurred
+        possibleStrings.add(word); 
 
         List<Pair> blocks = new ArrayList<>();
         if (word.length() > 0) {
