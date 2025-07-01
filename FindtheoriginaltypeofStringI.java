@@ -15,61 +15,30 @@
 // O(L^2) in the worst case.
 // This is because the `HashSet` can store up to O(L) strings, and each string can have a maximum length of O(L). Therefore, the total space complexity for storing all unique strings is O(L * L) = O(L^2).
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 class Solution {
     public int possibleStringCount(String word) {
-        Set<String> possibleStrings = new HashSet<>();
-        possibleStrings.add(word); 
+        int total = 1; // Original string is always valid
+        int i = 0, n = word.length();
 
-        List<Pair> blocks = new ArrayList<>();
-        if (word.length() > 0) {
-            char currentChar = word.charAt(0);
-            int currentCount = 1;
-            for (int i = 1; i < word.length(); i++) {
-                if (word.charAt(i) == currentChar) {
-                    currentCount++;
-                } else {
-                    blocks.add(new Pair(currentChar, currentCount));
-                    currentChar = word.charAt(i);
-                    currentCount = 1;
-                }
+        // Traverse through the word
+        while (i < n) {
+            int j = i;
+            // Count the length of group of same characters
+            while (j < n && word.charAt(i) == word.charAt(j)) {
+                j++;
             }
-            blocks.add(new Pair(currentChar, currentCount));
-        }
-        for (int i = 0; i < blocks.size(); i++) {
-            Pair currentBlock = blocks.get(i);
-            if (currentBlock.count > 1) {
-                for (int k = 1; k < currentBlock.count; k++) {
-                    StringBuilder sb = new StringBuilder();
-                    for (int j = 0; j < i; j++) {
-                        appendCharRepeated(sb, blocks.get(j).character, blocks.get(j).count);
-                    }
-                    appendCharRepeated(sb, currentBlock.character, k);
-                    for (int j = i + 1; j < blocks.size(); j++) {
-                        appendCharRepeated(sb, blocks.get(j).character, blocks.get(j).count);
-                    }
-                    possibleStrings.add(sb.toString());
-                }
-            }
-        }
-        return possibleStrings.size();
-    }
-     private void appendCharRepeated(StringBuilder sb, char c, int count) {
-        for (int i = 0; i < count; i++) {
-            sb.append(c);
-        }
-    }
-       private static class Pair {
-        char character;
-        int count;
 
-        Pair(char character, int count) {
-            this.character = character;
-            this.count = count;
+            int len = j - i;
+
+            // If this group has more than 1 character, we can remove 1..len-1 characters from it
+            // These are possible original strings if this was the long-pressed group
+            if (len > 1) {
+                total += (len - 1);
+            }
+
+            i = j; // Move to next group
         }
+
+        return total;
     }
 }
