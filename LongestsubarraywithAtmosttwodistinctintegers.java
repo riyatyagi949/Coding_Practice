@@ -15,22 +15,23 @@
 
 class Solution {
     public int totalElements(int[] arr) {
-        int left = 0;
-        int maxLength = 0;
-        java.util.Map<Integer, Integer> freqMap = new java.util.HashMap<>();
-
-        for (int right = 0; right < arr.length; right++) {
-            freqMap.put(arr[right], freqMap.getOrDefault(arr[right], 0) + 1);
-
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        
+        int start = 0;
+        int maxLen = 0;
+        
+        for (int end = 0; end < arr.length; end++) {
+            freqMap.put(arr[end], freqMap.getOrDefault(arr[end], 0) + 1);
+            
             while (freqMap.size() > 2) {
-                freqMap.put(arr[left], freqMap.get(arr[left]) - 1);
-                if (freqMap.get(arr[left]) == 0) {
-                    freqMap.remove(arr[left]);
+                freqMap.put(arr[start], freqMap.get(arr[start]) - 1);
+                if (freqMap.get(arr[start]) == 0) {
+                    freqMap.remove(arr[start]);
                 }
-                left++;
+                start++;
             }
-            maxLength = Math.max(maxLength, right - left + 1);
+            maxLen = Math.max(maxLen, end - start + 1);
         }
-        return maxLength;
+          return maxLen;
     }
 }
