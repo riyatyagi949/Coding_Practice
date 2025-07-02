@@ -13,6 +13,8 @@
 // Space Complexity:
 // The space complexity will be O(1) because the frequency map will store at most 3 distinct elements at any point in time (at most two distinct elements and one being removed). Since `arr[i]` can be up to 10^5, a HashMap is more appropriate, but the number of distinct elements in the map at any time is bounded by 3, making it effectively constant space. If we use an array as a frequency map, the space would be O(max_arr_value), which could be O(10^5), but given the problem constraint, a HashMap is a better choice for practical constant space.
 
+import java.util.*;
+
 class Solution {
     public int totalElements(int[] arr) {
         Map<Integer, Integer> freqMap = new HashMap<>();
