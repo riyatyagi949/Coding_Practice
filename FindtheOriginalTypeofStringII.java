@@ -28,59 +28,52 @@
 // Space Complexity:
 // O(N + k), where O(N) is for storing `blockLengths` (at most N elements) and O(k) for DP arrays.
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Solution {
-    public int possibleStringCount(String word, int k) {
-        int MOD = 1_000_000_007;
+  private static final int MOD = 1_000_000_007;
 
-        List<Integer> blockLengths = new ArrayList<>();
-        if (word.isEmpty()) {
-            return 0;
-        }
+  public int possibleStringCount(String word, int k) {
+    List<Integer> groups = getConsecutiveLetters(word);
 
-        int currentBlockLength = 1;
-        for (int i = 1; i < word.length(); i++) {
-            if (word.charAt(i) == word.charAt(i - 1)) {
-                currentBlockLength++;
-            } else {
-                blockLengths.add(currentBlockLength);
-                currentBlockLength = 1;
-            }
-        }
-        blockLengths.add(currentBlockLength);
+    final int totalCombinations =
+        (int) groups.stream().mapToLong(Integer::longValue).reduce(1L, (a, b) -> a * b % MOD);
+    if (k <= groups.size())
+      return totalCombinations;
 
-        long totalWays = 1;
-        for (int bLen : blockLengths) {
-            totalWays = (totalWays * bLen) % MOD;
-        }
+    int[] dp = new int[k];
+    dp[0] = 1; 
 
-        int[] dp = new int[k];
-        dp[0] = 1;
-
-        for (int block_length : blockLengths) {
-            int[] next_dp = new int[k];
-            
-            int[] prefix_sum_dp = new int[k + 1];
-            for (int i = 1; i <= k; i++) {
-                prefix_sum_dp[i] = (prefix_sum_dp[i - 1] + dp[i - 1]) % MOD;
-            }
-
-            for (int j = 1; j < k; j++) {
-                int start_idx_in_prev_dp = Math.max(0, j - block_length);
-                int end_idx_in_prev_dp = j - 1;
-
-                if (start_idx_in_prev_dp <= end_idx_in_prev_dp) {
-                    long num_ways_to_get_j = (prefix_sum_dp[end_idx_in_prev_dp + 1] - prefix_sum_dp[start_idx_in_prev_dp] + MOD) % MOD;
-                    next_dp[j] = (int) num_ways_to_get_j;
-                }
-            }
-            dp = next_dp;
-        }
-
-        long totalWaysLessThanK = 0;
-        for (int j = 0; j < k; j++) {
-            totalWaysLessThanK = (totalWaysLessThanK + dp[j]) % MOD;
-        }
-
-        return (int)((totalWays - totalWaysLessThanK + MOD) % MOD);
+    for (int i = 0; i < groups.size(); ++i) {
+      int[] newDp = new int[k];
+      int windowSum = 0;
+      int group = groups.get(i);
+      for (int j = i; j < k; ++j) {
+        newDp[j] = (newDp[j] + windowSum) % MOD;
+        windowSum = (windowSum + dp[j]) % MOD;
+        if (j >= group)
+          windowSum = (windowSum - dp[j - group] + MOD) % MOD;
+      }
+      dp = newDp;
     }
+
+    final int invalidCombinations = Arrays.stream(dp).reduce(0, (a, b) -> (a + b) % MOD);
+    return (totalCombinations - invalidCombinations + MOD) % MOD;
+  }
+
+  private List<Integer> getConsecutiveLetters(final String word) {
+    List<Integer> groups = new ArrayList<>();
+    int group = 1;
+    for (int i = 1; i < word.length(); ++i)
+      if (word.charAt(i) == word.charAt(i - 1)) {
+        ++group;
+      } else {
+        groups.add(group);
+        group = 1;
+      }
+    groups.add(group);
+    return groups;
+  }
 }
