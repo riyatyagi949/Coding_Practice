@@ -21,7 +21,6 @@ class Solution {
             
             for (int i = 0; i < sb.length(); i++) {
                 char ch = sb.charAt(i);
-                // Get next character in alphabet, wrap around from 'z' to 'a'
                 char nextChar = (char) ((ch - 'a' + 1) % 26 + 'a');
                 next.append(nextChar);
             }
