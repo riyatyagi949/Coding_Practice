@@ -23,7 +23,6 @@ class Solution {
         
         int maxLength = -1; 
         int left = 0; 
-        // Left boundary of window
 
         for (int right = 0; right < s.length(); right++) {
             char ch = s.charAt(right);
