@@ -26,7 +26,6 @@ class Solution {
             }
              sb.append(next); 
         }
-        
-        return sb.charAt(k - 1); // Return 1-indexed k-th character
+          return sb.charAt(k - 1); 
     }
 }
