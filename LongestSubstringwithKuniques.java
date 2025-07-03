@@ -39,8 +39,6 @@ class Solution {
                 }
                 left++;
             }
-
-            // If map size is exactly k, update maxLength
             if (map.size() == k) {
                 maxLength = Math.max(maxLength, right - left + 1);
             }
