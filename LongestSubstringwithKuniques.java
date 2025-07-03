@@ -21,7 +21,6 @@ class Solution {
         int[] freq = new int[26];
          // To store frequency of characters
         int distinctCount = 0; 
-        // To store count of distinct characters in current window
         int maxLength = -1; 
 
         int i = 0; 
