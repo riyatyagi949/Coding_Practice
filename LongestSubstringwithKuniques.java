@@ -18,9 +18,11 @@
 class Solution {
     public int longestKSubstr(String s, int k) {
         int n = s.length();
-        int[] freq = new int[26]; // To store frequency of characters
-        int distinctCount = 0; // To store count of distinct characters in current window
-        int maxLength = -1; // To store the maximum length found
+        int[] freq = new int[26];
+         // To store frequency of characters
+        int distinctCount = 0; 
+        // To store count of distinct characters in current window
+        int maxLength = -1; 
 
         int i = 0; 
 
