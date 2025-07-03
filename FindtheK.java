@@ -14,19 +14,21 @@
 
 class Solution {
     public char kthCharacter(int k) {
-        long currentLength = 1;
-        while (currentLength < k) {
-            currentLength *= 2;
-        }
-        int charOffset = 0;
-        while (currentLength > 1) {
-            long halfLength = currentLength / 2;
-            if (k > halfLength) {
-                charOffset = (charOffset + 1) % 26;
-                k -= halfLength;
+        StringBuilder sb = new StringBuilder("a"); 
+        
+        while (sb.length() < k) {
+            StringBuilder next = new StringBuilder();
+            
+            for (int i = 0; i < sb.length(); i++) {
+                char ch = sb.charAt(i);
+                // Get next character in alphabet, wrap around from 'z' to 'a'
+                char nextChar = (char) ((ch - 'a' + 1) % 26 + 'a');
+                next.append(nextChar);
             }
-            currentLength = halfLength;
+            
+            sb.append(next); // Append next string to current
         }
-        return (char) ('a' + charOffset);
+        
+        return sb.charAt(k - 1); // Return 1-indexed k-th character
     }
 }
