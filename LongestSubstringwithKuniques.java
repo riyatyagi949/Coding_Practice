@@ -30,7 +30,6 @@ class Solution {
             // Add current character to the map and update frequency
             map.put(ch, map.getOrDefault(ch, 0) + 1);
 
-            // If map size (unique characters) exceeds k, shrink the window from left
             while (map.size() > k) {
                 char leftChar = s.charAt(left);
                 map.put(leftChar, map.get(leftChar) - 1);
