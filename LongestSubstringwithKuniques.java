@@ -22,7 +22,7 @@ class Solution {
         int distinctCount = 0; // To store count of distinct characters in current window
         int maxLength = -1; // To store the maximum length found
 
-        int i = 0; // Left pointer of the sliding window
+        int i = 0; 
 
         for (int j = 0; j < n; j++) { 
             char currentChar = s.charAt(j);
