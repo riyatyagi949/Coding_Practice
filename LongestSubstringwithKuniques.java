@@ -31,7 +31,6 @@ class Solution {
             }
             freq[currentChar - 'a']++;
 
-            // Shrink the window if distinctCount exceeds k
             while (distinctCount > k) {
                 char charToRemove = s.charAt(i);
                 freq[charToRemove - 'a']--;
