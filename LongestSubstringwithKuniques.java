@@ -19,7 +19,6 @@ import java.util.*;
 
 class Solution {
     public int longestKSubstr(String s, int k) {
-        // Map to store frequency of characters in the current window
         Map<Character, Integer> map = new HashMap<>();
         
         int maxLength = -1; // Initialize result
