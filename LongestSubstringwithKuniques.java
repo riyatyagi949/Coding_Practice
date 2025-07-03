@@ -27,7 +27,6 @@ class Solution {
 
         for (int right = 0; right < s.length(); right++) {
             char ch = s.charAt(right);
-            // Add current character to the map and update frequency
             map.put(ch, map.getOrDefault(ch, 0) + 1);
 
             while (map.size() > k) {
