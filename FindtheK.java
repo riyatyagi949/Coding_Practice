@@ -24,8 +24,7 @@ class Solution {
                 char nextChar = (char) ((ch - 'a' + 1) % 26 + 'a');
                 next.append(nextChar);
             }
-            
-            sb.append(next); // Append next string to current
+             sb.append(next); 
         }
         
         return sb.charAt(k - 1); // Return 1-indexed k-th character
