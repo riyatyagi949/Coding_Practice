@@ -24,7 +24,7 @@ class Solution {
 
         int i = 0; // Left pointer of the sliding window
 
-        for (int j = 0; j < n; j++) { // Right pointer of the sliding window
+        for (int j = 0; j < n; j++) { 
             char currentChar = s.charAt(j);
             if (freq[currentChar - 'a'] == 0) {
                 distinctCount++;
