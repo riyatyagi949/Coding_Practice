@@ -18,7 +18,6 @@ class Solution {
     public int countAtMostK(int arr[], int k) {
         return subarraysWithAtMostKDistinct(arr, k);
     }
-
     private int subarraysWithAtMostKDistinct(int[] arr, int k) {
         int count = 0;
         int left = 0;
