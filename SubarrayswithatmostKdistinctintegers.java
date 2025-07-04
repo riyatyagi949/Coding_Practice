@@ -36,8 +36,7 @@ class Solution {
         }
          return total;
     }
-
-    public int subarraysWithAtMostKDistinct(int[] arr, int k) {
+     public int subarraysWithAtMostKDistinct(int[] arr, int k) {
         return countAtMostK(arr, k);
     }
 }
