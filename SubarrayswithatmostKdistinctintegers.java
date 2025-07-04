@@ -25,7 +25,6 @@ class Solution {
         for (int end = 0; end < n; end++) {
             freq.put(arr[end], freq.getOrDefault(arr[end], 0) + 1);
 
-            // If we have more than k distinct, shrink the window
             while (freq.size() > k) {
                 freq.put(arr[start], freq.get(arr[start]) - 1);
                 if (freq.get(arr[start]) == 0) {
