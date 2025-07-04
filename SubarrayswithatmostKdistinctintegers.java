@@ -33,7 +33,6 @@ class Solution {
                 }
                 left++;
             }
-            // All subarrays ending at 'right' and starting from 'left' to 'right' are valid
             count += (right - left + 1);
         }
         return count;
