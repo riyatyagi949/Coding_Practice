@@ -33,27 +33,18 @@
 // We only use a few variables to store `k`, `len`, and `offset`.
 
 class Solution {
-    public char kthCharacter(long k, int[] operations) {
-        int n = operations.length;
-        long[] lengths = new long[n + 1];
-        lengths[0] = 1;
+  public char kthCharacter(long k, int[] operations) {
+    final int operationsCount = (int) Math.ceil(Math.log(k) / Math.log(2));
+    int increases = 0;
 
-        for (int i = 0; i < n; i++) {
-            lengths[i + 1] = lengths[i] * 2;
-            if (lengths[i + 1] >= k) break; 
-        }
-        int shiftCount = 0;
-        for (int i = operations.length - 1; i >= 0; i--) {
-            long len = lengths[i + 1];
-
-            if (k > lengths[i]) {
-                k -= lengths[i];
-                if (operations[i] == 1) {
-                    shiftCount++;
-                }
-            }
-        }
-        int finalChar = ('a' + shiftCount) % 26;
-        return (char) ((finalChar == 0 ? 'z' : finalChar));
+    for (int i = operationsCount - 1; i >= 0; --i) {
+      final long halfSize = 1L << i;
+      if (k > halfSize) {
+        k -= halfSize; // Move k from the right half to the left half.
+        increases += operations[i];
+      }
     }
+
+    return (char) ('a' + increases % 26);
+  }
 }
