@@ -24,7 +24,6 @@ class Solution {
         java.util.Map<Integer, Integer> freq = new java.util.HashMap<>();
 
         for (int right = 0; right < arr.length; right++) {
-            // Add the current element to the window
             freq.put(arr[right], freq.getOrDefault(arr[right], 0) + 1);
 
             // Shrink the window from the left if distinct count exceeds k
