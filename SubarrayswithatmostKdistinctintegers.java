@@ -32,8 +32,6 @@ class Solution {
                 }
                 start++;
             }
-
-            // Count of subarrays ending at 'end' with at most k distinct
             total += (end - start + 1);
         }
 
