@@ -38,7 +38,6 @@ class Solution {
         long[] lengths = new long[n + 1];
         lengths[0] = 1;
 
-        // Compute length after each operation
         for (int i = 0; i < n; i++) {
             lengths[i + 1] = lengths[i] * 2;
             if (lengths[i + 1] >= k) break; 
