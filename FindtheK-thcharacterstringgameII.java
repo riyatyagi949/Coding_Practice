@@ -55,7 +55,6 @@ class Solution {
                     shiftCount++;
                 }
             }
-            // else: character came from the original first half, nothing to change
         }
         int finalChar = ('a' + shiftCount) % 26;
         return (char) ((finalChar == 0 ? 'z' : finalChar));
