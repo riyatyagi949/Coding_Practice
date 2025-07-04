@@ -41,7 +41,7 @@ class Solution {
         // Compute length after each operation
         for (int i = 0; i < n; i++) {
             lengths[i + 1] = lengths[i] * 2;
-            if (lengths[i + 1] >= k) break; // We don't need more than this
+            if (lengths[i + 1] >= k) break; 
         }
         int shiftCount = 0;
         for (int i = operations.length - 1; i >= 0; i--) {
