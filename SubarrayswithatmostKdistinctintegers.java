@@ -14,27 +14,35 @@
 // Both the left and right pointers traverse the array at most once.
 // Space Complexity: O(U), where U is the number of unique elements in the array (or O(max(arr[i])) if using an array for frequency map directly, but a HashMap is safer for large values of arr[i]). In the worst case, U can be N.
 
+import java.util.*;
+
 class Solution {
-    public int countAtMostK(int arr[], int k) {
-        return subarraysWithAtMostKDistinct(arr, k);
-    }
-    private int subarraysWithAtMostKDistinct(int[] arr, int k) {
-        int count = 0;
-        int left = 0;
-        java.util.Map<Integer, Integer> freq = new java.util.HashMap<>();
+    public int countAtMostK(int[] arr, int k) {
+        int n = arr.length;
+        Map<Integer, Integer> freq = new HashMap<>();
+        int start = 0, total = 0;
 
-        for (int right = 0; right < arr.length; right++) {
-            freq.put(arr[right], freq.getOrDefault(arr[right], 0) + 1);
+        for (int end = 0; end < n; end++) {
+            // Increase frequency of current element
+            freq.put(arr[end], freq.getOrDefault(arr[end], 0) + 1);
 
+            // If we have more than k distinct, shrink the window
             while (freq.size() > k) {
-                freq.put(arr[left], freq.get(arr[left]) - 1);
-                if (freq.get(arr[left]) == 0) {
-                    freq.remove(arr[left]);
+                freq.put(arr[start], freq.get(arr[start]) - 1);
+                if (freq.get(arr[start]) == 0) {
+                    freq.remove(arr[start]);
                 }
-                left++;
+                start++;
             }
-            count += (right - left + 1);
+
+            // Count of subarrays ending at 'end' with at most k distinct
+            total += (end - start + 1);
         }
-        return count;
+
+        return total;
+    }
+
+    public int subarraysWithAtMostKDistinct(int[] arr, int k) {
+        return countAtMostK(arr, k);
     }
 }
