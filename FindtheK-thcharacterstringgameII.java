@@ -49,7 +49,6 @@ class Solution {
             long len = lengths[i + 1];
 
             if (k > lengths[i]) {
-                // In second half
                 k -= lengths[i];
                 if (operations[i] == 1) {
                     shiftCount++;
