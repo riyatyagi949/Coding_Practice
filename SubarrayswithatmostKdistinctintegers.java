@@ -23,7 +23,6 @@ class Solution {
         int start = 0, total = 0;
 
         for (int end = 0; end < n; end++) {
-            // Increase frequency of current element
             freq.put(arr[end], freq.getOrDefault(arr[end], 0) + 1);
 
             // If we have more than k distinct, shrink the window
