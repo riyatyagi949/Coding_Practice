@@ -43,7 +43,6 @@ class Solution {
             lengths[i + 1] = lengths[i] * 2;
             if (lengths[i + 1] >= k) break; // We don't need more than this
         }
-
         int shiftCount = 0;
         for (int i = operations.length - 1; i >= 0; i--) {
             long len = lengths[i + 1];
