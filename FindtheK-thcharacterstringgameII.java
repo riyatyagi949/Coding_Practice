@@ -34,22 +34,30 @@
 
 class Solution {
     public char kthCharacter(long k, int[] operations) {
-        long len = 1;
-        for (int op : operations) {
-            len *= 2;
+        int n = operations.length;
+        long[] lengths = new long[n + 1];
+        lengths[0] = 1;
+
+        // Compute length after each operation
+        for (int i = 0; i < n; i++) {
+            lengths[i + 1] = lengths[i] * 2;
+            if (lengths[i + 1] >= k) break; // We don't need more than this
         }
-        int offset = 0;
+
+        int shiftCount = 0;
         for (int i = operations.length - 1; i >= 0; i--) {
-            if (k > len / 2) {
-                k -= len / 2;
+            long len = lengths[i + 1];
+
+            if (k > lengths[i]) {
+                // In second half
+                k -= lengths[i];
                 if (operations[i] == 1) {
-                    offset = (offset + 1) % 26;
+                    shiftCount++;
                 }
             }
-            len /= 2;
+            // else: character came from the original first half, nothing to change
         }
-        char originalChar = 'a';
-        char result = (char) ('a' + (originalChar - 'a' + offset) % 26);
-        return result;
+        int finalChar = ('a' + shiftCount) % 26;
+        return (char) ((finalChar == 0 ? 'z' : finalChar));
     }
 }
