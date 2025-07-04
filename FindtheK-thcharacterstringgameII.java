@@ -44,7 +44,6 @@ class Solution {
         increases += operations[i];
       }
     }
-
-    return (char) ('a' + increases % 26);
+     return (char) ('a' + increases % 26);
   }
 }
