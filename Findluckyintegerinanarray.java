@@ -18,8 +18,6 @@ class Solution {
         for (int num : arr) {
             freq[num]++;
         }
-        
-        // Check for lucky numbers, keep the largest one
         for (int i = 500; i >= 1; i--) {
             if (freq[i] == i) {
                 return i;
