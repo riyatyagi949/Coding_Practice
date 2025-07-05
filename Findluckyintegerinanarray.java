@@ -23,7 +23,6 @@ class Solution {
                 return i;
             }
         }
-        
         return -1;  // No lucky number found
     }
 }
