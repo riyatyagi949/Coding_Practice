@@ -20,17 +20,13 @@
 class Solution {
     public int maxSum(int arr[]) {
         int maxScore = 0;
-        java.util.Stack<Integer> stack = new java.util.Stack<>();
-
-        for (int i = 0; i < arr.length; i++) {
-            while (!stack.isEmpty() && arr[stack.peek()] > arr[i]) {
-                maxScore = Math.max(maxScore, arr[stack.pop()] + arr[i]);
-            }
-            if (!stack.isEmpty()) {
-                maxScore = Math.max(maxScore, arr[stack.peek()] + arr[i]);
-            }
-            stack.push(i);
+        
+        for (int i = 0; i < arr.length - 1; i++) {
+            int a = arr[i];
+            int b = arr[i + 1];
+            
+            maxScore = Math.max(maxScore, a + b);
         }
-        return maxScore;
+    return maxScore;
     }
 }
