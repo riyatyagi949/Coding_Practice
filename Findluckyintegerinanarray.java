@@ -13,7 +13,7 @@
 
 class Solution {
     public int findLucky(int[] arr) {
-        int[] freq = new int[501];  // because 1 <= arr[i] <= 500
+        int[] freq = new int[501]; 
         
         // Count frequencies
         for (int num : arr) {
