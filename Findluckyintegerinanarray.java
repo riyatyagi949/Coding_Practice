@@ -11,23 +11,22 @@
 // Time Complexity: O(N + M) where N is array length, M is max element value (500). Effectively O(N).
 // Space Complexity: O(M) for frequency map. Effectively O(1).
 
-import java.util.HashMap;
-import java.util.Map;
-
 class Solution {
     public int findLucky(int[] arr) {
-        Map<Integer, Integer> freqMap = new HashMap<>();
+        int[] freq = new int[501];  // because 1 <= arr[i] <= 500
+        
+        // Count frequencies
         for (int num : arr) {
-            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+            freq[num]++;
         }
-
-        int largestLucky = -1;
+        
+        // Check for lucky numbers, keep the largest one
         for (int i = 500; i >= 1; i--) {
-            if (freqMap.containsKey(i) && freqMap.get(i) == i) {
-                largestLucky = i;
-                break;
+            if (freq[i] == i) {
+                return i;
             }
         }
-        return largestLucky;
+        
+        return -1;  // No lucky number found
     }
 }
