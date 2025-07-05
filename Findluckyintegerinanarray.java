@@ -15,7 +15,6 @@ class Solution {
     public int findLucky(int[] arr) {
         int[] freq = new int[501]; 
         
-        // Count frequencies
         for (int num : arr) {
             freq[num]++;
         }
