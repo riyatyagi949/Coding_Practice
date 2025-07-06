@@ -18,45 +18,42 @@ import java.util.*;
 
 class Solution {
     public ArrayList<Integer> topKSumPairs(int[] a, int[] b, int k) {
+        int n = a.length;
         Arrays.sort(a);
         Arrays.sort(b);
 
-        int n = a.length;
-        // Reverse for descending order
-        for (int i = 0; i < n / 2; i++) { int temp = a[i]; a[i] = a[n - 1 - i]; a[n - 1 - i] = temp; }
-        for (int i = 0; i < n / 2; i++) { int temp = b[i]; b[i] = b[n - 1 - i]; b[n - 1 - i] = temp; }
+        PriorityQueue<Pair> maxHeap = new PriorityQueue<>((p1, p2) -> p2.sum - p1.sum);
+        Set<String> visited = new HashSet<>();
 
-        PriorityQueue<int[]> pq = new PriorityQueue<>((x, y) -> y[0] - x[0]);
-        Set<Long> visited = new HashSet<>();
+        int i = n - 1, j = n - 1;
+        maxHeap.offer(new Pair(i, j, a[i] + b[j]));
+        visited.add(i + "#" + j);
+
         ArrayList<Integer> result = new ArrayList<>();
 
-        pq.offer(new int[]{a[0] + b[0], 0, 0});
-        visited.add(0L); 
+        while (k-- > 0 && !maxHeap.isEmpty()) {
+            Pair top = maxHeap.poll();
+            result.add(top.sum);
 
-        while (k > 0 && !pq.isEmpty()) {
-            int[] current = pq.poll();
-            int sum = current[0];
-            int i = current[1];
-            int j = current[2];
+            i = top.i;
+            j = top.j;
 
-            result.add(sum);
-            k--;
-
-            if (j + 1 < n) {
-                long nextPair = (long) i * n + (j + 1);
-                if (!visited.contains(nextPair)) {
-                    pq.offer(new int[]{a[i] + b[j + 1], i, j + 1});
-                    visited.add(nextPair);
-                }
+            if (i - 1 >= 0 && visited.add((i - 1) + "#" + j)) {
+                maxHeap.offer(new Pair(i - 1, j, a[i - 1] + b[j]));
             }
-            if (i + 1 < n) {
-                long nextPair = (long) (i + 1) * n + j;
-                if (!visited.contains(nextPair)) {
-                    pq.offer(new int[]{a[i + 1] + b[j], i + 1, j});
-                    visited.add(nextPair);
-                }
+
+            if (j - 1 >= 0 && visited.add(i + "#" + (j - 1))) {
+                maxHeap.offer(new Pair(i, j - 1, a[i] + b[j - 1]));
             }
         }
-        return result;
+          return result;
+    }
+     static class Pair {
+        int i, j, sum;
+        Pair(int i, int j, int sum) {
+            this.i = i;
+            this.j = j;
+            this.sum = sum;
+        }
     }
 }
