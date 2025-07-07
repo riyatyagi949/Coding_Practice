@@ -15,7 +15,7 @@
 // Optimal Solution:
 import java.util.Arrays;
 import java.util.PriorityQueue;
-import java.util.Collections; // Not explicitly used but good for general import awareness
+import java.util.Collections; 
 
 class Solution {
     public int maxEvents(int[][] events) {
