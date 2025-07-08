@@ -42,7 +42,6 @@ class Solution {
             }
              stack.push(arr[i]);
         }
-
         return result;
     }
 }
