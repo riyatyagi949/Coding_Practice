@@ -29,8 +29,6 @@ class Solution {
         for (int num : arr) {
             freq.put(num, freq.getOrDefault(num, 0) + 1);
         }
-
-        // Step 2: Use stack to track next element with higher frequency
         Stack<Integer> stack = new Stack<>();
 
         for (int i = n - 1; i >= 0; i--) {
