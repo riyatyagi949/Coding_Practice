@@ -32,13 +32,11 @@ class Solution {
             int prevIndex = binarySearch(events, start);
 
             for (int j = 1; j <= k; j++) {
-                // Max of: skipping current OR taking current + best from previous non-overlapping
                 dp[i][j] = Math.max(dp[i - 1][j],
                                     dp[prevIndex + 1][j - 1] + val);
             }
         }
-
-        return dp[n][k];
+          return dp[n][k];
     }
 
     // Binary search to find last event that ends before startDay
