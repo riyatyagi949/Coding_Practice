@@ -34,11 +34,9 @@ class Solution {
         for (int i = n - 1; i >= 0; i--) {
             int currFreq = freq.get(arr[i]);
 
-            // Remove elements from stack with frequency <= current
             while (!stack.isEmpty() && freq.get(stack.peek()) <= currFreq) {
                 stack.pop();
             }
-
             if (!stack.isEmpty()) {
                 result.set(i, stack.peek());
             }
