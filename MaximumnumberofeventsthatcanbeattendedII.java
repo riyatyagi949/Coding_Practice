@@ -20,7 +20,6 @@ class Solution {
         Arrays.sort(events, Comparator.comparingInt(a -> a[1]));
         int n = events.length;
 
-        // Step 2: dp[i][j] = max value using first i events and attending j events
         int[][] dp = new int[n + 1][k + 1];
 
         // Extract start times for binary search
