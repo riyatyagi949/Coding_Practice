@@ -40,8 +40,7 @@ class Solution {
             if (!stack.isEmpty()) {
                 result.set(i, stack.peek());
             }
-
-            stack.push(arr[i]);
+             stack.push(arr[i]);
         }
 
         return result;
