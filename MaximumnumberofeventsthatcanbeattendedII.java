@@ -12,57 +12,56 @@ For each event `events[idx]`:
 Time Complexity: O(N * K * logN)
 Space Complexity: O(N * K)
 */
+
+import java.util.*;
+
 class Solution {
-    private int[][] events;
-    private int k;
-    private int[][] memo;
-
     public int maxValue(int[][] events, int k) {
-        java.util.Arrays.sort(events, (a, b) -> a[0] - b[0]); // Sort by start day
-        this.events = events;
-        this.k = k;
+        // Step 1: Sort events by end time
+        Arrays.sort(events, Comparator.comparingInt(a -> a[1]));
         int n = events.length;
-        this.memo = new int[n][k + 1];
+
+        // Step 2: dp[i][j] = max value using first i events and attending j events
+        int[][] dp = new int[n + 1][k + 1];
+
+        // Extract start times for binary search
+        int[] endTimes = new int[n];
         for (int i = 0; i < n; i++) {
-            java.util.Arrays.fill(memo[i], -1); // Initialize memo table with -1
-        }
-        return solve(0, k);
-    }
-
-    private int solve(int idx, int count) {
-        if (count == 0 || idx == events.length) {
-            return 0; // Base case: no more events to attend or no more events available
-        }
-        if (memo[idx][count] != -1) {
-            return memo[idx][count]; // Return memoized result
+            endTimes[i] = events[i][1];
         }
 
-        // Option 1: Don't attend current event
-        int skipCurrent = solve(idx + 1, count);
+        for (int i = 1; i <= n; i++) {
+            int[] event = events[i - 1];
+            int start = event[0], end = event[1], val = event[2];
 
-        // Option 2: Attend current event
-        int currentVal = events[idx][2];
-        int nextIdx = findNextEvent(idx + 1, events[idx][1]); // Find next non-overlapping event
-        int attendCurrent = currentVal + solve(nextIdx, count - 1);
+            // Step 3: Find the last event that ends before current event starts
+            int prevIndex = binarySearch(events, start);
 
-        return memo[idx][count] = Math.max(skipCurrent, attendCurrent); // Memoize and return max
-    }
-
-    // Binary search for the first event whose start day is > `endDay`
-    private int findNextEvent(int searchStartIdx, int endDay) {
-        int low = searchStartIdx;
-        int high = events.length - 1;
-        int result = events.length; // Default to no next event found
-
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (events[mid][0] > endDay) {
-                result = mid;
-                high = mid - 1;
-            } else {
-                low = mid + 1;
+            for (int j = 1; j <= k; j++) {
+                // Max of: skipping current OR taking current + best from previous non-overlapping
+                dp[i][j] = Math.max(dp[i - 1][j],
+                                    dp[prevIndex + 1][j - 1] + val);
             }
         }
-        return result;
+
+        return dp[n][k];
+    }
+
+    // Binary search to find last event that ends before startDay
+    private int binarySearch(int[][] events, int startDay) {
+        int left = 0, right = events.length - 1;
+        int ans = -1;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (events[mid][1] < startDay) {
+                ans = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return ans;
     }
 }
