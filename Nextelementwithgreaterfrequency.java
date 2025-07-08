@@ -17,41 +17,35 @@ O(N) - Two passes are made: one to calculate frequencies and another to iterate 
 Space Complexity:
 O(N) - For the frequency map and the stack, in the worst case, they can store all unique elements and all elements respectively.
 */
+
+import java.util.*;
+
 class Solution {
     public ArrayList<Integer> findGreater(int[] arr) {
-        // Calculate frequencies of all elements
-        java.util.HashMap<Integer, Integer> freqMap = new java.util.HashMap<>();
-        for (int num : arr) {
-            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
-        }
-
         int n = arr.length;
-        ArrayList<Integer> result = new ArrayList<>(n);
-        for (int i = 0; i < n; i++) {
-            result.add(0); // Initialize with a placeholder
+        ArrayList<Integer> result = new ArrayList<>(Collections.nCopies(n, -1));
+
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int num : arr) {
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
         }
 
-        // Monotonic stack to store indices
-        java.util.Stack<Integer> stack = new java.util.Stack<>();
+        // Step 2: Use stack to track next element with higher frequency
+        Stack<Integer> stack = new Stack<>();
 
-        // Iterate from right to left
         for (int i = n - 1; i >= 0; i--) {
-            int currentFreq = freqMap.get(arr[i]);
+            int currFreq = freq.get(arr[i]);
 
-            // Pop elements from stack while their frequency is less than or equal to current element's frequency
-            while (!stack.isEmpty() && freqMap.get(arr[stack.peek()]) <= currentFreq) {
+            // Remove elements from stack with frequency <= current
+            while (!stack.isEmpty() && freq.get(stack.peek()) <= currFreq) {
                 stack.pop();
             }
 
-            // If stack is not empty, the top element is the next element with greater frequency
             if (!stack.isEmpty()) {
-                result.set(i, arr[stack.peek()]);
-            } else {
-                result.set(i, -1); // No such element found
+                result.set(i, stack.peek());
             }
 
-            // Push current index onto the stack
-            stack.push(i);
+            stack.push(arr[i]);
         }
 
         return result;
