@@ -21,8 +21,6 @@ class Solution {
         int n = events.length;
 
         int[][] dp = new int[n + 1][k + 1];
-
-        // Extract start times for binary search
         int[] endTimes = new int[n];
         for (int i = 0; i < n; i++) {
             endTimes[i] = events[i][1];
