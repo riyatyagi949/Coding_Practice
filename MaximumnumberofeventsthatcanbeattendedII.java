@@ -22,15 +22,13 @@ class Solution {
 
         int[][] dp = new int[n + 1][k + 1];
         int[] endTimes = new int[n];
+
         for (int i = 0; i < n; i++) {
             endTimes[i] = events[i][1];
         }
-
-        for (int i = 1; i <= n; i++) {
+          for (int i = 1; i <= n; i++) {
             int[] event = events[i - 1];
             int start = event[0], end = event[1], val = event[2];
-
-            // Step 3: Find the last event that ends before current event starts
             int prevIndex = binarySearch(events, start);
 
             for (int j = 1; j <= k; j++) {
