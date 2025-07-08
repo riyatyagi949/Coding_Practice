@@ -17,7 +17,6 @@ import java.util.*;
 
 class Solution {
     public int maxValue(int[][] events, int k) {
-        // Step 1: Sort events by end time
         Arrays.sort(events, Comparator.comparingInt(a -> a[1]));
         int n = events.length;
 
