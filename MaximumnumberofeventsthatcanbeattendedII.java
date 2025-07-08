@@ -38,8 +38,6 @@ class Solution {
         }
           return dp[n][k];
     }
-
-    // Binary search to find last event that ends before startDay
     private int binarySearch(int[][] events, int startDay) {
         int left = 0, right = events.length - 1;
         int ans = -1;
@@ -53,7 +51,6 @@ class Solution {
                 right = mid - 1;
             }
         }
-
         return ans;
     }
 }
