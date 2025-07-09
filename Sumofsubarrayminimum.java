@@ -70,7 +70,6 @@ class Solution {
             }
             stack.push(i);
         }
-
         int[] right = new int[n];
         stack.clear();
         for (int i = n - 1; i >= 0; i--) {
