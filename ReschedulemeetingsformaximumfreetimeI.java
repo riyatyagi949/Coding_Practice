@@ -34,7 +34,6 @@ class Solution {
 
         long[] gapsOnly = new long[n + 1];
 
-        // Gap before the first meeting
         gapsOnly[0] = startTime[0];
 
         // Gaps between consecutive meetings
