@@ -36,7 +36,6 @@ class Solution {
 
         gapsOnly[0] = startTime[0];
 
-        // Gaps between consecutive meetings
         for (int i = 0; i < n - 1; i++) {
             gapsOnly[i + 1] = startTime[i + 1] - endTime[i];
         }
