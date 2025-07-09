@@ -33,7 +33,6 @@ class Solution {
         int n = startTime.length;
 
         long[] gapsOnly = new long[n + 1];
-
         gapsOnly[0] = startTime[0];
 
         for (int i = 0; i < n - 1; i++) {
