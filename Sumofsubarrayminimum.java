@@ -83,7 +83,6 @@ class Solution {
             }
             stack.push(i);
         }
-
         long totalSum = 0;
         for (int i = 0; i < n; i++) {
             totalSum = (totalSum + (long)arr[i] * left[i] * right[i]) % MOD;
