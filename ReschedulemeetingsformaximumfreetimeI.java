@@ -53,7 +53,6 @@ class Solution {
             }
           maxFreeTime = Math.max(maxFreeTime, currentWindowSum);
         }
-
-        return (int) maxFreeTime;
+          return (int) maxFreeTime;
     }
 }
