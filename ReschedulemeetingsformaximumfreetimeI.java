@@ -38,8 +38,6 @@ class Solution {
         for (int i = 0; i < n - 1; i++) {
             gapsOnly[i + 1] = startTime[i + 1] - endTime[i];
         }
-
-        // Gap after the last meeting
         gapsOnly[n] = eventTime - endTime[n - 1];
 
         long maxFreeTime = 0;
