@@ -51,8 +51,7 @@ class Solution {
                 currentWindowSum -= gapsOnly[left];
                 left++;
             }
-
-            maxFreeTime = Math.max(maxFreeTime, currentWindowSum);
+          maxFreeTime = Math.max(maxFreeTime, currentWindowSum);
         }
 
         return (int) maxFreeTime;
