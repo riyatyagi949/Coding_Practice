@@ -87,7 +87,6 @@ class Solution {
         for (int i = 0; i < n; i++) {
             totalSum = (totalSum + (long)arr[i] * left[i] * right[i]) % MOD;
         }
-
-        return (int)totalSum;
+         return (int)totalSum;
     }
 }
