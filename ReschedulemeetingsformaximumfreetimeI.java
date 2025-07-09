@@ -47,7 +47,6 @@ class Solution {
         for (int right = 0; right <= n; right++) {
             currentWindowSum += gapsOnly[right];
 
-            // (right - left) represents the number of meetings bridged to combine gapsOnly[left]...gapsOnly[right]
             while ((right - left) > k) {
                 currentWindowSum -= gapsOnly[left];
                 left++;
