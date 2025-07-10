@@ -35,7 +35,6 @@ class Solution {
         if (meetings[0][0] > 0) {
             gaps.add(new int[]{0, meetings[0][0]});
         }
-
         for (int i = 1; i < n; i++) {
             if (meetings[i][0] > meetings[i - 1][1]) {
                 gaps.add(new int[]{meetings[i - 1][1], meetings[i][0]});
