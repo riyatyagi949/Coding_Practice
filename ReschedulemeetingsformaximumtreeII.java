@@ -40,8 +40,7 @@ class Solution {
                 gaps.add(new int[]{meetings[i - 1][1], meetings[i][0]});
             }
         }
-
-        if (meetings[n - 1][1] < eventTime) {
+         if (meetings[n - 1][1] < eventTime) {
             gaps.add(new int[]{meetings[n - 1][1], eventTime});
         }
 
