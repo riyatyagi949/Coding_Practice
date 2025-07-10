@@ -49,8 +49,6 @@ class Solution {
         }
         for (int i = 0; i < n; i++) {
             int dur = meetings[i][1] - meetings[i][0];
-
-            // Simulate removing meeting i → creates a merged gap
             int left = (i == 0) ? 0 : meetings[i - 1][1];
             int right = (i == n - 1) ? eventTime : meetings[i + 1][0];
 
