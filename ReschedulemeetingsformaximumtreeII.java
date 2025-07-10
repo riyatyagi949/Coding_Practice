@@ -31,8 +31,6 @@ class Solution {
             meetings[i][0] = startTime[i];
             meetings[i][1] = endTime[i];
         }
-
-        // Precompute the free time gaps between meetings
         List<int[]> gaps = new ArrayList<>();
         if (meetings[0][0] > 0) {
             gaps.add(new int[]{0, meetings[0][0]});
