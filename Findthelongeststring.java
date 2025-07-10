@@ -39,62 +39,67 @@ Optimal Solution:
 The provided solution utilizing a Trie and DFS is considered optimal because it efficiently handles prefix lookups and word validation, achieving a time complexity directly proportional to the total number of characters across all input strings.
 
 */
-import java.util.Arrays;
-
-class TrieNode {
-    TrieNode[] children;
-    boolean isEndOfWord;
-
-    public TrieNode() {
-        children = new TrieNode[26];
-        isEndOfWord = false;
-    }
-}
-
 class Solution {
-    private TrieNode root;
-    private String longestString = "";
+    static class TrieNode {
+        TrieNode[] children;
+        boolean isEndOfWord;
 
-    public String longestWord(String[] arr) {
-        root = new TrieNode();
-        for (String word : arr) {
-            insert(word);
+        public TrieNode() {
+            children = new TrieNode[26];
+            isEndOfWord = false;
         }
-        dfs(root, new StringBuilder());
-        return longestString;
     }
+ static class Trie {
+        TrieNode root;
 
-    private void insert(String word) {
-        TrieNode current = root;
-        for (char ch : word.toCharArray()) {
-            int index = ch - 'a';
-            if (current.children[index] == null) {
-                current.children[index] = new TrieNode();
-            }
-            current = current.children[index];
+        public Trie() {
+            root = new TrieNode();
         }
-        current.isEndOfWord = true;
+      public void insert(String word) {
+            TrieNode curr = root;
+            for (char ch : word.toCharArray()) {
+                int index = ch - 'a';
+                if (curr.children[index] == null) {
+                    curr.children[index] = new TrieNode();
+                }
+                curr = curr.children[index];
+            }
+            curr.isEndOfWord = true;
+        }
+      public boolean checkIfAllPrefixesAreWords(String word) {
+            TrieNode curr = root;
+            for (char ch : word.toCharArray()) {
+                int index = ch - 'a';
+                curr = curr.children[index];
+                if (curr == null || !curr.isEndOfWord) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
-
-    private void dfs(TrieNode node, StringBuilder currentString) {
-        if (node != root && !node.isEndOfWord) {
-            return;
-        }
-
-        if (currentString.length() > longestString.length()) {
-            longestString = currentString.toString();
-        } else if (currentString.length() == longestString.length()) {
-            if (currentString.toString().compareTo(longestString) < 0) {
-                longestString = currentString.toString();
-            }
-        }
+     public String longestString(String[] arr) {
+        Trie trie = new Trie();
         
-        for (int i = 0; i < 26; i++) {
-            if (node.children[i] != null) {
-                currentString.append((char)('a' + i));
-                dfs(node.children[i], currentString);
-                currentString.deleteCharAt(currentString.length() - 1);
+        for (String s : arr) {
+            trie.insert(s);
+        }
+
+        String longest = "";
+
+        Arrays.sort(arr); 
+
+        for (String s : arr) {
+            if (trie.checkIfAllPrefixesAreWords(s)) {
+                if (s.length() > longest.length()) {
+                    longest = s;
+                } else if (s.length() == longest.length()) {
+                    if (s.compareTo(longest) < 0) {
+                        longest = s;
+                    }
+                }
             }
         }
+        return longest;
     }
 }
