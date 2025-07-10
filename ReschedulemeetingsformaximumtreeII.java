@@ -47,8 +47,6 @@ class Solution {
         for (int[] gap : gaps) {
             maxFree = Math.max(maxFree, gap[1] - gap[0]);
         }
-
-        // Step 2: Try rescheduling each meeting
         for (int i = 0; i < n; i++) {
             int dur = meetings[i][1] - meetings[i][0];
 
