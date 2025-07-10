@@ -55,7 +55,6 @@ class Solution {
             int mergedGap = right - left;
             maxFree = Math.max(maxFree, mergedGap);
 
-            // Try placing meeting[i] in every other gap
             for (int[] gap : gaps) {
                 if (gap[1] - gap[0] >= dur) {
                     maxFree = Math.max(maxFree, dur);
