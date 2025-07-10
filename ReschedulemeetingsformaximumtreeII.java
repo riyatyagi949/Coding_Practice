@@ -23,44 +23,40 @@ The problem is solved efficiently in linear time by using prefix/suffix maximums
 */
 
 class Solution {
-    public int maxFreeTime(int eventTime, int[] startTime, int[] endTime) {
-        int n = startTime.length;
-        int[][] meetings = new int[n][2];
+  public int maxFreeTime(int eventTime, int[] startTime, int[] endTime) {
+    final int n = startTime.length;
+    final int[] gaps = getGaps(eventTime, startTime, endTime);
+    int ans = 0;
+    int[] maxLeft = new int[n + 1];  // maxLeft[i] := max(gaps[0..i])
+    int[] maxRight = new int[n + 1]; // maxRight[i] := max(gaps[i..n])
 
-        for (int i = 0; i < n; i++) {
-            meetings[i][0] = startTime[i];
-            meetings[i][1] = endTime[i];
-        }
-        List<int[]> gaps = new ArrayList<>();
-        if (meetings[0][0] > 0) {
-            gaps.add(new int[]{0, meetings[0][0]});
-        }
-        for (int i = 1; i < n; i++) {
-            if (meetings[i][0] > meetings[i - 1][1]) {
-                gaps.add(new int[]{meetings[i - 1][1], meetings[i][0]});
-            }
-        }
-         if (meetings[n - 1][1] < eventTime) {
-            gaps.add(new int[]{meetings[n - 1][1], eventTime});
-        }
-        int maxFree = 0;
-        for (int[] gap : gaps) {
-            maxFree = Math.max(maxFree, gap[1] - gap[0]);
-        }
-        for (int i = 0; i < n; i++) {
-            int dur = meetings[i][1] - meetings[i][0];
-            int left = (i == 0) ? 0 : meetings[i - 1][1];
-            int right = (i == n - 1) ? eventTime : meetings[i + 1][0];
+    maxLeft[0] = gaps[0];
+    maxRight[n] = gaps[n];
 
-            int mergedGap = right - left;
-            maxFree = Math.max(maxFree, mergedGap);
+    for (int i = 1; i < n + 1; ++i)
+      maxLeft[i] = Math.max(gaps[i], maxLeft[i - 1]);
 
-            for (int[] gap : gaps) {
-                if (gap[1] - gap[0] >= dur) {
-                    maxFree = Math.max(maxFree, dur);
-                }
-            }
-        }
-        return maxFree;
+    for (int i = n - 1; i >= 0; --i)
+      maxRight[i] = Math.max(gaps[i], maxRight[i + 1]);
+
+    for (int i = 0; i < n; ++i) {
+      final int currMeetingTime = endTime[i] - startTime[i];
+      final int adjacentGapsSum = gaps[i] + gaps[i + 1];
+      final boolean canMoveMeeting =
+          currMeetingTime <= Math.max(i > 0 ? maxLeft[i - 1] : 0, //
+                                      i + 2 < n + 1 ? maxRight[i + 2] : 0);
+      ans = Math.max(ans, adjacentGapsSum + (canMoveMeeting ? currMeetingTime : 0));
     }
+
+    return ans;
+  }
+
+  private int[] getGaps(int eventTime, int[] startTime, int[] endTime) {
+    int[] gaps = new int[startTime.length + 1];
+    gaps[0] = startTime[0];
+    for (int i = 1; i < startTime.length; ++i)
+      gaps[i] = startTime[i] - endTime[i - 1];
+      gaps[startTime.length] = eventTime - endTime[endTime.length - 1];
+    return gaps;
+  }
 }
