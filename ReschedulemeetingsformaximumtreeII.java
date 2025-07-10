@@ -43,8 +43,6 @@ class Solution {
          if (meetings[n - 1][1] < eventTime) {
             gaps.add(new int[]{meetings[n - 1][1], eventTime});
         }
-
-        // Step 1: Record max current free time
         int maxFree = 0;
         for (int[] gap : gaps) {
             maxFree = Math.max(maxFree, gap[1] - gap[0]);
