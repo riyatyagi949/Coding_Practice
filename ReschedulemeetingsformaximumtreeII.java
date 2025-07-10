@@ -21,67 +21,58 @@ Space Complexity: O(N) for storing auxiliary arrays.
 Optimal Solution:
 The problem is solved efficiently in linear time by using prefix/suffix maximums on calculated free gaps, avoiding re-computation for each potential move.
 */
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 class Solution {
-    public int maximizeFreeTime(int eventTime, int[] startTime, int[] endTime) {
+    public int maxFreeTime(int eventTime, int[] startTime, int[] endTime) {
         int n = startTime.length;
+        int[][] meetings = new int[n][2];
 
-        List<int[]> meetings = new ArrayList<>();
-        meetings.add(new int[]{0, 0});
         for (int i = 0; i < n; i++) {
-            meetings.add(new int[]{startTime[i], endTime[i]});
-        }
-        meetings.add(new int[]{eventTime, eventTime});
-
-        int[] freeGaps = new int[n + 1];
-        for (int i = 0; i <= n; i++) {
-            freeGaps[i] = meetings.get(i + 1)[0] - meetings.get(i)[1];
+            meetings[i][0] = startTime[i];
+            meetings[i][1] = endTime[i];
         }
 
-        int[] prefixMaxGap = new int[n + 1];
-        if (n >= 0) {
-            prefixMaxGap[0] = freeGaps[0];
-            for (int i = 1; i <= n; i++) {
-                prefixMaxGap[i] = Math.max(prefixMaxGap[i - 1], freeGaps[i]);
+        // Precompute the free time gaps between meetings
+        List<int[]> gaps = new ArrayList<>();
+        if (meetings[0][0] > 0) {
+            gaps.add(new int[]{0, meetings[0][0]});
+        }
+
+        for (int i = 1; i < n; i++) {
+            if (meetings[i][0] > meetings[i - 1][1]) {
+                gaps.add(new int[]{meetings[i - 1][1], meetings[i][0]});
             }
         }
-       
-        int[] suffixMaxGap = new int[n + 1];
-        if (n >= 0) {
-             suffixMaxGap[n] = freeGaps[n];
-            for (int i = n - 1; i >= 0; i--) {
-                suffixMaxGap[i] = Math.max(suffixMaxGap[i + 1], freeGaps[i]);
-            }
-        }
-       
-        int overallMaxFreeTime = (n >= 0) ? prefixMaxGap[n] : 0;
 
-        for (int k = 1; k <= n; k++) {
-            int currentMeetingDuration = meetings.get(k)[1] - meetings.get(k)[0];
-
-            int maxFreeFromPrefixPart = 0;
-            if (k - 2 >= 0) {
-                maxFreeFromPrefixPart = prefixMaxGap[k - 2];
-            }
-
-            int maxFreeFromSuffixPart = 0;
-            if (k + 1 <= n) {
-                maxFreeFromSuffixPart = suffixMaxGap[k + 1];
-            }
-
-            int maxOfUnaffectedGaps = Math.max(maxFreeFromPrefixPart, maxFreeFromSuffixPart);
-
-            int mergedGapSize = meetings.get(k + 1)[0] - meetings.get(k - 1)[1];
-            int freeTimeInMergedSlotIfUsed = mergedGapSize - currentMeetingDuration;
-            
-            int potentialMaxFreeTimeForThisMove = Math.max(maxOfUnaffectedGaps, Math.max(0, freeTimeInMergedSlotIfUsed));
-            
-            overallMaxFreeTime = Math.max(overallMaxFreeTime, potentialMaxFreeTimeForThisMove);
+        if (meetings[n - 1][1] < eventTime) {
+            gaps.add(new int[]{meetings[n - 1][1], eventTime});
         }
 
-        return overallMaxFreeTime;
+        // Step 1: Record max current free time
+        int maxFree = 0;
+        for (int[] gap : gaps) {
+            maxFree = Math.max(maxFree, gap[1] - gap[0]);
+        }
+
+        // Step 2: Try rescheduling each meeting
+        for (int i = 0; i < n; i++) {
+            int dur = meetings[i][1] - meetings[i][0];
+
+            // Simulate removing meeting i → creates a merged gap
+            int left = (i == 0) ? 0 : meetings[i - 1][1];
+            int right = (i == n - 1) ? eventTime : meetings[i + 1][0];
+
+            int mergedGap = right - left;
+            maxFree = Math.max(maxFree, mergedGap);
+
+            // Try placing meeting[i] in every other gap
+            for (int[] gap : gaps) {
+                if (gap[1] - gap[0] >= dur) {
+                    maxFree = Math.max(maxFree, dur);
+                }
+            }
+        }
+
+        return maxFree;
     }
 }
