@@ -49,13 +49,14 @@ class Solution {
     }
     return ans;
   }
-
   private int[] getGaps(int eventTime, int[] startTime, int[] endTime) {
     int[] gaps = new int[startTime.length + 1];
     gaps[0] = startTime[0];
+
     for (int i = 1; i < startTime.length; ++i)
       gaps[i] = startTime[i] - endTime[i - 1];
       gaps[startTime.length] = eventTime - endTime[endTime.length - 1];
+      
     return gaps;
   }
 }
