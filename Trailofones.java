@@ -26,6 +26,7 @@ class Solution {
         }
         int validCount = dp0[n] + dp1[n];
         int total = 1 << n; 
+        
         return total - validCount;
     }
 }
