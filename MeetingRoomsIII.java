@@ -20,54 +20,51 @@
 // Time Complexity: O(M log M + M log N) where M is the number of meetings and N is the number of rooms.
 // Space Complexity: O(N)
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.*;
 
 class Solution {
     public int mostBooked(int n, int[][] meetings) {
-        Arrays.sort(meetings, (a, b) -> a[0] - b[0]);
+        Arrays.sort(meetings, (a, b) -> Integer.compare(a[0], b[0]));
 
+        int[] roomUsage = new int[n];  
         PriorityQueue<Integer> availableRooms = new PriorityQueue<>();
         for (int i = 0; i < n; i++) {
-            availableRooms.offer(i);
+            availableRooms.offer(i); 
         }
 
-        PriorityQueue<long[]> occupiedRooms = new PriorityQueue<>((a, b) -> {
-            if (a[0] != b[0]) {
-                return Long.compare(a[0], b[0]);
-            }
+        // Compare by endTime, and in case of tie, by room number
+        PriorityQueue<long[]> ongoingMeetings = new PriorityQueue<>((a, b) -> {
+            if (a[0] != b[0]) return Long.compare(a[0], b[0]);
             return Integer.compare((int) a[1], (int) b[1]);
-        }); // {finishTime, roomNumber}
-
-        int[] meetingCount = new int[n];
+        });
 
         for (int[] meeting : meetings) {
-            long currentStart = meeting[0];
-            long duration = meeting[1] - meeting[0];
+            int start = meeting[0], end = meeting[1];
 
-            while (!occupiedRooms.isEmpty() && occupiedRooms.peek()[0] <= currentStart) {
-                availableRooms.offer((int) occupiedRooms.poll()[1]);
+            // Free up rooms that finished before or at meeting start
+            while (!ongoingMeetings.isEmpty() && ongoingMeetings.peek()[0] <= start) {
+                availableRooms.offer((int) ongoingMeetings.poll()[1]);
             }
 
             if (!availableRooms.isEmpty()) {
                 int room = availableRooms.poll();
-                meetingCount[room]++;
-                occupiedRooms.offer(new long[]{currentStart + duration, room});
+                ongoingMeetings.offer(new long[]{end, room});
+                roomUsage[room]++;
             } else {
-                long[] earliestFreeRoom = occupiedRooms.poll();
-                long finishTime = earliestFreeRoom[0];
-                int room = (int) earliestFreeRoom[1];
-
-                meetingCount[room]++;
-                occupiedRooms.offer(new long[]{finishTime + duration, room});
+                long[] earliest = ongoingMeetings.poll();
+                long newStart = earliest[0];
+                int room = (int) earliest[1];
+                long duration = end - start;
+                long newEnd = newStart + duration;
+                ongoingMeetings.offer(new long[]{newEnd, room});
+                roomUsage[room]++;
             }
         }
 
-        int maxMeetings = 0;
-        int resultRoom = -1;
+        int maxMeetings = 0, resultRoom = 0;
         for (int i = 0; i < n; i++) {
-            if (meetingCount[i] > maxMeetings) {
-                maxMeetings = meetingCount[i];
+            if (roomUsage[i] > maxMeetings) {
+                maxMeetings = roomUsage[i];
                 resultRoom = i;
             }
         }
