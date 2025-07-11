@@ -11,23 +11,20 @@
 
 // Optimal Solution:
 class Solution {
-    long fib(int n) {
-        if (n <= 1) {
-            return n;
-        }
-        long a = 0;
-        long b = 1;
-        for (int i = 2; i <= n; i++) {
-            long c = a + b;
-            a = b;
-            b = c;
-        }
-        return b;
-    }
+    public int countConsec(int n) {
+        if (n < 2) return 0;
 
-    public long numberOfConsecutiveOnes(int n) {
-        long totalStrings = 1L << n;
-        long stringsWithoutConsecutiveOnes = fib(n + 2);
-        return totalStrings - stringsWithoutConsecutiveOnes;
+        int[] dp0 = new int[n + 1]; 
+        int[] dp1 = new int[n + 1];
+        dp0[1] = 1;
+        dp1[1] = 1;
+
+        for (int i = 2; i <= n; i++) {
+            dp0[i] = dp0[i - 1] + dp1[i - 1];
+            dp1[i] = dp0[i - 1];
+        }
+        int validCount = dp0[n] + dp1[n];
+        int total = 1 << n; 
+        return total - validCount;
     }
 }
