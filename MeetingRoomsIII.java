@@ -60,8 +60,7 @@ class Solution {
                 roomUsage[room]++;
             }
         }
-
-        int maxMeetings = 0, resultRoom = 0;
+ int maxMeetings = 0, resultRoom = 0;
         for (int i = 0; i < n; i++) {
             if (roomUsage[i] > maxMeetings) {
                 maxMeetings = roomUsage[i];
