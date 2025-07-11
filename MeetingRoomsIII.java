@@ -37,7 +37,6 @@ class Solution {
             if (a[0] != b[0]) return Long.compare(a[0], b[0]);
             return Integer.compare((int) a[1], (int) b[1]);
         });
-
         for (int[] meeting : meetings) {
             int start = meeting[0], end = meeting[1];
 
