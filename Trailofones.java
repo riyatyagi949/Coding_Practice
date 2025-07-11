@@ -12,7 +12,8 @@
 // Optimal Solution:
 class Solution {
     public int countConsec(int n) {
-        if (n < 2) return 0;
+        if (n < 2)
+         return 0;
 
         int[] dp0 = new int[n + 1]; 
         int[] dp1 = new int[n + 1];
