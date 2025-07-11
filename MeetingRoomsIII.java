@@ -45,7 +45,6 @@ class Solution {
             while (!ongoingMeetings.isEmpty() && ongoingMeetings.peek()[0] <= start) {
                 availableRooms.offer((int) ongoingMeetings.poll()[1]);
             }
-
             if (!availableRooms.isEmpty()) {
                 int room = availableRooms.poll();
                 ongoingMeetings.offer(new long[]{end, room});
