@@ -31,8 +31,6 @@ class Solution {
         for (int i = 0; i < n; i++) {
             availableRooms.offer(i); 
         }
-
-        // Compare by endTime, and in case of tie, by room number
         PriorityQueue<long[]> ongoingMeetings = new PriorityQueue<>((a, b) -> {
             if (a[0] != b[0]) return Long.compare(a[0], b[0]);
             return Integer.compare((int) a[1], (int) b[1]);
@@ -58,7 +56,7 @@ class Solution {
                 roomUsage[room]++;
             }
         }
- int maxMeetings = 0, resultRoom = 0;
+     int maxMeetings = 0, resultRoom = 0;
         for (int i = 0; i < n; i++) {
             if (roomUsage[i] > maxMeetings) {
                 maxMeetings = roomUsage[i];
