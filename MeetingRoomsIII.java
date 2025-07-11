@@ -50,7 +50,8 @@ class Solution {
                 int room = availableRooms.poll();
                 ongoingMeetings.offer(new long[]{end, room});
                 roomUsage[room]++;
-            } else {
+            } 
+            else {
                 long[] earliest = ongoingMeetings.poll();
                 long newStart = earliest[0];
                 int room = (int) earliest[1];
