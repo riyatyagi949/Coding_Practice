@@ -41,7 +41,6 @@ class Solution {
         for (int[] meeting : meetings) {
             int start = meeting[0], end = meeting[1];
 
-            // Free up rooms that finished before or at meeting start
             while (!ongoingMeetings.isEmpty() && ongoingMeetings.peek()[0] <= start) {
                 availableRooms.offer((int) ongoingMeetings.poll()[1]);
             }
