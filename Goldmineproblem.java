@@ -56,7 +56,6 @@ class Solution {
     static int goldMine(int n, int m, int mat[][]) {
         int[][] dp = new int[n][m];
 
-        // Initialize the first column of dp table
         for (int i = 0; i < n; i++) {
             dp[i][0] = mat[i][0];
         }
