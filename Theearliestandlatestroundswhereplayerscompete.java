@@ -75,14 +75,12 @@ class Solution {
         memo.put(mask, currentMinMaxResults);
         return currentMinMaxResults;
     }
-
-    private void generateNextMasks(List<Integer> activePlayersOriginalIndices, int pairIdx, int currentWinnersMask, int[] minMax) {
+private void generateNextMasks(List<Integer> activePlayersOriginalIndices, int pairIdx, int currentWinnersMask, int[] minMax) 
+       {
         int nPlayersInRound = activePlayersOriginalIndices.size();
         int numPairs = nPlayersInRound / 2;
 
-        // Base case for this helper: all pairs have been processed
         if (pairIdx == numPairs) {
-            // If an odd number of players, the middle player automatically advances
             if (nPlayersInRound % 2 == 1) {
                 currentWinnersMask |= (1 << (activePlayersOriginalIndices.get(numPairs) - 1));
             }
