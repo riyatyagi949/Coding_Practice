@@ -60,10 +60,8 @@ class Solution {
         for (int i = 0; i < n; i++) {
             dp[i][0] = mat[i][0];
         }
-
-        // Fill the dp table column by column
-        for (int j = 1; j < m; j++) { // Iterate through columns (from second column)
-            for (int i = 0; i < n; i++) { // Iterate through rows
+        for (int j = 1; j < m; j++) { 
+            for (int i = 0; i < n; i++) {
                 int maxGoldFromPrev = 0;
 
                 maxGoldFromPrev = dp[i][j - 1];
