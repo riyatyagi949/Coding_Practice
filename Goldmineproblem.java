@@ -66,19 +66,13 @@ class Solution {
             for (int i = 0; i < n; i++) { // Iterate through rows
                 int maxGoldFromPrev = 0;
 
-                // Option 1: From directly left (i, j-1)
                 maxGoldFromPrev = dp[i][j - 1];
-
-                // Option 2: From diagonally up-left (i-1, j-1)
                 if (i > 0) {
                     maxGoldFromPrev = Math.max(maxGoldFromPrev, dp[i - 1][j - 1]);
                 }
-
-                // Option 3: From diagonally down-left (i+1, j-1)
                 if (i < n - 1) {
                     maxGoldFromPrev = Math.max(maxGoldFromPrev, dp[i + 1][j - 1]);
                 }
-
                 dp[i][j] = mat[i][j] + maxGoldFromPrev;
             }
         }
