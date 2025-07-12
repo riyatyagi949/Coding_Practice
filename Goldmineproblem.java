@@ -27,16 +27,16 @@
 // Algorithm:
 // 1. Initialize `rows = mat.length` and `cols = mat[0].length`.
 // 2. Create a `dp` table of size `rows x cols`.
-// 3. **Base Cases (First Column):** For each `i` from `0` to `rows-1`, set `dp[i][0] = mat[i][0]`.
-// 4. **Fill DP Table (Columns 1 to cols-1):**
+// 3. Base Cases (First Column): For each `i` from `0` to `rows-1`, set `dp[i][0] = mat[i][0]`.
+// 4. Fill DP Table (Columns 1 to cols-1):
 //    For each column `j` from `1` to `cols-1`:
 //        For each row `i` from `0` to `rows-1`:
 //            Initialize `maxGoldFromPrev = 0`.
-//            a. **From directly left:** `maxGoldFromPrev = dp[i][j-1]`.
-//            b. **From diagonally up-left:** If `i > 0`, `maxGoldFromPrev = max(maxGoldFromPrev, dp[i-1][j-1])`.
-//            c. **From diagonally down-left:** If `i < rows-1`, `maxGoldFromPrev = max(maxGoldFromPrev, dp[i+1][j-1])`.
+//            a. From directly left: `maxGoldFromPrev = dp[i][j-1]`.
+//            b. From diagonally up-left: If `i > 0`, `maxGoldFromPrev = max(maxGoldFromPrev, dp[i-1][j-1])`.
+//            c. From diagonally down-left: If `i < rows-1`, `maxGoldFromPrev = max(maxGoldFromPrev, dp[i+1][j-1])`.
 //            `dp[i][j] = mat[i][j] + maxGoldFromPrev`.
-// 5. **Find Maximum Gold:** After filling the entire `dp` table, the maximum gold collected will be the maximum value in the last column of the `dp` table.
+// 5. Find Maximum Gold: After filling the entire `dp` table, the maximum gold collected will be the maximum value in the last column of the `dp` table.
 //    Initialize `maxGold = 0`.
 //    For each `i` from `0` to `rows-1`, `maxGold = max(maxGold, dp[i][cols-1])`.
 // 6. Return `maxGold`.
