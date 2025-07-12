@@ -69,14 +69,9 @@ class Solution {
         if (memo.containsKey(mask)) {
             return memo.get(mask);
         }
-
-        // Initialize min and max rounds for the current state (to be updated by recursive calls)
         int[] currentMinMaxResults = {Integer.MAX_VALUE, Integer.MIN_VALUE};
-
-        // Recursively explore all possible outcomes of matches to generate next round's masks
         generateNextMasks(activePlayersOriginalIndices, 0, 0, currentMinMaxResults);
 
-        // Store and return the computed min/max rounds for the current mask
         memo.put(mask, currentMinMaxResults);
         return currentMinMaxResults;
     }
