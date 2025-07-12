@@ -42,9 +42,9 @@ class Solution {
             this.secondP = temp;
         }
         int initialMask = (1 << n) - 1;
-       return solve(initialMask);
-    } 
-     private int[] solve(int mask) {
+        return solve(initialMask);
+    }
+    private int[] solve(int mask) {
         int currentFirstPPos = -1;
         int currentSecondPPos = -1;
         int numActivePlayers = 0;
@@ -53,8 +53,7 @@ class Solution {
         for (int i = 0; i < 28; i++) { 
             if (((mask >> i) & 1) == 1) { 
                 numActivePlayers++;
-                activePlayersOriginalIndices.add(i + 1);
-
+                activePlayersOriginalIndices.add(i + 1); 
                 if (i + 1 == firstP) {
                     currentFirstPPos = numActivePlayers; 
                 }
@@ -64,7 +63,7 @@ class Solution {
             }
         }
         if (currentFirstPPos + currentSecondPPos == numActivePlayers + 1) {
-            return new int[]{1, 1};
+            return new int[]{1, 1}; 
         }
         if (memo.containsKey(mask)) {
             return memo.get(mask);
@@ -75,8 +74,7 @@ class Solution {
         memo.put(mask, currentMinMaxResults);
         return currentMinMaxResults;
     }
-private void generateNextMasks(List<Integer> activePlayersOriginalIndices, int pairIdx, int currentWinnersMask, int[] minMax) 
-       {
+       private void generateNextMasks(List<Integer> activePlayersOriginalIndices, int pairIdx, int currentWinnersMask, int[] minMax) {
         int nPlayersInRound = activePlayersOriginalIndices.size();
         int numPairs = nPlayersInRound / 2;
 
@@ -84,42 +82,24 @@ private void generateNextMasks(List<Integer> activePlayersOriginalIndices, int p
             if (nPlayersInRound % 2 == 1) {
                 currentWinnersMask |= (1 << (activePlayersOriginalIndices.get(numPairs) - 1));
             }
-
-            // Call `solve` for the next round's mask to get its min/max rounds
             int[] resFromNextRound = solve(currentWinnersMask);
-
-            // Update the overall min and max rounds for the current `solve` call's state
-            // Add 1 to account for the current round
             minMax[0] = Math.min(minMax[0], 1 + resFromNextRound[0]);
             minMax[1] = Math.max(minMax[1], 1 + resFromNextRound[1]);
             return;
         }
-
-        // Get the two players in the current pair based on their positions in the active list
         int p1 = activePlayersOriginalIndices.get(pairIdx);
         int p2 = activePlayersOriginalIndices.get(nPlayersInRound - 1 - pairIdx);
 
-        // Check if either player is `firstP` or `secondP`
         boolean p1IsSpecial = (p1 == firstP || p1 == secondP);
         boolean p2IsSpecial = (p2 == firstP || p2 == secondP);
 
-        // If both p1 and p2 are special players, they would have met in this round,
-        // and the base case in `solve()` would have handled it. So, this condition
-        // logically shouldn't be met here.
-
-        if (p1IsSpecial) {
-            // If p1 is a special player, p1 must win
+         if (p1IsSpecial) {
             generateNextMasks(activePlayersOriginalIndices, pairIdx + 1, currentWinnersMask | (1 << (p1 - 1)), minMax);
         } else if (p2IsSpecial) {
-            // If p2 is a special player, p2 must win
             generateNextMasks(activePlayersOriginalIndices, pairIdx + 1, currentWinnersMask | (1 << (p2 - 1)), minMax);
-        } else {
-            // Neither p1 nor p2 is a special player, so either can win.
-            // Explore both possibilities:
-
-            // Option 1: p1 wins
-            generateNextMasks(activePlayersOriginalIndices, pairIdx + 1, currentWinnersMask | (1 << (p1 - 1)), minMax);
-
-        }
+        } 
+        else {
+             generateNextMasks(activePlayersOriginalIndices, pairIdx + 1, currentWinnersMask | (1 << (p1 - 1)), minMax);
+            }
     }
 }
