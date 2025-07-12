@@ -27,79 +27,83 @@
 import java.util.*;
 
 class Solution {
-    int firstP;
-    int secondP;
-    Map<Integer, int[]> memo;
-
-    public int[] earliestAndLatest(int n, int firstPlayer, int secondPlayer) {
-        this.firstP = firstPlayer;
-        this.secondP = secondPlayer;
-        this.memo = new HashMap<>();
-
-        if (this.firstP > this.secondP) {
-            int temp = this.firstP;
-            this.firstP = this.secondP;
-            this.secondP = temp;
-        }
-        int initialMask = (1 << n) - 1;
-        return solve(initialMask);
+    Map<String, int[]> memo = new HashMap<>();
+    public int[] earliestAndLatest(int n, int firstPlayer, int secondPlayer)
+     {
+        return dfs(n, firstPlayer, secondPlayer, 1);
     }
-    private int[] solve(int mask) {
-        int currentFirstPPos = -1;
-        int currentSecondPPos = -1;
-        int numActivePlayers = 0;
-        List<Integer> activePlayersOriginalIndices = new ArrayList<>();
+     private int[] dfs(int n, int a, int b, int round) {
+        if (a > b) {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+        if (a + b == n + 1) return new int[]{round, round};
 
-        for (int i = 0; i < 28; i++) { 
-            if (((mask >> i) & 1) == 1) { 
-                numActivePlayers++;
-                activePlayersOriginalIndices.add(i + 1); 
-                if (i + 1 == firstP) {
-                    currentFirstPPos = numActivePlayers; 
-                }
-                if (i + 1 == secondP) {
-                    currentSecondPPos = numActivePlayers; 
-                }
-            }
-        }
-        if (currentFirstPPos + currentSecondPPos == numActivePlayers + 1) {
-            return new int[]{1, 1}; 
-        }
-        if (memo.containsKey(mask)) {
-            return memo.get(mask);
-        }
-        int[] currentMinMaxResults = {Integer.MAX_VALUE, Integer.MIN_VALUE};
-        generateNextMasks(activePlayersOriginalIndices, 0, 0, currentMinMaxResults);
+        String key = n + "," + a + "," + b;
+        if (memo.containsKey(key)) return memo.get(key);
 
-        memo.put(mask, currentMinMaxResults);
-        return currentMinMaxResults;
+        int earliest = Integer.MAX_VALUE;
+        int latest = Integer.MIN_VALUE;
+
+        for (List<Integer> next : getNextRounds(n, a, b)) {
+            int indexA = next.indexOf(a);
+            int indexB = next.indexOf(b);
+            int[] res = dfs(next.size(), indexA + 1, indexB + 1, round + 1);
+            earliest = Math.min(earliest, res[0]);
+            latest = Math.max(latest, res[1]);
+        }
+        int[] result = new int[]{earliest, latest};
+        memo.put(key, result);
+        return result;
     }
-       private void generateNextMasks(List<Integer> activePlayersOriginalIndices, int pairIdx, int currentWinnersMask, int[] minMax) {
-        int nPlayersInRound = activePlayersOriginalIndices.size();
-        int numPairs = nPlayersInRound / 2;
+     private List<List<Integer>> getNextRounds(int n, int a, int b) {
+        List<List<Integer>> results = new ArrayList<>();
+        List<Integer> current = new ArrayList<>();
+        for (int i = 1; i <= n; i++) current.add(i);
 
-        if (pairIdx == numPairs) {
-            if (nPlayersInRound % 2 == 1) {
-                currentWinnersMask |= (1 << (activePlayersOriginalIndices.get(numPairs) - 1));
-            }
-            int[] resFromNextRound = solve(currentWinnersMask);
-            minMax[0] = Math.min(minMax[0], 1 + resFromNextRound[0]);
-            minMax[1] = Math.max(minMax[1], 1 + resFromNextRound[1]);
+        backtrack(current, 0, current.size() - 1, a, b, new ArrayList<>(), results);
+        return results;
+    }
+   private void backtrack(List<Integer> players, int left, int right, int a, int b,
+    List<Integer> path, List<List<Integer>> results) {
+        if (left > right) {
+            List<Integer> sorted = new ArrayList<>(path);
+            Collections.sort(sorted);
+            results.add(sorted);
             return;
         }
-        int p1 = activePlayersOriginalIndices.get(pairIdx);
-        int p2 = activePlayersOriginalIndices.get(nPlayersInRound - 1 - pairIdx);
+        if (left == right) {
+            path.add(players.get(left));
+            backtrack(players, left + 1, right - 1, a, b, path, results);
+            path.remove(path.size() - 1);
+            return;
+        }
+        int p1 = players.get(left), p2 = players.get(right);
+        boolean isAB = (p1 == a && p2 == b) || (p1 == b && p2 == a);
+        boolean hasAorB = (p1 == a || p1 == b || p2 == a || p2 == b);
 
-        boolean p1IsSpecial = (p1 == firstP || p1 == secondP);
-        boolean p2IsSpecial = (p2 == firstP || p2 == secondP);
+        if (isAB) return; 
 
-         if (p1IsSpecial) {
-            generateNextMasks(activePlayersOriginalIndices, pairIdx + 1, currentWinnersMask | (1 << (p1 - 1)), minMax);
-        } else if (p2IsSpecial) {
-            generateNextMasks(activePlayersOriginalIndices, pairIdx + 1, currentWinnersMask | (1 << (p2 - 1)), minMax);
+        if (hasAorB) {
+            if (p1 == a || p1 == b) {
+                path.add(p1);
+                backtrack(players, left + 1, right - 1, a, b, path, results);
+                path.remove(path.size() - 1);
+            } 
+            else {
+                path.add(p2);
+                backtrack(players, left + 1, right - 1, a, b, path, results);
+                path.remove(path.size() - 1);
+            }
         } 
         else {
-             generateNextMasks(activePlayersOriginalIndices, pairIdx + 1, currentWinnersMask | (1 << (p1 - 1)), minMax);
-            }
+            path.add(p1);
+            backtrack(players, left + 1, right - 1, a, b, path, results);
+            path.remove(path.size() - 1);
+            path.add(p2);
+            backtrack(players, left + 1, right - 1, a, b, path, results);
+            path.remove(path.size() - 1);
+        }
     }
 }
