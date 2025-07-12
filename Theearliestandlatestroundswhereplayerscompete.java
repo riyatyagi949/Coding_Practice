@@ -43,10 +43,8 @@ class Solution {
         }
         int initialMask = (1 << n) - 1;
        return solve(initialMask);
-    }
-
-    private int[] solve(int mask) {
-        // Calculate current relative positions of firstP and secondP
+    } 
+     private int[] solve(int mask) {
         int currentFirstPPos = -1;
         int currentSecondPPos = -1;
         int numActivePlayers = 0;
