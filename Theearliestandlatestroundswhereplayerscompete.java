@@ -50,26 +50,22 @@ class Solution {
         int numActivePlayers = 0;
         List<Integer> activePlayersOriginalIndices = new ArrayList<>();
 
-        for (int i = 0; i < 28; i++) { // Iterate up to max possible N (28)
-            if (((mask >> i) & 1) == 1) { // If player (i+1) is active
+        for (int i = 0; i < 28; i++) { 
+            if (((mask >> i) & 1) == 1) { 
                 numActivePlayers++;
-                activePlayersOriginalIndices.add(i + 1); // Store original player number
+                activePlayersOriginalIndices.add(i + 1);
+
                 if (i + 1 == firstP) {
-                    currentFirstPPos = numActivePlayers; // 1-based relative position in current list
+                    currentFirstPPos = numActivePlayers; 
                 }
                 if (i + 1 == secondP) {
-                    currentSecondPPos = numActivePlayers; // 1-based relative position
+                    currentSecondPPos = numActivePlayers; 
                 }
             }
         }
-
-        // Base case: firstP and secondP meet in this round
-        // This occurs if their relative positions are symmetric (e.g., 1st vs last, 2nd vs 2nd-to-last)
         if (currentFirstPPos + currentSecondPPos == numActivePlayers + 1) {
-            return new int[]{1, 1}; // They meet in this round, so it takes 1 more round
+            return new int[]{1, 1};
         }
-
-        // Memoization check: if result for this mask already computed, return it
         if (memo.containsKey(mask)) {
             return memo.get(mask);
         }
