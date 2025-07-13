@@ -183,7 +183,6 @@ class Solution {
             sum[i] = arr[i];
             totalSum += arr[i];
         }
-
         int maxLength = 1;
 
         for (int i = 0; i < n; i++) {
