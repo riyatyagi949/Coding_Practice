@@ -174,7 +174,6 @@ class Solution {
         if (n == 0) {
             return 0;
         }
-
         int[] length = new int[n];
         long[] sum = new long[n];
 
