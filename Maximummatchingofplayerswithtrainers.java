@@ -112,7 +112,6 @@
                 playerIdx++;
                 trainerIdx++;
             } else {
-                // Move to the next trainer.
                 trainerIdx++;
             }
         }
