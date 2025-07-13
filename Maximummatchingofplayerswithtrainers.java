@@ -112,7 +112,6 @@
                 playerIdx++;
                 trainerIdx++;
             } else {
-                // This trainer is too weak for the current player.
                 // Move to the next trainer.
                 trainerIdx++;
             }
