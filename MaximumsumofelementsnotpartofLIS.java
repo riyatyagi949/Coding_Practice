@@ -198,7 +198,6 @@ class Solution {
             }
             maxLength = Math.max(maxLength, length[i]);
         }
-
         long minLisSum = Long.MAX_VALUE;
         for (int i = 0; i < n; i++) {
             if (length[i] == maxLength) {
