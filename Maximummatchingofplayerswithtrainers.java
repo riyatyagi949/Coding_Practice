@@ -108,7 +108,6 @@
 
         while (playerIdx < players.length && trainerIdx < trainers.length) {
             if (players[playerIdx] <= trainers[trainerIdx]) {
-                // This player can be matched with this trainer
                 matchCount++;
                 playerIdx++;
                 trainerIdx++;
