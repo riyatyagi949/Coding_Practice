@@ -204,7 +204,6 @@ class Solution {
                 minLisSum = Math.min(minLisSum, sum[i]);
             }
         }
-
-        return (int) (totalSum - minLisSum);
+         return (int) (totalSum - minLisSum);
     }
 }
