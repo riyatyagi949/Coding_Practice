@@ -53,7 +53,6 @@ class Solution {
             decimalValue = (decimalValue << 1) | current.val; // Equivalent to decimalValue = decimalValue * 2 + current.val;
             current = current.next;
         }
-
         return decimalValue;
     }
 }
