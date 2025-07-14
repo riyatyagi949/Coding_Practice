@@ -68,10 +68,8 @@ class Solution {
                 }
             }
         }
-
-        return dp[n] == Integer.MAX_VALUE ? -1 : dp[n];
-    }
-
+         return dp[n] == Integer.MAX_VALUE ? -1 : dp[n];
+    } 
     private boolean isPowerOfFive(long n) {
         if (n <= 0) {
             return false;
