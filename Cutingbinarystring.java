@@ -59,7 +59,6 @@ class Solution {
                 try {
                     decimalValue = Long.parseLong(sub, 2);
                 } catch (NumberFormatException e) {
-                    // This should ideally not happen for valid binary substrings within length limits
                     continue; 
                 }
 
