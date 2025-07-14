@@ -50,7 +50,7 @@ class Solution {
         ListNode current = head;
 
         while (current != null) {
-            decimalValue = (decimalValue << 1) | current.val; // Equivalent to decimalValue = decimalValue * 2 + current.val;
+            decimalValue = (decimalValue << 1) | current.val; 
             current = current.next;
         }
         return decimalValue;
