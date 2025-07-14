@@ -55,8 +55,6 @@ class Solution {
                 if (sub.length() > 1 && sub.charAt(0) == '0') {
                     continue;
                 }
-                
-                // Convert binary substring to long
                 long decimalValue = 0;
                 try {
                     decimalValue = Long.parseLong(sub, 2);
