@@ -51,10 +51,7 @@ class Solution {
                 if (dp[j] == Integer.MAX_VALUE) {
                     continue;
                 }
-
                 String sub = s.substring(j, i);
-
-                // Check for leading zeros, "0" is not a power of 5
                 if (sub.length() > 1 && sub.charAt(0) == '0') {
                     continue;
                 }
