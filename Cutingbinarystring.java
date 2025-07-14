@@ -61,8 +61,6 @@ class Solution {
                 } catch (NumberFormatException e) {
                     continue; 
                 }
-
-                // Check if it's a power of 5
                 if (isPowerOfFive(decimalValue)) {
                     if (dp[j] != Integer.MAX_VALUE) {
                         dp[i] = Math.min(dp[i], dp[j] + 1);
