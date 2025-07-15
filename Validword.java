@@ -43,7 +43,7 @@ class Solution {
 
         for (char c : word.toCharArray()) {
             if (!Character.isLetterOrDigit(c)) {
-                return false; // Contains invalid characters
+                return false;
             }
         if (Character.isLetter(c)) {
                 char lowerC = Character.toLowerCase(c);
