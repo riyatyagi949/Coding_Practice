@@ -55,7 +55,6 @@ class Solution {
                 }
             }
         }
-
         return hasVowel && hasConsonant;
     }
 }
