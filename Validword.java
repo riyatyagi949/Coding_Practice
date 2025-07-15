@@ -37,7 +37,6 @@ class Solution {
         if (word.length() < 3) {
             return false;
         }
-
         boolean hasVowel = false;
         boolean hasConsonant = false;
 
