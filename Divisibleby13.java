@@ -32,9 +32,11 @@ class Solution {
             remainder = (remainder * 10 + (c - '0')) % 13;
         }
         if (remainder == 0) {
-            return 1; // True
+            return 1; 
+            // True
         } else {
-            return 0; // False
+            return 0; 
+            // False
         }
     }
 }
