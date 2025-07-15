@@ -45,8 +45,7 @@ class Solution {
             if (!Character.isLetterOrDigit(c)) {
                 return false; // Contains invalid characters
             }
-
-            if (Character.isLetter(c)) {
+        if (Character.isLetter(c)) {
                 char lowerC = Character.toLowerCase(c);
                 if (lowerC == 'a' || lowerC == 'e' || lowerC == 'i' || lowerC == 'o' || lowerC == 'u') {
                     hasVowel = true;
