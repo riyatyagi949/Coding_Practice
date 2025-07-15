@@ -26,15 +26,12 @@
 // O(1), as we only use a constant amount of extra space to store the remainder.
 
 class Solution {
-    int isDivisibleBy13(String s) {
-        int remainder = 0;
-        for (char c : s.toCharArray()) {
-            remainder = (remainder * 10 + (c - '0')) % 13;
+    public boolean divby13(String s) {
+        int mod = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int digit = s.charAt(i) - '0';
+            mod = (mod * 10 + digit) % 13;
         }
-        if (remainder == 0) {
-            return 1; 
-        } else {
-            return 0; 
-        }
+        return mod == 0;
     }
 }
