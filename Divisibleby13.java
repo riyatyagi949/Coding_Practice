@@ -33,7 +33,6 @@ class Solution {
         }
         if (remainder == 0) {
             return 1; 
-            // True
         } else {
             return 0; 
             // False
