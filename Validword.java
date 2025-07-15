@@ -34,21 +34,21 @@
 
 class Solution {
     public boolean isValid(String word) {
-        if (word.length() < 3) {
-            return false;
-        }
+        if (word.length() < 3) 
+        return false;
+
         boolean hasVowel = false;
         boolean hasConsonant = false;
 
-        for (char c : word.toCharArray()) {
-            if (!Character.isLetterOrDigit(c)) {
-                return false;
-            }
-        if (Character.isLetter(c)) {
-                char lowerC = Character.toLowerCase(c);
-                if (lowerC == 'a' || lowerC == 'e' || lowerC == 'i' || lowerC == 'o' || lowerC == 'u') {
+        for (char ch : word.toCharArray()) {
+            if (!Character.isLetterOrDigit(ch)) return false;
+
+            if (Character.isLetter(ch)) {
+                char lower = Character.toLowerCase(ch);
+                if ("aeiou".indexOf(lower) != -1) {
                     hasVowel = true;
-                } else {
+                } 
+                else {
                     hasConsonant = true;
                 }
             }
