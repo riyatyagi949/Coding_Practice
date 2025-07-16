@@ -52,56 +52,38 @@
 // O(sqrt(N)) for storing primes using a boolean array for the sieve.
 
 class Solution {
-    public int nineDivisors(int n) {
-        int count = 0;
-        int limit = (int) Math.sqrt(n);
-        boolean[] isPrime = new boolean[limit + 1];
-        java.util.Arrays.fill(isPrime, true);
+    public static int countNumbers(int n) {
+        int maxLimit = (int)Math.sqrt(n) + 1;
+        boolean[] isPrime = new boolean[maxLimit];
+        Arrays.fill(isPrime, true);
         isPrime[0] = isPrime[1] = false;
 
-        java.util.ArrayList<Integer> primes = new java.util.ArrayList<>();
-
-        for (int p = 2; p <= limit; p++) {
-            if (isPrime[p]) {
-                primes.add(p);
-                for (int multiple = p * p; multiple <= limit; multiple += p) {
-                    isPrime[multiple] = false;
+        List<Integer> primes = new ArrayList<>();
+        for (int i = 2; i < maxLimit; i++) {
+            if (isPrime[i]) {
+                primes.add(i);
+                for (int j = i * 2; j < maxLimit; j += i) {
+                    isPrime[j] = false;
                 }
             }
         }
-
-        // Case 1: numbers of the form p^8
-        // p^8 <= n => p <= n^(1/8)
+        int count = 0;
         for (int p : primes) {
-            long val = (long) p * p * p * p * p * p * p * p; // p^8
-            if (val <= n) {
-                count++;
-            } else {
-                // Since primes are sorted, further p values will also exceed n.
+            long val = 1;
+            for (int i = 0; i < 8; i++) val *= p;
+            if (val <= n) count++;
+            else break;
+        }
+        int size = primes.size();
+        for (int i = 0; i < size; i++) {
+            long pSquare = (long)primes.get(i) * primes.get(i);
+            for (int j = i + 1; j < size; j++) {
+                long qSquare = (long)primes.get(j) * primes.get(j);
+                if (pSquare * qSquare <= n) count++;
+                else 
                 break;
             }
         }
-
-        // Case 2: numbers of the form p1^2 * p2^2
-        // (p1 * p2)^2 <= n => p1 * p2 <= sqrt(n)
-        // Iterate through all distinct pairs of primes (p1, p2) such that p1 < p2
-        // and p1 * p2 <= sqrt(n).
-        for (int i = 0; i < primes.size(); i++) {
-            int p1 = primes.get(i);
-            long p1Sq = (long) p1 * p1;
-            if (p1Sq > n) { // Optimization: if p1^2 is already greater than n, then p1^2 * p2^2 will definitely be.
-                break;
-            }
-            for (int j = i + 1; j < primes.size(); j++) {
-                int p2 = primes.get(j);
-                long p2Sq = (long) p2 * p2;
-                if (p1Sq > (double) n / p2Sq) { // Avoid overflow and check p1^2 * p2^2 <= n
-                    break;
-                }
-                count++;
-            }
-        }
-
-        return count;
+          return count;
     }
 }
