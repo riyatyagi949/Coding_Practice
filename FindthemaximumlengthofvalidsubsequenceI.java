@@ -22,24 +22,14 @@
 // Space Complexity: O(1) for a few constant variables.
 
 class Solution {
-    public int maxLengthValidSubsequence(int[] nums) {
-        int countEven = 0;
-        int countOdd = 0;
+    public int maximumLength(int[] nums) {
+        int even = 0, odd = 0;
 
-        int dp_even_end = 0; 
-        int dp_odd_end = 0;  
         for (int num : nums) {
-            if (num % 2 == 0) {
-                countEven++;
-                dp_even_end = dp_odd_end + 1; 
-            } else { 
-                countOdd++;
-                dp_odd_end = dp_even_end + 1;
-            }
+            if (num % 2 == 0) even++;
+            else odd++;
         }
-        int maxLenSameParity = Math.max(countEven, countOdd);
-        int maxLenAlternatingParity = Math.max(dp_even_end, dp_odd_end);
 
-        return Math.max(maxLenSameParity, maxLenAlternatingParity);
+        return Math.max(Math.max(even, odd), 2 * Math.min(even, odd));
     }
 }
