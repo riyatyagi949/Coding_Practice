@@ -28,7 +28,8 @@ class Solution {
         for (int num : nums) {
             if (num % 2 == 0) 
             even++;
-            else odd++;
+            else 
+            odd++;
         }
      return Math.max(Math.max(even, odd), 2 * Math.min(even, odd));
     }
