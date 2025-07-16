@@ -24,7 +24,6 @@
 class Solution {
     public int maximumLength(int[] nums) {
         int even = 0, odd = 0;
-
         for (int num : nums) {
             if (num % 2 == 0) 
             even++;
