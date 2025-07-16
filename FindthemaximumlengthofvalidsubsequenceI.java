@@ -29,7 +29,6 @@ class Solution {
             if (num % 2 == 0) even++;
             else odd++;
         }
-
-        return Math.max(Math.max(even, odd), 2 * Math.min(even, odd));
+     return Math.max(Math.max(even, odd), 2 * Math.min(even, odd));
     }
 }
