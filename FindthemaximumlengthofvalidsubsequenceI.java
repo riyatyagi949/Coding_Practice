@@ -33,17 +33,11 @@ class Solution {
                 countEven++;
                 dp_even_end = dp_odd_end + 1; 
             } else { 
-                // Current number is odd
                 countOdd++;
                 dp_odd_end = dp_even_end + 1;
-                 // Extend an even-ending alternating sequence
             }
         }
-
-        // Longest subsequence with same-parity elements
         int maxLenSameParity = Math.max(countEven, countOdd);
-
-        // Longest subsequence with alternating-parity elements
         int maxLenAlternatingParity = Math.max(dp_even_end, dp_odd_end);
 
         return Math.max(maxLenSameParity, maxLenAlternatingParity);
