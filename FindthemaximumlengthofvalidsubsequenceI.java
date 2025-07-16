@@ -23,13 +23,29 @@
 
 class Solution {
     public int maximumLength(int[] nums) {
-        int even = 0, odd = 0;
-        for (int num : nums) {
-            if (num % 2 == 0) 
-            even++;
-            else 
-            odd++;
+        int maxLength = 0;
+
+        // Try both combinations:
+        // 1. Even-Odd-Even... starting with even-index parity = 0
+        // 2. Odd-Even-Odd... starting with even-index parity = 1
+        for (int evenParity = 0; evenParity <= 1; evenParity++) {
+            for (int oddParity = 0; oddParity <= 1; oddParity++) {
+                int count = 0;
+                int index = 0;
+
+                for (int num : nums) {
+                    if (index % 2 == 0 && num % 2 == evenParity) {
+                        count++;
+                        index++;
+                    } else if (index % 2 == 1 && num % 2 == oddParity) {
+                        count++;
+                        index++;
+                    }
+                }
+           maxLength = Math.max(maxLength, count);
+            }
         }
-     return Math.max(Math.max(even, odd), 2 * Math.min(even, odd));
+     return maxLength;
     }
 }
+
