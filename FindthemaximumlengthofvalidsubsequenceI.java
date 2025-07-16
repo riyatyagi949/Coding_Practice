@@ -37,7 +37,8 @@ class Solution {
                     if (index % 2 == 0 && num % 2 == evenParity) {
                         count++;
                         index++;
-                    } else if (index % 2 == 1 && num % 2 == oddParity) {
+                    } 
+                    else if (index % 2 == 1 && num % 2 == oddParity) {
                         count++;
                         index++;
                     }
