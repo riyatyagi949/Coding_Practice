@@ -28,14 +28,10 @@ class Solution {
 
         int dp_even_end = 0; 
         int dp_odd_end = 0;  
-        // Longest alternating subsequence ending with an odd number
-
         for (int num : nums) {
             if (num % 2 == 0) {
-                 // Current number is even
                 countEven++;
                 dp_even_end = dp_odd_end + 1; 
-                // Extend an odd-ending alternating sequence
             } else { 
                 // Current number is odd
                 countOdd++;
