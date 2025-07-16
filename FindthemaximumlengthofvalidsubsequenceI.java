@@ -23,21 +23,24 @@
 
 class Solution {
     public int maxLengthValidSubsequence(int[] nums) {
-        // Count for subsequences where adjacent sums are even (all same parity elements)
         int countEven = 0;
         int countOdd = 0;
 
-        // DP states for subsequences where adjacent sums are odd (alternating parity elements)
-        int dp_even_end = 0; // Longest alternating subsequence ending with an even number
-        int dp_odd_end = 0;  // Longest alternating subsequence ending with an odd number
+        int dp_even_end = 0; 
+        int dp_odd_end = 0;  
+        // Longest alternating subsequence ending with an odd number
 
         for (int num : nums) {
-            if (num % 2 == 0) { // Current number is even
+            if (num % 2 == 0) {
+                 // Current number is even
                 countEven++;
-                dp_even_end = dp_odd_end + 1; // Extend an odd-ending alternating sequence
-            } else { // Current number is odd
+                dp_even_end = dp_odd_end + 1; 
+                // Extend an odd-ending alternating sequence
+            } else { 
+                // Current number is odd
                 countOdd++;
-                dp_odd_end = dp_even_end + 1; // Extend an even-ending alternating sequence
+                dp_odd_end = dp_even_end + 1;
+                 // Extend an even-ending alternating sequence
             }
         }
 
