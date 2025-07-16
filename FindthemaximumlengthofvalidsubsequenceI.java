@@ -26,7 +26,8 @@ class Solution {
         int even = 0, odd = 0;
 
         for (int num : nums) {
-            if (num % 2 == 0) even++;
+            if (num % 2 == 0) 
+            even++;
             else odd++;
         }
      return Math.max(Math.max(even, odd), 2 * Math.min(even, odd));
