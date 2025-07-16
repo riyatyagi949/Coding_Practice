@@ -25,7 +25,6 @@ class Solution {
     public int maximumLength(int[] nums) {
         int maxLength = 0;
 
-        // Try both combinations:
         // 1. Even-Odd-Even... starting with even-index parity = 0
         // 2. Odd-Even-Odd... starting with even-index parity = 1
         for (int evenParity = 0; evenParity <= 1; evenParity++) {
