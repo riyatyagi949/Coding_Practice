@@ -35,7 +35,6 @@ class Solution {
             if (n % 3 == 0) { 
                 return (n - 1) * (n - 2) * (n - 3);
             } else { 
-                // n is even, but not a multiple of 3
                 return n * (n - 1) * (n - 3);
             }
         }
