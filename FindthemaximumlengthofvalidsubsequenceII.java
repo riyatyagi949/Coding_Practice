@@ -27,7 +27,6 @@ class Solution {
         int maxLen = 1;
 
         for (int i = 0; i < n; i++) {
-            // Start with this element as a single-length subsequence
             for (int mod = 0; mod < k; mod++) {
                 dp[i][mod] = 1;
             }
