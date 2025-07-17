@@ -31,7 +31,6 @@ class Solution {
             for (int mod = 0; mod < k; mod++) {
                 dp[i][mod] = 1;
             }
-
             for (int j = 0; j < i; j++) {
                 int mod = (nums[j] + nums[i]) % k;
                 dp[i][mod] = Math.max(dp[i][mod], dp[j][mod] + 1);
