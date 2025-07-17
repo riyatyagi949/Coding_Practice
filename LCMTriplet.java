@@ -28,7 +28,6 @@ class Solution {
         if (n == 3) {
             return 6;
         }
-
         if (n % 2 != 0) { 
             return n * (n - 1) * (n - 2);
         } 
