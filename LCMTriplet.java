@@ -31,10 +31,12 @@ class Solution {
 
         if (n % 2 != 0) { 
             return n * (n - 1) * (n - 2);
-        } else { // n is even
-            if (n % 3 == 0) { // n is a multiple of 6
+        } else { 
+            if (n % 3 == 0) { 
+                // n is a multiple of 6
                 return (n - 1) * (n - 2) * (n - 3);
-            } else { // n is even, but not a multiple of 3
+            } else { 
+                // n is even, but not a multiple of 3
                 return n * (n - 1) * (n - 3);
             }
         }
