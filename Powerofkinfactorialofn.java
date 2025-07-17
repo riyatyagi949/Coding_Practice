@@ -50,54 +50,37 @@ Optimal Solution:
 The approach described is optimal.
 
 */
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.*;
 
 class Solution {
-    long countPrimeFactorsInFactorial(int n, int p) {
-        long count = 0;
-        long currentPowerOfP = p;
-        while (currentPowerOfP <= n) {
-            count += n / currentPowerOfP;
-            if (currentPowerOfP > n / p) { // Avoid overflow for currentPowerOfP * p
-                break;
-            }
-            currentPowerOfP *= p;
-        }
-        return count;
-    }
-
-    public int power(int n, int k) {
-        if (k == 1) {
-            return Integer.MAX_VALUE; // As 1^x always divides n!, x can be arbitrarily large.
-        }
-
-        Map<Integer, Integer> primeFactorsK = new HashMap<>();
-        int tempK = k;
-
-        // Find prime factorization of k
-        for (int i = 2; i * i <= tempK; i++) {
-            while (tempK % i == 0) {
-                primeFactorsK.put(i, primeFactorsK.getOrDefault(i, 0) + 1);
-                tempK /= i;
+    public int maxKPower(int n, int k) {
+        Map<Integer, Integer> primeFactors = new HashMap<>();
+        int temp = k;
+        
+        for (int i = 2; i * i <= temp; i++) {
+            while (temp % i == 0) {
+                primeFactors.put(i, primeFactors.getOrDefault(i, 0) + 1);
+                temp /= i;
             }
         }
-        if (tempK > 1) {
-            primeFactorsK.put(tempK, primeFactorsK.getOrDefault(tempK, 0) + 1);
+        if (temp > 1) {
+            primeFactors.put(temp, primeFactors.getOrDefault(temp, 0) + 1);
         }
+        int result = Integer.MAX_VALUE;
 
-        int minX = Integer.MAX_VALUE;
-
-        // For each prime factor of k, calculate the maximum power x
-        for (Map.Entry<Integer, Integer> entry : primeFactorsK.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : primeFactors.entrySet()) {
             int prime = entry.getKey();
-            int countInK = entry.getValue();
+            int exponentInK = entry.getValue();
 
-            long countInNFactorial = countPrimeFactorsInFactorial(n, prime);
-
-            minX = Math.min(minX, (int) (countInNFactorial / countInK));
+            int countInFactorial = 0;
+            long p = prime;
+            while (p <= n) {
+                countInFactorial += n / p;
+                p *= prime;
+            }
+             result = Math.min(result, countInFactorial / exponentInK);
         }
-
-        return minX;
+            return result;
     }
 }
