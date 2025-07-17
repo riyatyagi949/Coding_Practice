@@ -38,7 +38,6 @@ class Solution {
                 maxLen = Math.max(maxLen, dp[i][mod]);
             }
         }
-
-        return maxLen;
+          return maxLen;
     }
 }
