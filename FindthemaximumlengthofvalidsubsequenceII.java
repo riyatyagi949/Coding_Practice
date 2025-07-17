@@ -17,23 +17,28 @@ Then, for every possible `common_sum_rem` (from `0` to `k-1`):
 Time Complexity: O(N * K) - `N` iterations for numbers, `K` iterations for possible common sums.
 Space Complexity: O(K^2) - for the `dp` table.
 */
-class Solution {
-    public int maxLength(int[] nums, int k) {
-        int[][] dp = new int[k][k];
-        int maxOverallLen = 1;
 
-        for (int num : nums) {
-            int currRem = num % k;
-            for (int commonSumRem = 0; commonSumRem < k; commonSumRem++) {
-                int neededPrevRem = (commonSumRem - currRem + k) % k;
-                if (dp[neededPrevRem][commonSumRem] > 0) {
-                    dp[currRem][commonSumRem] = Math.max(dp[currRem][commonSumRem], dp[neededPrevRem][commonSumRem] + 1);
-                } else {
-                    dp[currRem][commonSumRem] = Math.max(dp[currRem][commonSumRem], 1);
-                }
-                maxOverallLen = Math.max(maxOverallLen, dp[currRem][commonSumRem]);
+class Solution {
+    public int maximumLength(int[] nums, int k) {
+        int n = nums.length;
+        int[][] dp = new int[n][k];  
+        // dp[i][mod] = max length of valid subseq ending at i with mod
+
+        int maxLen = 1;
+
+        for (int i = 0; i < n; i++) {
+            // Start with this element as a single-length subsequence
+            for (int mod = 0; mod < k; mod++) {
+                dp[i][mod] = 1;
+            }
+
+            for (int j = 0; j < i; j++) {
+                int mod = (nums[j] + nums[i]) % k;
+                dp[i][mod] = Math.max(dp[i][mod], dp[j][mod] + 1);
+                maxLen = Math.max(maxLen, dp[i][mod]);
             }
         }
-        return maxOverallLen;
+
+        return maxLen;
     }
 }
