@@ -22,7 +22,6 @@ class Solution {
     public int maximumLength(int[] nums, int k) {
         int n = nums.length;
         int[][] dp = new int[n][k];  
-        // dp[i][mod] = max length of valid subseq ending at i with mod
 
         int maxLen = 1;
 
@@ -36,6 +35,6 @@ class Solution {
                 maxLen = Math.max(maxLen, dp[i][mod]);
             }
         }
-          return maxLen;
+         return maxLen;
     }
 }
