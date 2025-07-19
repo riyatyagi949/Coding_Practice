@@ -27,7 +27,6 @@ class Solution {
         List<String> result = new ArrayList<>();
 
         for (String path : folder) {
-            // If result is empty OR current path is NOT a subfolder of the last added folder
             if (result.isEmpty() || !path.startsWith(result.get(result.size() - 1) + "/")) {
                 result.add(path);
             }
