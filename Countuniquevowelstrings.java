@@ -101,25 +101,29 @@ class Solution {
                     vowelPresent[0] = true;
                     uniqueVowelsFound++;
                 }
-            } else if (c == 'e') {
+            } 
+            else if (c == 'e') {
                 vowelCounts[1]++;
                 if (!vowelPresent[1]) {
                     vowelPresent[1] = true;
                     uniqueVowelsFound++;
                 }
-            } else if (c == 'i') {
+            }
+             else if (c == 'i') {
                 vowelCounts[2]++;
                 if (!vowelPresent[2]) {
                     vowelPresent[2] = true;
                     uniqueVowelsFound++;
                 }
-            } else if (c == 'o') {
+            } 
+            else if (c == 'o') {
                 vowelCounts[3]++;
                 if (!vowelPresent[3]) {
                     vowelPresent[3] = true;
                     uniqueVowelsFound++;
                 }
-            } else if (c == 'u') {
+            } 
+            else if (c == 'u') {
                 vowelCounts[4]++;
                 if (!vowelPresent[4]) {
                     vowelPresent[4] = true;
