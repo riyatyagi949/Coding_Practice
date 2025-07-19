@@ -87,60 +87,59 @@
 // O(1) as we use a fixed-size map or array (size 5 for vowels) to store counts.
 // Overall space complexity is O(1).
 
-import java.util.*;
 
 class Solution {
-    public int vowelCount(String s) {
-        Map<Character, List<Integer>> map = new HashMap<>();
-        Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u');
+    public long countUniqueVowelStrings(String s) {
+        long[] vowelCounts = new long[5]; 
+        boolean[] vowelPresent = new boolean[5];
+        int uniqueVowelsFound = 0;
 
-        // Store indices of each vowel
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (vowels.contains(c)) {
-                map.computeIfAbsent(c, k -> new ArrayList<>()).add(i);
+        for (char c : s.toCharArray()) {
+            if (c == 'a') {
+                vowelCounts[0]++;
+                if (!vowelPresent[0]) {
+                    vowelPresent[0] = true;
+                    uniqueVowelsFound++;
+                }
+            } else if (c == 'e') {
+                vowelCounts[1]++;
+                if (!vowelPresent[1]) {
+                    vowelPresent[1] = true;
+                    uniqueVowelsFound++;
+                }
+            } else if (c == 'i') {
+                vowelCounts[2]++;
+                if (!vowelPresent[2]) {
+                    vowelPresent[2] = true;
+                    uniqueVowelsFound++;
+                }
+            } else if (c == 'o') {
+                vowelCounts[3]++;
+                if (!vowelPresent[3]) {
+                    vowelPresent[3] = true;
+                    uniqueVowelsFound++;
+                }
+            } else if (c == 'u') {
+                vowelCounts[4]++;
+                if (!vowelPresent[4]) {
+                    vowelPresent[4] = true;
+                    uniqueVowelsFound++;
+                }
             }
         }
 
-        // Generate all combinations by picking one occurrence of each vowel
-        List<List<Integer>> positions = new ArrayList<>(map.values());
-        List<List<Integer>> combos = new ArrayList<>();
-        backtrack(positions, 0, new ArrayList<>(), combos);
-
-        // Generate permutations of each combo and count unique strings
-        Set<String> result = new HashSet<>();
-        for (List<Integer> combo : combos) {
-            List<Character> chars = new ArrayList<>();
-            for (int idx : combo) chars.add(s.charAt(idx));
-            permute(chars, 0, result);
+        long selectionWays = 1;
+        for (int i = 0; i < 5; i++) {
+            if (vowelPresent[i]) {
+                selectionWays *= vowelCounts[i];
+            }
         }
 
-        return result.size();
-    }
+        long factorial = 1;
+        for (int i = 1; i <= uniqueVowelsFound; i++) {
+            factorial *= i;
+        }
 
-    void backtrack(List<List<Integer>> lists, int idx, List<Integer> path, List<List<Integer>> res) {
-        if (idx == lists.size()) {
-            res.add(new ArrayList<>(path));
-            return;
-        }
-        for (int val : lists.get(idx)) {
-            path.add(val);
-            backtrack(lists, idx + 1, path, res);
-            path.remove(path.size() - 1);
-        }
-    }
-
-    void permute(List<Character> list, int start, Set<String> res) {
-        if (start == list.size()) {
-            StringBuilder sb = new StringBuilder();
-            for (char c : list) sb.append(c);
-            res.add(sb.toString());
-            return;
-        }
-        for (int i = start; i < list.size(); i++) {
-            Collections.swap(list, i, start);
-            permute(list, start + 1, res);
-            Collections.swap(list, i, start);
-        }
+        return selectionWays * factorial;
     }
 }
