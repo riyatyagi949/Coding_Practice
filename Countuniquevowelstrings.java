@@ -127,14 +127,12 @@ class Solution {
                 }
             }
         }
-
         long selectionWays = 1;
         for (int i = 0; i < 5; i++) {
             if (vowelPresent[i]) {
                 selectionWays *= vowelCounts[i];
             }
         }
-
         long factorial = 1;
         for (int i = 1; i <= uniqueVowelsFound; i++) {
             factorial *= i;
