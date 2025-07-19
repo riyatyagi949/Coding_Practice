@@ -23,7 +23,8 @@ import java.util.*;
 
 class Solution {
     public List<String> removeSubfolders(String[] folder) {
-        Arrays.sort(folder); // Sort to ensure parent comes before subfolders
+        Arrays.sort(folder); 
+        // Sort to ensure parent comes before subfolders
         List<String> result = new ArrayList<>();
 
         for (String path : folder) {
