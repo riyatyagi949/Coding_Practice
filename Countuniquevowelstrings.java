@@ -137,7 +137,6 @@ class Solution {
         for (int i = 1; i <= uniqueVowelsFound; i++) {
             factorial *= i;
         }
-
-        return selectionWays * factorial;
+       return selectionWays * factorial;
     }
 }
