@@ -19,39 +19,19 @@
 // Space Complexity:
 // O(N * L) in the worst case, to store the `result` list and for the sorting process (depending on Java's `Arrays.sort` implementation).
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 class Solution {
     public List<String> removeSubfolders(String[] folder) {
-        Arrays.sort(folder); // Sorts lexicographically, putting parents before children
-
+        Arrays.sort(folder); // Sort to ensure parent comes before subfolders
         List<String> result = new ArrayList<>();
-        if (folder.length == 0) {
-            return result;
-        }
 
-        // The first folder is always a root folder
-        result.add(folder[0]);
-        String lastRootFolder = folder[0];
-
-        for (int i = 1; i < folder.length; i++) {
-            String currentFolder = folder[i];
-
-            // Check if currentFolder is a sub-folder of lastRootFolder
-            // It must start with lastRootFolder, be longer, and have a '/' exactly at the length of lastRootFolder
-            boolean isSubfolder = currentFolder.startsWith(lastRootFolder) &&
-                                  currentFolder.length() > lastRootFolder.length() &&
-                                  currentFolder.charAt(lastRootFolder.length()) == '/';
-
-            if (!isSubfolder) {
-                // If it's not a sub-folder, it's a new root folder
-                result.add(currentFolder);
-                lastRootFolder = currentFolder;
+        for (String path : folder) {
+            // If result is empty OR current path is NOT a subfolder of the last added folder
+            if (result.isEmpty() || !path.startsWith(result.get(result.size() - 1) + "/")) {
+                result.add(path);
             }
         }
-
         return result;
     }
 }
