@@ -142,9 +142,9 @@ class Solution {
         map.computeIfAbsent(node.serial, k -> new ArrayList<>()).add(node);
         return node.serial;
     }
-
-    private void dfs(TrieNode node, List<String> path, List<List<String>> result) {
-        if (node != null && node != path && node.isDeleted) return;
+   private void dfs(TrieNode node, List<String> path, List<List<String>> result) {
+        if (node != null && node != path && node.isDeleted) 
+        return;
 
         if (node != null && node != path && !node.name.equals("")) {
             path.add(node.name);
