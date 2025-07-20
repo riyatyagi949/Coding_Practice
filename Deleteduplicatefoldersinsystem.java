@@ -86,6 +86,8 @@ Total Space Complexity: O(C).
 Optimal Solution:
 The approach of using a Trie and serializing subtrees is generally considered optimal for this type of problem. The key is to handle the serialization correctly (e.g., sorting child strings) to ensure identical subtrees are identified regardless of child order.
 */
+import java.util.*;
+
 
 class Solution {
     class TrieNode {
@@ -98,8 +100,7 @@ class Solution {
             this.name = name;
         }
     }
-
-    public List<List<String>> deleteDuplicateFolder(List<List<String>> paths) {
+  public List<List<String>> deleteDuplicateFolder(List<List<String>> paths) {
         TrieNode root = new TrieNode("");
         for (List<String> path : paths) {
             insert(root, path);
