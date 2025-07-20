@@ -83,7 +83,6 @@ class Solution {
                 countBannedOnly += countCombinations(d, banned, n - 1);
             }
         }
-
         return total - countBannedOnly;
     }
  private int countCombinations(int firstDigit, boolean[] banned, int remainingDigits) {
