@@ -87,3 +87,75 @@ Optimal Solution:
 The approach of using a Trie and serializing subtrees is generally considered optimal for this type of problem. The key is to handle the serialization correctly (e.g., sorting child strings) to ensure identical subtrees are identified regardless of child order.
 */
 
+class Solution {
+    class TrieNode {
+        Map<String, TrieNode> children = new HashMap<>();
+        String name;
+        String serial;
+        boolean isDeleted = false;
+
+        TrieNode(String name) {
+            this.name = name;
+        }
+    }
+
+    public List<List<String>> deleteDuplicateFolder(List<List<String>> paths) {
+        TrieNode root = new TrieNode("");
+        for (List<String> path : paths) {
+            insert(root, path);
+        }
+
+        Map<String, List<TrieNode>> map = new HashMap<>();
+        serialize(root, map);
+
+        for (List<TrieNode> group : map.values()) {
+            if (group.size() > 1) {
+                for (TrieNode node : group) {
+                    node.isDeleted = true;
+                }
+            }
+        }
+
+        List<List<String>> result = new ArrayList<>();
+        dfs(root, new ArrayList<>(), result);
+        return result;
+    }
+
+    private void insert(TrieNode root, List<String> path) {
+        TrieNode curr = root;
+        for (String folder : path) {
+            curr.children.putIfAbsent(folder, new TrieNode(folder));
+            curr = curr.children.get(folder);
+        }
+    }
+
+    private String serialize(TrieNode node, Map<String, List<TrieNode>> map) {
+        if (node.children.isEmpty()) return "";
+
+        List<String> parts = new ArrayList<>();
+        for (String key : node.children.keySet()) {
+            String childSerial = serialize(node.children.get(key), map);
+            parts.add("(" + key + childSerial + ")");
+        }
+
+        Collections.sort(parts);
+        node.serial = String.join("", parts);
+        map.computeIfAbsent(node.serial, k -> new ArrayList<>()).add(node);
+        return node.serial;
+    }
+
+    private void dfs(TrieNode node, List<String> path, List<List<String>> result) {
+        if (node != null && node != path && node.isDeleted) return;
+
+        if (node != null && node != path && !node.name.equals("")) {
+            path.add(node.name);
+            result.add(new ArrayList<>(path));
+        }
+
+        for (TrieNode child : node.children.values()) {
+            dfs(child, path, result);
+        }
+
+        if (!path.isEmpty()) path.remove(path.size() - 1);
+    }
+}
