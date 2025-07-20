@@ -120,7 +120,6 @@ class Solution {
         dfs(root, new ArrayList<>(), result);
         return result;
     }
-
     private void insert(TrieNode root, List<String> path) {
         TrieNode curr = root;
         for (String folder : path) {
