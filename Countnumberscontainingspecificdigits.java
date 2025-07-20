@@ -51,40 +51,51 @@ Space Complexity:
 - Overall space complexity: O(1).
 */
 
-import java.util.HashSet;
-
 class Solution {
-    public long countNumbers(int n, int[] arr) {
-        HashSet<Integer> arrDigits = new HashSet<>();
+    public int countValid(int n, int[] arr) {
+        boolean[] hasDigit = new boolean[10];
         for (int digit : arr) {
-            arrDigits.add(digit);
+            hasDigit[digit] = true;
         }
 
-        // Calculate total n-digit numbers
-        long totalNDigitNumbers = (long) (9 * Math.pow(10, n - 1));
+        int total;
+        if (n == 1) {
+            total = 9;
+        } else {
+            total = (int)Math.pow(10, n) - (int)Math.pow(10, n - 1);
+        }
 
-        // Calculate the count of n-digit numbers that DO NOT contain any digit from arr
-        long countAllowedDigits = 0;
-        long countAllowedNonZeroDigits = 0;
-
-        for (int i = 0; i <= 9; i++) {
-            if (!arrDigits.contains(i)) {
-                countAllowedDigits++;
-                if (i != 0) {
-                    countAllowedNonZeroDigits++;
-                }
+        boolean[] banned = new boolean[10];
+        int bannedCount = 0;
+        for (int i = 0; i < 10; i++) {
+            if (!hasDigit[i]) {
+                banned[i] = true;
+                bannedCount++;
             }
         }
 
-        long nDigitNumbersWithoutArrDigits;
-        if (n == 1) {
-            // For 1-digit numbers, the first digit cannot be 0, so only count allowed non-zero digits
-            nDigitNumbersWithoutArrDigits = countAllowedNonZeroDigits;
-        } else {
-            // For n-digit numbers, first digit is non-zero allowed, rest are any allowed
-            nDigitNumbersWithoutArrDigits = countAllowedNonZeroDigits * (long) Math.pow(countAllowedDigits, n - 1);
+        if (bannedCount == 0) return 0;
+        if (bannedCount == 10) return 0;
+
+        int countBannedOnly = 0;
+        for (int d = 1; d < 10; d++) {
+            if (banned[d]) {
+                countBannedOnly += countCombinations(d, banned, n - 1);
+            }
         }
 
-        return totalNDigitNumbers - nDigitNumbersWithoutArrDigits;
+        return total - countBannedOnly;
+    }
+
+    private int countCombinations(int firstDigit, boolean[] banned, int remainingDigits) {
+        int count = 1;
+        for (int i = 0; i < remainingDigits; i++) {
+            int options = 0;
+            for (int d = 0; d < 10; d++) {
+                if (banned[d]) options++;
+            }
+            count *= options;
+        }
+        return count;
     }
 }
