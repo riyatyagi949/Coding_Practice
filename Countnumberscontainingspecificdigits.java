@@ -61,7 +61,8 @@ class Solution {
         int total;
         if (n == 1) {
             total = 9;
-        } else {
+        }
+         else {
             total = (int)Math.pow(10, n) - (int)Math.pow(10, n - 1);
         }
         boolean[] banned = new boolean[10];
