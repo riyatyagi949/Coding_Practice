@@ -73,9 +73,10 @@ class Solution {
                 bannedCount++;
             }
         }
-
-        if (bannedCount == 0) return 0;
-        if (bannedCount == 10) return 0;
+        if (bannedCount == 0)
+            return 0;
+        if (bannedCount == 10)
+            return 0;
 
         int countBannedOnly = 0;
         for (int d = 1; d < 10; d++) {
