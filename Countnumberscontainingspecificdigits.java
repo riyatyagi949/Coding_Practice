@@ -86,8 +86,7 @@ class Solution {
 
         return total - countBannedOnly;
     }
-
-    private int countCombinations(int firstDigit, boolean[] banned, int remainingDigits) {
+ private int countCombinations(int firstDigit, boolean[] banned, int remainingDigits) {
         int count = 1;
         for (int i = 0; i < remainingDigits; i++) {
             int options = 0;
