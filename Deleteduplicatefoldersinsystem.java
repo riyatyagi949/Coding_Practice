@@ -127,9 +127,9 @@ class Solution {
             curr = curr.children.get(folder);
         }
     }
-
     private String serialize(TrieNode node, Map<String, List<TrieNode>> map) {
-        if (node.children.isEmpty()) return "";
+        if (node.children.isEmpty()) 
+        return "";
 
         List<String> parts = new ArrayList<>();
         for (String key : node.children.keySet()) {
