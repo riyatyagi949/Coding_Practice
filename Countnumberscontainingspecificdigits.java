@@ -64,7 +64,6 @@ class Solution {
         } else {
             total = (int)Math.pow(10, n) - (int)Math.pow(10, n - 1);
         }
-
         boolean[] banned = new boolean[10];
         int bannedCount = 0;
         for (int i = 0; i < 10; i++) {
