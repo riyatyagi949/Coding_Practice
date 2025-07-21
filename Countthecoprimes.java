@@ -91,8 +91,7 @@ class Solution {
                 }
             }
         }
-
-        return count;
+          return count;
     }
     private int gcd(int a, int b) {
         while (b != 0) {
