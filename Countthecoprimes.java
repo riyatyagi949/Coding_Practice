@@ -79,26 +79,50 @@ Given `MAX_VAL` up to 10^4, this is fine.
 Optimal Solution:
 */
 
+import java.util.*;
+
 class Solution {
+    static final int MAX = 10005;
+
     public int cntCoprime(int[] arr) {
         int n = arr.length;
-        int count = 0;
+        int[] freq = new int[MAX];
+        for (int x : arr) {
+            freq[x]++;
+        }
 
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if (gcd(arr[i], arr[j]) == 1) {
-                    count++;
+        int[] cnt = new int[MAX];
+        for (int i = 1; i < MAX; i++) {
+            for (int j = i; j < MAX; j += i) {
+                cnt[i] += freq[j];
+            }
+        }
+
+        int[] mobius = new int[MAX];
+        Arrays.fill(mobius, 1);
+        boolean[] isPrime = new boolean[MAX];
+        Arrays.fill(isPrime, true);
+
+        for (int i = 2; i < MAX; i++) {
+            if (isPrime[i]) {
+                for (int j = i; j < MAX; j += i) {
+                    mobius[j] *= -1;
+                    isPrime[j] = false;
+                }
+                for (int j = i * i; j < MAX; j += i * i) {
+                    mobius[j] = 0;
                 }
             }
         }
-          return count;
-    }
-    private int gcd(int a, int b) {
-        while (b != 0) {
-            int tmp = b;
-            b = a % b;
-            a = tmp;
+
+        long coprimePairs = 0;
+        for (int i = 1; i < MAX; i++) {
+            if (mobius[i] != 0 && cnt[i] >= 2) {
+                long pairs = (long) cnt[i] * (cnt[i] - 1) / 2;
+                coprimePairs += mobius[i] * pairs;
+            }
         }
-        return a;
+
+        return (int) coprimePairs;
     }
 }
