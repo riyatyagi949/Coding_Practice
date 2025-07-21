@@ -78,62 +78,28 @@ Given `MAX_VAL` up to 10^4, this is fine.
 
 Optimal Solution:
 */
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 class Solution {
-    public long countCoprimePairs(int[] arr) {
-        int MAX_VAL = 0;
-        for (int x : arr) {
-            MAX_VAL = Math.max(MAX_VAL, x);
-        }
+    public int cntCoprime(int[] arr) {
+        int n = arr.length;
+        int count = 0;
 
-        int[] count = new int[MAX_VAL + 1];
-        for (int x : arr) {
-            count[x]++;
-        }
-
-        int[] mu = new int[MAX_VAL + 1];
-        int[] spf = new int[MAX_VAL + 1]; // smallest prime factor
-        List<Integer> primes = new ArrayList<>();
-
-        Arrays.fill(spf, 0); // 0 indicates not processed or no prime factor yet
-        mu[1] = 1;
-
-        for (int i = 2; i <= MAX_VAL; i++) {
-            if (spf[i] == 0) { // i is prime
-                spf[i] = i;
-                primes.add(i);
-                mu[i] = -1;
-            }
-
-            for (int p : primes) {
-                if (p > spf[i] || i * p > MAX_VAL) {
-                    break;
-                }
-                spf[i * p] = p;
-                if (p == spf[i]) { // i*p has p^2 as a factor
-                    mu[i * p] = 0;
-                } else {
-                    mu[i * p] = -mu[i];
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (gcd(arr[i], arr[j]) == 1) {
+                    count++;
                 }
             }
         }
 
-        long[] multiples = new long[MAX_VAL + 1];
-        for (int i = 1; i <= MAX_VAL; i++) {
-            for (int j = i; j <= MAX_VAL; j += i) {
-                multiples[i] += count[j];
-            }
+        return count;
+    }
+    private int gcd(int a, int b) {
+        while (b != 0) {
+            int tmp = b;
+            b = a % b;
+            a = tmp;
         }
-
-        long ans = 0;
-        for (int d = 1; d <= MAX_VAL; d++) {
-            long numPairs = multiples[d] * (multiples[d] - 1) / 2;
-            ans += (long) mu[d] * numPairs;
-        }
-
-        return ans;
+        return a;
     }
 }
