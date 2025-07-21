@@ -117,32 +117,23 @@ Constraints check:
 1 <= s.length <= 10^5. O(N) time and O(N) space are well within limits.
 s consists only of lowercase English letters. This is handled by direct character comparison.
 */
+
 class Solution {
     public String makeFancyString(String s) {
-        if (s == null || s.length() < 3) {
-            return s;
-        }
-
-        StringBuilder fancyString = new StringBuilder();
-        // Add the first two characters if they exist, as they can never violate the rule by themselves.
-        fancyString.append(s.charAt(0));
-        int consecutiveCount = 1;
-
+        StringBuilder sb = new StringBuilder();
+        int count = 1;
+        sb.append(s.charAt(0));
         for (int i = 1; i < s.length(); i++) {
-            char currentChar = s.charAt(i);
-            char prevCharInFancyString = fancyString.charAt(fancyString.length() - 1);
-
-            if (currentChar == prevCharInFancyString) {
-                consecutiveCount++;
-            } else {
-                consecutiveCount = 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                count++;
+            } 
+            else {
+                count = 1;
             }
-
-            if (consecutiveCount < 3) {
-                fancyString.append(currentChar);
+            if (count < 3) {
+                sb.append(s.charAt(i));
             }
         }
-
-        return fancyString.toString();
+        return sb.toString();
     }
 }
