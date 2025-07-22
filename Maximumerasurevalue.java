@@ -132,7 +132,8 @@ class Solution {
                 currentSum += nums[right];
                 maxSum = Math.max(maxSum, currentSum);
                 right++;
-            } else {
+            }
+             else {
                 set.remove(nums[left]);
                 currentSum -= nums[left];
                 left++;
