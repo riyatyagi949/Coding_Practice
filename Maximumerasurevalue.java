@@ -139,7 +139,6 @@ class Solution {
                 left++;
             }
         }
-
         return maxSum;
     }
 }
