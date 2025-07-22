@@ -116,34 +116,3 @@ Space Complexity:
 We are performing in-place modifications to the input array. No additional data structures are used that grow with the input size.
 Overall space complexity: O(1).
 */
-class Solution {
-    public int missingNumber(int[] arr) {
-        int n = arr.length;
-
-        // Phase 1: Place positive numbers in their correct positions
-        // i.e., place number 'k' at index 'k-1'
-        for (int i = 0; i < n; i++) {
-            // While the current element `arr[i]` is a positive number within the range [1, n],
-            // and it's not already at its correct position (arr[i] != arr[arr[i]-1]),
-            // swap it with the element at its correct position.
-            while (arr[i] > 0 && arr[i] <= n && arr[i] != arr[arr[i] - 1]) {
-                int correctIdx = arr[i] - 1;
-                int temp = arr[i];
-                arr[i] = arr[correctIdx];
-                arr[correctIdx] = temp;
-            }
-        }
-
-        // Phase 2: Find the first missing positive number
-        // Iterate through the array to find the first index `i` where `arr[i]` is not `i + 1`.
-        // This means `i + 1` is the smallest positive missing number.
-        for (int i = 0; i < n; i++) {
-            if (arr[i] != i + 1) {
-                return i + 1;
-            }
-        }
-
-        // If all numbers from 1 to n are present, then the smallest missing positive number is n + 1.
-        return n + 1;
-    }
-}
