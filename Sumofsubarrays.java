@@ -31,6 +31,5 @@ class Solution {
         }
 
         return (int) total;
-         // safe to cast because problem guarantees 32-bit range
     }
 }
