@@ -39,7 +39,8 @@ class Solution {
             Result r1 = removePair(s, 'a', 'b', x);
             Result r2 = removePair(r1.updatedString, 'b', 'a', y);
             return r1.score + r2.score;
-        } else {
+        } 
+        else {
             Result r1 = removePair(s, 'b', 'a', y);
             Result r2 = removePair(r1.updatedString, 'a', 'b', x);
             return r1.score + r2.score;
