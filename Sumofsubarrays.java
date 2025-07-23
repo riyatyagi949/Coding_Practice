@@ -29,7 +29,6 @@ class Solution {
             long contribution = (long) arr[i] * (i + 1) * (n - i);
             total += contribution;
         }
-
-        return (int) total;
+         return (int) total;
     }
 }
