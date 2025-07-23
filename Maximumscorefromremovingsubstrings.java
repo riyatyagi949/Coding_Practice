@@ -55,13 +55,14 @@ class Solution {
             if (len > 0 && sb.charAt(len - 1) == first && c == second) {
                 sb.deleteCharAt(len - 1);
                 score += points;
-            } else {
+            } 
+            else {
                 sb.append(c);
             }
         }
         return new Result(sb.toString(), score);
     }
-    private static class Result {
+     private static class Result {
         String updatedString;
         int score;
 
