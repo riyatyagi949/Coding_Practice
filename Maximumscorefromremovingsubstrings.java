@@ -45,7 +45,6 @@ class Solution {
             return r1.score + r2.score;
         }
     }
-
     private Result removePair(String s, char first, char second, int points) {
         StringBuilder sb = new StringBuilder();
         int score = 0;
