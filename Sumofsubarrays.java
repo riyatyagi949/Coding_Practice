@@ -30,6 +30,7 @@ class Solution {
             total += contribution;
         }
 
-        return (int) total; // safe to cast because problem guarantees 32-bit range
+        return (int) total;
+         // safe to cast because problem guarantees 32-bit range
     }
 }
