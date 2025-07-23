@@ -59,7 +59,6 @@ class Solution {
                 sb.append(c);
             }
         }
-
         return new Result(sb.toString(), score);
     }
     private static class Result {
