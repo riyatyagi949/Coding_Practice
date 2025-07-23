@@ -36,15 +36,17 @@
 class Solution {
     public int maximumGain(String s, int x, int y) {
         if (x > y) {
-            // Remove "ab" first, then "ba"
-            return removePair(s, 'a', 'b', x) + removePair(s, 'b', 'a', y);
+            Result r1 = removePair(s, 'a', 'b', x);
+            Result r2 = removePair(r1.updatedString, 'b', 'a', y);
+            return r1.score + r2.score;
         } else {
-            // Remove "ba" first, then "ab"
-            return removePair(s, 'b', 'a', y) + removePair(s, 'a', 'b', x);
+            Result r1 = removePair(s, 'b', 'a', y);
+            Result r2 = removePair(r1.updatedString, 'a', 'b', x);
+            return r1.score + r2.score;
         }
     }
 
-    private int removePair(String s, char first, char second, int points) {
+    private Result removePair(String s, char first, char second, int points) {
         StringBuilder sb = new StringBuilder();
         int score = 0;
 
@@ -58,8 +60,16 @@ class Solution {
             }
         }
 
-        // Rebuild the string after first pass
-        s = sb.toString();
-        return score;
+        return new Result(sb.toString(), score);
+    }
+
+    private static class Result {
+        String updatedString;
+        int score;
+
+        Result(String updatedString, int score) {
+            this.updatedString = updatedString;
+            this.score = score;
+        }
     }
 }
