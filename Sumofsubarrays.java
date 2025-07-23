@@ -21,11 +21,15 @@
 // The approach uses a constant amount of extra space, as it only stores a few variables for the sum and loop counter.
 
 class Solution {
-    public long subarraySum(long[] arr, int n) {
-        long totalSum = 0;
+    public int subarraySum(int[] arr) {
+        int n = arr.length;
+        long total = 0;
+        
         for (int i = 0; i < n; i++) {
-            totalSum += arr[i] * (i + 1) * (n - i);
+            long contribution = (long) arr[i] * (i + 1) * (n - i);
+            total += contribution;
         }
-        return totalSum;
+
+        return (int) total; // safe to cast because problem guarantees 32-bit range
     }
 }
