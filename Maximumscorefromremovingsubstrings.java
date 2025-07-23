@@ -62,7 +62,6 @@ class Solution {
 
         return new Result(sb.toString(), score);
     }
-
     private static class Result {
         String updatedString;
         int score;
