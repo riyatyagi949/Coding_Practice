@@ -32,3 +32,34 @@
 // Space Complexity: O(N)
 // In the worst case, the stack can store all characters of the string (e.g., "aaaaa" or "bbbbb").
 
+
+class Solution {
+    public int maximumGain(String s, int x, int y) {
+        if (x > y) {
+            // Remove "ab" first, then "ba"
+            return removePair(s, 'a', 'b', x) + removePair(s, 'b', 'a', y);
+        } else {
+            // Remove "ba" first, then "ab"
+            return removePair(s, 'b', 'a', y) + removePair(s, 'a', 'b', x);
+        }
+    }
+
+    private int removePair(String s, char first, char second, int points) {
+        StringBuilder sb = new StringBuilder();
+        int score = 0;
+
+        for (char c : s.toCharArray()) {
+            int len = sb.length();
+            if (len > 0 && sb.charAt(len - 1) == first && c == second) {
+                sb.deleteCharAt(len - 1);
+                score += points;
+            } else {
+                sb.append(c);
+            }
+        }
+
+        // Rebuild the string after first pass
+        s = sb.toString();
+        return score;
+    }
+}
