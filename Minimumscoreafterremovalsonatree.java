@@ -207,16 +207,14 @@ class Solution {
                     y = xor[b];
                     z = totalXor ^ xor[a] ^ xor[b];
                 }
-
                 int max = Math.max(x, Math.max(y, z));
                 int min = Math.min(x, Math.min(y, z));
                 res = Math.min(res, max - min);
             }
         }
-
         return res;
     }
-
+    
     private void dfs(int node, int parent, int[] nums) {
         in[node] = ++time;
         xor[node] = nums[node];
