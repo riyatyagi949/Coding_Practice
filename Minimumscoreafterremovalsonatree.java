@@ -149,3 +149,90 @@ Root the DFS at node 0. `dfs(0, -1, ...)`
 // Recursion stack depth for DFS: O(N) in the worst case (skewed tree).
 // Total space complexity: O(N).
 
+import java.util.*;
+
+class Solution {
+    int[] xor; 
+    // to store XOR of subtree rooted at each node
+    int[] in, out; 
+    // for entry/exit times (ancestor check)
+    int time = 0;
+    int totalXor = 0;
+    List<Integer>[] graph;
+
+    public int minimumScore(int[] nums, int[][] edges) {
+        int n = nums.length;
+        xor = new int[n];
+        in = new int[n];
+        out = new int[n];
+        graph = new ArrayList[n];
+
+        // Build graph
+        for (int i = 0; i < n; i++) graph[i] = new ArrayList<>();
+        for (int[] e : edges) {
+            graph[e[0]].add(e[1]);
+            graph[e[1]].add(e[0]);
+        }
+
+        // Run DFS to compute XOR of each subtree and entry/exit times
+        dfs(0, -1, nums);
+
+        int res = Integer.MAX_VALUE;
+
+        // Try every pair of edges (represented as child node of the removed edge)
+        List<int[]> directedEdges = new ArrayList<>();
+        for (int[] e : edges) {
+            // always keep parent -> child direction
+            if (in[e[0]] < in[e[1]]) directedEdges.add(new int[]{e[1], e[0]});
+            else directedEdges.add(new int[]{e[0], e[1]});
+        }
+
+        for (int i = 0; i < directedEdges.size(); i++) {
+            for (int j = i + 1; j < directedEdges.size(); j++) {
+                int a = directedEdges.get(i)[0];
+                int b = directedEdges.get(j)[0];
+
+                int x, y, z;
+
+                if (isAncestor(a, b)) {
+                    x = xor[b];
+                    y = xor[a] ^ xor[b];
+                    z = totalXor ^ xor[a];
+                } else if (isAncestor(b, a)) {
+                    x = xor[a];
+                    y = xor[b] ^ xor[a];
+                    z = totalXor ^ xor[b];
+                } else {
+                    x = xor[a];
+                    y = xor[b];
+                    z = totalXor ^ xor[a] ^ xor[b];
+                }
+
+                int max = Math.max(x, Math.max(y, z));
+                int min = Math.min(x, Math.min(y, z));
+                res = Math.min(res, max - min);
+            }
+        }
+
+        return res;
+    }
+
+    private void dfs(int node, int parent, int[] nums) {
+        in[node] = ++time;
+        xor[node] = nums[node];
+        for (int neighbor : graph[node]) {
+            if (neighbor != parent) {
+                dfs(neighbor, node, nums);
+                xor[node] ^= xor[neighbor];
+            }
+        }
+        out[node] = time;
+        totalXor = xor[0];
+         // total tree xor
+    }
+    private boolean isAncestor(int u, int v) {
+        return in[u] <= in[v] && out[v] <= out[u];
+    }
+}
+
+
