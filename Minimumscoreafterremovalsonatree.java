@@ -155,7 +155,6 @@ class Solution {
     int[] xor; 
     // to store XOR of subtree rooted at each node
     int[] in, out; 
-    // for entry/exit times (ancestor check)
     int time = 0;
     int totalXor = 0;
     List<Integer>[] graph;
