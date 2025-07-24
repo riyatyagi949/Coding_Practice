@@ -198,11 +198,13 @@ class Solution {
                     x = xor[b];
                     y = xor[a] ^ xor[b];
                     z = totalXor ^ xor[a];
-                } else if (isAncestor(b, a)) {
+                } 
+                else if (isAncestor(b, a)) {
                     x = xor[a];
                     y = xor[b] ^ xor[a];
                     z = totalXor ^ xor[b];
-                } else {
+                }
+                 else {
                     x = xor[a];
                     y = xor[b];
                     z = totalXor ^ xor[a] ^ xor[b];
