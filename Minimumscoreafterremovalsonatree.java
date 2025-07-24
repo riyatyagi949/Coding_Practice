@@ -173,8 +173,6 @@ class Solution {
             graph[e[0]].add(e[1]);
             graph[e[1]].add(e[0]);
         }
-
-        // Run DFS to compute XOR of each subtree and entry/exit times
         dfs(0, -1, nums);
 
         int res = Integer.MAX_VALUE;
