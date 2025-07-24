@@ -153,7 +153,6 @@ import java.util.*;
 
 class Solution {
     int[] xor; 
-    // to store XOR of subtree rooted at each node
     int[] in, out; 
     int time = 0;
     int totalXor = 0;
