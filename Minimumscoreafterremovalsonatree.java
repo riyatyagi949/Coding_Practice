@@ -179,7 +179,6 @@ class Solution {
 
         int res = Integer.MAX_VALUE;
 
-        // Try every pair of edges (represented as child node of the removed edge)
         List<int[]> directedEdges = new ArrayList<>();
         for (int[] e : edges) {
             if (in[e[0]] < in[e[1]]) directedEdges.add(new int[]{e[1], e[0]});
