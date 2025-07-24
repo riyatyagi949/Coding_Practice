@@ -167,7 +167,6 @@ class Solution {
         out = new int[n];
         graph = new ArrayList[n];
 
-        // Build graph
         for (int i = 0; i < n; i++) graph[i] = new ArrayList<>();
         for (int[] e : edges) {
             graph[e[0]].add(e[1]);
