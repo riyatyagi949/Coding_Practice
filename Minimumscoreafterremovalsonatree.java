@@ -228,7 +228,6 @@ class Solution {
         }
         out[node] = time;
         totalXor = xor[0];
-         // total tree xor
     }
     private boolean isAncestor(int u, int v) {
         return in[u] <= in[v] && out[v] <= out[u];
