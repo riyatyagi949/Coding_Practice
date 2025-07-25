@@ -28,11 +28,12 @@ class Solution {
                 set.remove(nums[left]);
                 left++;
             }
-            
+
             currentSum += nums[right];
             set.add(nums[right]);
             maxSum = Math.max(maxSum, currentSum);
         }
+        
         return maxSum;
     }
 }
