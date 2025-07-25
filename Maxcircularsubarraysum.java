@@ -40,7 +40,8 @@ class Solution {
         
         if (totalSum == minKadane) {
             return maxKadane;
-        } else {
+        } 
+        else {
             return Math.max(maxKadane, totalSum - minKadane);
         }
     }
