@@ -27,7 +27,8 @@ class Solution {
         for (int num : nums) {
             if (num == candidate1) {
                 count1++;
-            } else if (num == candidate2) {
+            } 
+            else if (num == candidate2) {
                 count2++;
             } else if (count1 == 0) {
                 candidate1 = num;
@@ -59,7 +60,7 @@ class Solution {
         if (count2 > nums.length / 3) {
             result.add(candidate2);
         }
-        
+
         Collections.sort(result);
         return result;
     }
