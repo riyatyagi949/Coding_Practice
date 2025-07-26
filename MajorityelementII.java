@@ -21,7 +21,7 @@ class Solution {
         if (nums == null || nums.length == 0) {
             return new ArrayList<>();
         }
-        
+
         int candidate1 = 0, candidate2 = 0;
         int count1 = 0, count2 = 0;
         for (int num : nums) {
@@ -45,17 +45,21 @@ class Solution {
         for (int num : nums) {
             if (num == candidate1) {
                 count1++;
-            } else if (num == candidate2) {
+            } 
+            else if (num == candidate2) {
                 count2++;
             }
         }
+
         List<Integer> result = new ArrayList<>();
         if (count1 > nums.length / 3) {
             result.add(candidate1);
         }
+
         if (count2 > nums.length / 3) {
             result.add(candidate2);
         }
+        
         Collections.sort(result);
         return result;
     }
