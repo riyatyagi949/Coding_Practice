@@ -40,13 +40,16 @@ class Solution {
         if (left > maxLeft) {
           secondMaxLeft = maxLeft;
           maxLeft = left;
-        } else if (left > secondMaxLeft) {
+        }
+         else if (left > secondMaxLeft) {
           secondMaxLeft = left;
         }
       }
+
       validSubarrays += right - maxLeft;
       gains[maxLeft] += maxLeft - secondMaxLeft;
     }
+
     return validSubarrays + Arrays.stream(gains).max().getAsLong();
   }
 }
