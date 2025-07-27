@@ -24,31 +24,3 @@
 // Space Complexity: O(N) in the worst case, to store the compressed array. If there are no consecutive duplicate elements, the compressed array will have the same size as the input array.
 //
 // Optimal Solution:
-class Solution {
-    public int countHillAndValley(int[] nums) {
-        List<Integer> compressedNums = new ArrayList<>();
-        if (nums.length > 0) {
-            compressedNums.add(nums[0]);
-        }
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i] != nums[i - 1]) {
-                compressedNums.add(nums[i]);
-            }
-        }
-        
-        if (compressedNums.size() < 3) {
-            return 0;
-        }
-        
-        int count = 0;
-        for (int i = 1; i < compressedNums.size() - 1; i++) {
-            if (compressedNums.get(i) > compressedNums.get(i - 1) && compressedNums.get(i) > compressedNums.get(i + 1)) {
-                count++;
-            } else if (compressedNums.get(i) < compressedNums.get(i - 1) && compressedNums.get(i) < compressedNums.get(i + 1)) {
-                count++;
-            }
-        }
-        
-        return count;
-    }
-}
