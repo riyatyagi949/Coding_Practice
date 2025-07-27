@@ -62,8 +62,6 @@ class Solution {
                 }
             }
         }
-
-        // Second pass to set cells to zero
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (row[i] || col[j]) {
