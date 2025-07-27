@@ -39,9 +39,11 @@ class Solution {
         int count = 0;
         for (int i = 1; i < clean.size() - 1; i++) {
             if (clean.get(i) > clean.get(i - 1) && clean.get(i) > clean.get(i + 1)) {
-                count++; // hill
+                count++; 
+                // hill
             } else if (clean.get(i) < clean.get(i - 1) && clean.get(i) < clean.get(i + 1)) {
-                count++; // valley
+                count++; 
+                // valley
             }
         }
 
