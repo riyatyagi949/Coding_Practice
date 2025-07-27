@@ -46,3 +46,32 @@
 // Time Complexity: O(n*m), where n is the number of rows and m is the number of columns. We iterate through the matrix a constant number of times.
 // Space Complexity: O(1), as we are using the matrix itself for marking, and a few constant space variables.
 
+class Solution {
+    public void setMatrixZeroes(int[][] mat) {
+        int n = mat.length;
+        int m = mat[0].length;
+
+        // Arrays to mark which rows and columns have a zero
+        boolean[] row = new boolean[n];
+        boolean[] col = new boolean[m];
+
+        // First pass to mark rows and columns
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 0) {
+                    row[i] = true;
+                    col[j] = true;
+                }
+            }
+        }
+
+        // Second pass to set cells to zero
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (row[i] || col[j]) {
+                    mat[i][j] = 0;
+                }
+            }
+        }
+    }
+}
