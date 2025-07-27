@@ -51,7 +51,6 @@ class Solution {
         int n = mat.length;
         int m = mat[0].length;
 
-        // Arrays to mark which rows and columns have a zero
         boolean[] row = new boolean[n];
         boolean[] col = new boolean[m];
 
