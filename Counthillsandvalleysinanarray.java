@@ -24,3 +24,27 @@
 // Space Complexity: O(N) in the worst case, to store the compressed array. If there are no consecutive duplicate elements, the compressed array will have the same size as the input array.
 //
 // Optimal Solution:
+class Solution {
+    public int countHillValley(int[] nums) {
+        // Step 1: Create a new list removing consecutive duplicates
+        List<Integer> clean = new ArrayList<>();
+        clean.add(nums[0]);
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[i - 1]) {
+                clean.add(nums[i]);
+            }
+        }
+
+        // Step 2: Count hills and valleys
+        int count = 0;
+        for (int i = 1; i < clean.size() - 1; i++) {
+            if (clean.get(i) > clean.get(i - 1) && clean.get(i) > clean.get(i + 1)) {
+                count++; // hill
+            } else if (clean.get(i) < clean.get(i - 1) && clean.get(i) < clean.get(i + 1)) {
+                count++; // valley
+            }
+        }
+
+        return count;
+    }
+}
