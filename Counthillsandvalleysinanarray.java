@@ -34,7 +34,7 @@ class Solution {
                 clean.add(nums[i]);
             }
         }
-        
+
         int count = 0;
         for (int i = 1; i < clean.size() - 1; i++) {
             if (clean.get(i) > clean.get(i - 1) && clean.get(i) > clean.get(i + 1)) {
@@ -44,7 +44,6 @@ class Solution {
                 count++; 
             }
         }
-
-        return count;
+         return count;
     }
 }
