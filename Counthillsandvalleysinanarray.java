@@ -26,7 +26,6 @@
 // Optimal Solution:
 class Solution {
     public int countHillValley(int[] nums) {
-        // Step 1: Create a new list removing consecutive duplicates
         List<Integer> clean = new ArrayList<>();
         clean.add(nums[0]);
         for (int i = 1; i < nums.length; i++) {
