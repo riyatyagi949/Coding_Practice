@@ -66,8 +66,7 @@ class Solution {
         for (int sum : colSums) {
             max_sum = Math.max(max_sum, sum);
         }
-
-        long targetTotalSum = (long) n * max_sum;
+         long targetTotalSum = (long) n * max_sum;
         return (int) (targetTotalSum - totalSum);
     }
 }
