@@ -71,7 +71,6 @@ class Solution {
         }
         backtrack(index + 1, currentOr);
 
-        // Include nums[index]
         backtrack(index + 1, currentOr | nums[index]);
     }
 }
