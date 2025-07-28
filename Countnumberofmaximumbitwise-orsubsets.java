@@ -62,7 +62,6 @@ class Solution {
         backtrack(0, 0);
         return count;
     }
-
     private void backtrack(int index, int currentOr) {
         if (index == nums.length) {
             if (currentOr == maxOr) {
