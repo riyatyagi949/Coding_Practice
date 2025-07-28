@@ -59,7 +59,6 @@ class Solution {
                 totalSum += matrix[i][j];
             }
         }
-
         int max_sum = 0;
         for (int sum : rowSums) {
             max_sum = Math.max(max_sum, sum);
