@@ -69,8 +69,6 @@ class Solution {
             }
             return;
         }
-
-        // Exclude nums[index]
         backtrack(index + 1, currentOr);
 
         // Include nums[index]
