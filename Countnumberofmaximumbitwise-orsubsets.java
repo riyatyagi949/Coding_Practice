@@ -70,7 +70,6 @@ class Solution {
             return;
         }
         backtrack(index + 1, currentOr);
-
         backtrack(index + 1, currentOr | nums[index]);
     }
 }
