@@ -1,3 +1,3 @@
-public class SmallestsubarrayswithmaximumbitwiseOR {
+public class SmallestsubarrayswithmaximumbitwiseOR 
   
 
