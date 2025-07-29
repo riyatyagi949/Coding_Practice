@@ -33,34 +33,3 @@
 
 import java.util.*;
 
-class Solution {
-    public List<Integer> asciiRangeSum(String s) {
-        int[] firstOccurrence = new int[26];
-        Arrays.fill(firstOccurrence, -1);
-        int[] lastOccurrence = new int[26];
-
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (firstOccurrence[c - 'a'] == -1) {
-                firstOccurrence[c - 'a'] = i;
-            }
-            lastOccurrence[c - 'a'] = i;
-        }
-
-        Set<Integer> resultSums = new HashSet<>();
-
-        for (int i = 0; i < 26; i++) {
-            if (firstOccurrence[i] != -1 && firstOccurrence[i] != lastOccurrence[i]) {
-                int sum = 0;
-                for (int j = firstOccurrence[i] + 1; j < lastOccurrence[i]; j++) {
-                    sum += s.charAt(j);
-                }
-                if (sum != 0) {
-                    resultSums.add(sum);
-                }
-            }
-        }
-
-        return new ArrayList<>(resultSums);
-    }
-}
