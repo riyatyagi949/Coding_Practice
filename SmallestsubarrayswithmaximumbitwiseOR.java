@@ -12,7 +12,33 @@
 // Time Complexity: O(N * Max_Bits) -> O(N) as Max_Bits is constant (30).
 // Space Complexity: O(N) for the answer array, O(Max_Bits) for `lastSeenBitIdx` -> O(N).
 
-import java.util.Arrays;
+class Solution {
+    public int[] smallestSubarrays(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        int[] lastSeen = new int[32];
+         // To track last seen index for each bit
+
+        for (int i = n - 1; i >= 0; i--) {
+            // Update last seen for each bit that is set in nums[i]
+            for (int b = 0; b < 32; b++) {
+                if (((nums[i] >> b) & 1) == 1) {
+                    lastSeen[b] = i;
+                }
+            }
+
+            // Get the furthest index we need to go to achieve max OR
+            int furthest = i;
+            for (int b = 0; b < 32; b++) {
+                furthest = Math.max(furthest, lastSeen[b]);
+            }
+
+            res[i] = furthest - i + 1;
+        }
+
+        return res;
+    }
+}
 
 
 
