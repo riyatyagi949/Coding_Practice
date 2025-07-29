@@ -24,8 +24,6 @@ class Solution {
                     lastSeen[b] = i;
                 }
             }
-
-            // Get the furthest index we need to go to achieve max OR
             int furthest = i;
             for (int b = 0; b < 32; b++) {
                 furthest = Math.max(furthest, lastSeen[b]);
