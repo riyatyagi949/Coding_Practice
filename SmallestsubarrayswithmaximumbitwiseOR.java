@@ -14,34 +14,7 @@
 
 import java.util.Arrays;
 
-class Solution {
-    public int[] smallestSubarrays(int[] nums) {
-        int n = nums.length;
-        int[] answer = new int[n];
-        int[] lastSeenBitIdx = new int[30]; // Stores the rightmost index where each bit (0-29) was seen.
-        Arrays.fill(lastSeenBitIdx, -1);
 
-        for (int i = n - 1; i >= 0; i--) {
-            int currentMaxRightIdx = i;
 
-            // Update lastSeenBitIdx with the current number nums[i]
-            for (int b = 0; b < 30; b++) {
-                if (((nums[i] >> b) & 1) == 1) {
-                    lastSeenBitIdx[b] = i;
-                }
-            }
-
-            // Determine the farthest right index needed to cover all bits for the maximum OR
-            for (int b = 0; b < 30; b++) {
-                if (lastSeenBitIdx[b] != -1) {
-                    currentMaxRightIdx = Math.max(currentMaxRightIdx, lastSeenBitIdx[b]);
-                }
-            }
-
-            answer[i] = currentMaxRightIdx - i + 1;
-        }
-
-        return answer;
-    }
-}
+    
 
