@@ -24,14 +24,13 @@ class Solution {
                     lastSeen[b] = i;
                 }
             }
-            int furthest = i;
-            for (int b = 0; b < 32; b++) {
+             int furthest = i;
+               for (int b = 0; b < 32; b++) {
                 furthest = Math.max(furthest, lastSeen[b]);
             }
-             res[i] = furthest - i + 1;
+        res[i] = furthest - i + 1;
         }
-
-        return res;
+     return res;
     }
 }
 
