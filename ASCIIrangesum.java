@@ -33,3 +33,32 @@
 
 import java.util.*;
 
+class Solution {
+    public ArrayList<Integer> asciirange(String s) {
+        Map<Character, Integer> firstPos = new HashMap<>();
+        Map<Character, Integer> lastPos = new HashMap<>();
+        ArrayList<Integer> result = new ArrayList<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            firstPos.putIfAbsent(ch, i);
+            lastPos.put(ch, i);
+        }
+
+        for (char ch : firstPos.keySet()) {
+            int start = firstPos.get(ch);
+            int end = lastPos.get(ch);
+            if (start < end - 1) {
+                int sum = 0;
+                for (int i = start + 1; i < end; i++) {
+                    sum += s.charAt(i);
+                }
+                if (sum > 0) {
+                    result.add(sum);
+                }
+            }
+        }
+
+        return result;
+    }
+}
