@@ -17,7 +17,6 @@ class Solution {
         int n = nums.length;
         int[] res = new int[n];
         int[] lastSeen = new int[32];
-         // To track last seen index for each bit
 
         for (int i = n - 1; i >= 0; i--) {
             // Update last seen for each bit that is set in nums[i]
