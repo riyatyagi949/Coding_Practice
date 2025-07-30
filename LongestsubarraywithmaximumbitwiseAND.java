@@ -55,7 +55,6 @@ class Solution {
                 currentLength = 0;
             }
         }
-
         return longestLength;
     }
 }
