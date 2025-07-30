@@ -48,7 +48,6 @@ class Solution {
 
         for (int number : nums) {
             if (number == maxValue) {
-                // Increment the current length counter.
                 currentLength++;
                 // Update the longest length if the current length is greater.
                 longestLength = Math.max(longestLength, currentLength);
