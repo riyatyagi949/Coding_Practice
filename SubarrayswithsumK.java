@@ -19,20 +19,3 @@ Space Complexity:
 The space complexity is O(N) in the worst case, as the HashMap can store up to N distinct cumulative sums.
 */
 
-class Solution {
-    public int subarraySum(int[] arr, int k) {
-        int count = 0;
-        int currentSum = 0;
-        java.util.HashMap<Integer, Integer> sumFrequency = new java.util.HashMap<>();
-        sumFrequency.put(0, 1); // To handle cases where the subarray itself starts from the beginning and sums to k
-
-        for (int num : arr) {
-            currentSum += num;
-            if (sumFrequency.containsKey(currentSum - k)) {
-                count += sumFrequency.get(currentSum - k);
-            }
-            sumFrequency.put(currentSum, sumFrequency.getOrDefault(currentSum, 0) + 1);
-        }
-        return count;
-    }
-}
