@@ -18,6 +18,8 @@ The time complexity is O(N) because we iterate through the array once, and HashM
 Space Complexity:
 The space complexity is O(N) in the worst case, as the HashMap can store up to N distinct cumulative sums.
 */
+
+// Optimal Solution:-
 import java.util.*;
 
 class Solution {
