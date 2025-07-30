@@ -46,7 +46,6 @@ class Solution {
         int longestLength = 0;
         int currentLength = 0;
 
-        // Iterate through each element in the list.
         for (int number : nums) {
             // If the current element is equal to the maximum value...
             if (number == maxValue) {
