@@ -43,8 +43,6 @@ class Solution {
                 maxValue = num;
             }
         }
-
-        // Initialize the longest length and the current length counter to zero.
         int longestLength = 0;
         int currentLength = 0;
 
