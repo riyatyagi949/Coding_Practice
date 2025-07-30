@@ -50,8 +50,8 @@ class Solution {
             if (number == maxValue) {
                 currentLength++;
                 longestLength = Math.max(longestLength, currentLength);
-            } else {
-                // If the current element is not equal to the max value, reset current length to 0.
+            }
+             else {
                 currentLength = 0;
             }
         }
