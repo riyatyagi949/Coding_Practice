@@ -56,7 +56,6 @@ class Solution {
             }
         }
 
-        // After iterating through the list, return the longest length of the subarray with max values.
         return longestLength;
     }
 }
