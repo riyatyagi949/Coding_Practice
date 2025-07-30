@@ -18,4 +18,23 @@ The time complexity is O(N) because we iterate through the array once, and HashM
 Space Complexity:
 The space complexity is O(N) in the worst case, as the HashMap can store up to N distinct cumulative sums.
 */
+import java.util.*;
 
+class Solution {
+    public int cntSubarrays(int[] arr, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+
+        int count = 0;
+        int prefixSum = 0;
+
+        for (int num : arr) {
+            prefixSum += num;
+            if (map.containsKey(prefixSum - k)) {
+                count += map.get(prefixSum - k);
+            }
+            map.put(prefixSum, map.getOrDefault(prefixSum, 0) + 1);
+        }
+          return count;
+    }
+}
