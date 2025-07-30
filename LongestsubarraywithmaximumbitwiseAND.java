@@ -47,7 +47,6 @@ class Solution {
         int currentLength = 0;
 
         for (int number : nums) {
-            // If the current element is equal to the maximum value...
             if (number == maxValue) {
                 // Increment the current length counter.
                 currentLength++;
