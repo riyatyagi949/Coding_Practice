@@ -37,7 +37,6 @@ The space complexity is O(1) as we only use a few constant extra variables (`max
 
 class Solution {
     public int longestSubarray(int[] nums) {
-        // Step 1: Find the maximum value in the array nums.
         int maxValue = 0;
         for (int num : nums) {
             if (num > maxValue) {
