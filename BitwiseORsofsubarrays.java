@@ -83,10 +83,7 @@ class Solution {
 
         // Iterate through each number in the input array
         for (int num : arr) {
-            Set<Integer> curr = new HashSet<>(); 
-            // Set to store unique bitwise OR sums for subarrays ending at the current 'num'
-            
-            // The current number 'num' itself is a subarray of length 1
+            Set<Integer> curr = new HashSet<>();             
             curr.add(num);
 
             for (int x : prev) {
