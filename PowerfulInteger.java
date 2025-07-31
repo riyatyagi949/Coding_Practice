@@ -42,6 +42,32 @@ Space Complexity:
 This sweep-line approach efficiently handles the large coordinate range by only considering the points where the overlap count changes, rather than iterating through every single integer in the range.
 */
 
-import java.util.Map;
 import java.util.TreeMap;
 
+class Solution {
+    public int powerfulInteger(int[][] intervals, int k) {
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+
+        for (int[] interval : intervals) {
+            map.put(interval[0], map.getOrDefault(interval[0], 0) + 1);
+            map.put(interval[1] + 1, map.getOrDefault(interval[1] + 1, 0) - 1);
+        }
+
+        int currCount = 0;
+        int prev = -1;
+        int maxPowerful = -1;
+
+        for (int point : map.keySet()) {
+            int delta = map.get(point);
+
+            if (currCount >= k) {
+                maxPowerful = Math.max(maxPowerful, point - 1);
+            }
+
+            currCount += delta;
+            prev = point;
+        }
+
+        return maxPowerful;
+    }
+}
