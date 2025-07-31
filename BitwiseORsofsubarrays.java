@@ -95,9 +95,6 @@ class Solution {
             for (int x : prev) {
                 curr.add(x | num);
             }
-
-            // Add all the unique OR sums found for subarrays ending at 'num'
-            // to our global result set.
             result.addAll(curr);
             prev = curr;
         }
