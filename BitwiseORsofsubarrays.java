@@ -77,11 +77,8 @@ import java.util.*;
 class Solution {
     public int subarrayBitwiseORs(int[] arr) {
         Set<Integer> result = new HashSet<>();
-         // Stores all unique bitwise OR sums found across all subarrays
         Set<Integer> prev = new HashSet<>();  
-         // Stores unique bitwise OR sums of subarrays ending at the previous index
 
-        // Iterate through each number in the input array
         for (int num : arr) {
             Set<Integer> curr = new HashSet<>();             
             curr.add(num);
