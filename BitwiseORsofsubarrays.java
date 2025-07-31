@@ -16,38 +16,3 @@ Space Complexity: O(N), for the TreeMap.
 import java.util.Map;
 import java.util.TreeMap;
 
-class Solution {
-    public int powerfulInteger(int n, int[][] intervals, int k) {
-        TreeMap<Integer, Integer> sweepLine = new TreeMap<>();
-
-        for (int[] interval : intervals) {
-            int start = interval[0];
-            int end = interval[1];
-            sweepLine.put(start, sweepLine.getOrDefault(start, 0) + 1);
-            sweepLine.put(end + 1, sweepLine.getOrDefault(end + 1, 0) - 1);
-        }
-
-        int maxPowerfulInteger = -1;
-        int currentOverlap = 0;
-        int prevCoordinate = -1;
-
-        for (Map.Entry<Integer, Integer> entry : sweepLine.entrySet()) {
-            int currentCoordinate = entry.getKey();
-            int change = entry.getValue();
-
-            if (prevCoordinate != -1 && currentOverlap >= k) {
-                maxPowerfulInteger = Math.max(maxPowerfulInteger, currentCoordinate - 1);
-            }
-
-            currentOverlap += change;
-            
-            if (currentOverlap >= k) {
-                maxPowerfulInteger = Math.max(maxPowerfulInteger, currentCoordinate);
-            }
-
-            prevCoordinate = currentCoordinate;
-        }
-
-        return maxPowerfulInteger;
-    }
-}
