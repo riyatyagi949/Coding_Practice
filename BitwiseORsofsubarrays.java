@@ -99,13 +99,8 @@ class Solution {
             // Add all the unique OR sums found for subarrays ending at 'num'
             // to our global result set.
             result.addAll(curr);
-
-            // Set the 'curr' set (OR sums ending at current 'num')
-            // as 'prev' for the next iteration.
             prev = curr;
         }
-
-        // The final answer is the total count of unique bitwise OR sums.
         return result.size();
     }
 }
