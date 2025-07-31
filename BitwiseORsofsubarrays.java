@@ -89,9 +89,6 @@ class Solution {
             // The current number 'num' itself is a subarray of length 1
             curr.add(num);
 
-            // For each unique OR sum 'x' that ended at the previous index,
-            // we can extend that subarray by including the current 'num'.
-            // The new OR sum will be 'x | num'.
             for (int x : prev) {
                 curr.add(x | num);
             }
