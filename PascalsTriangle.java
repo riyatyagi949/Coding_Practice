@@ -47,7 +47,6 @@ class Solution {
             currentRow.add(1);
             triangle.add(currentRow);
         }
-        
         return triangle;
     }
 }
