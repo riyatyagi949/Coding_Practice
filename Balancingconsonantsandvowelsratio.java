@@ -26,3 +26,31 @@
 // The hash map can store up to `M+1` distinct prefix sums in the worst case.
 // Thus, the space complexity is O(M).
 
+import java.util.*;
+
+class Solution {
+    public int countBalanced(String[] arr) {
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        freqMap.put(0, 1);
+        int totalBalanced = 0;
+        int diff = 0;
+
+        for (String str : arr) {
+            for (char ch : str.toCharArray()) {
+                if (isVowel(ch)) {
+                    diff += 1;
+                } else {
+                    diff -= 1;
+                }
+            }
+            totalBalanced += freqMap.getOrDefault(diff, 0);
+            freqMap.put(diff, freqMap.getOrDefault(diff, 0) + 1);
+        }
+
+        return totalBalanced;
+    }
+
+    private boolean isVowel(char ch) {
+        return "aeiou".indexOf(ch) >= 0;
+    }
+}
