@@ -24,36 +24,28 @@ import java.util.HashMap;
 class Solution {
     public int longestSubarray(int[] arr, int k) {
         int n = arr.length;
-        int[] transformedArr = new int[n];
+        int[] diff = new int[n];
 
         for (int i = 0; i < n; i++) {
-            if (arr[i] > k) {
-                transformedArr[i] = 1;
-            } 
+            diff[i] = (arr[i] > k) ? 1 : -1;
+        }
+        HashMap<Integer, Integer> prefixMap = new HashMap<>();
+        int sum = 0, maxLen = 0;
+
+        for (int i = 0; i < n; i++) {
+            sum += diff[i];
+
+            if (sum > 0) {
+                maxLen = i + 1;
+            }
             else {
-                transformedArr[i] = -1;
+                prefixMap.putIfAbsent(sum, i);
+
+                if (prefixMap.containsKey(sum - 1)) {
+                    maxLen = Math.max(maxLen, i - prefixMap.get(sum - 1));
+                }
             }
         }
-
-        int maxLength = 0;
-        int currentSum = 0;
-        HashMap<Integer, Integer> sumMap = new HashMap<>();
-        sumMap.put(0, -1);
-
-        for (int i = 0; i < n; i++) {
-            currentSum += transformedArr[i];
-            if (currentSum > 0) {
-                maxLength = i + 1;
-            } 
-            else if (sumMap.containsKey(currentSum - 1)) {
-                maxLength = Math.max(maxLength, i - sumMap.get(currentSum - 1));
-            }
-
-            if (!sumMap.containsKey(currentSum)) {
-                sumMap.put(currentSum, i);
-            }
-        }
-
-        return maxLength;
+        return maxLen;
     }
 }
