@@ -41,70 +41,37 @@ We use HashMaps and lists to store frequencies and fruits to be swapped. In the 
 
 */
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 class Solution {
-    public long minCostToEqualizeBaskets(int[] basket1, int[] basket2) {
-        int n = basket1.length;
-        Map<Integer, Integer> freq = new HashMap<>();
-        int minCost = Integer.MAX_VALUE;
+  public long minCost(int[] basket1, int[] basket2) {
+    long ans = 0;
+    List<Integer> swapped = new ArrayList<>();
+    Map<Integer, Integer> count = new HashMap<>();
 
-        for (int fruit : basket1) {
-            freq.put(fruit, freq.getOrDefault(fruit, 0) + 1);
-            minCost = Math.min(minCost, fruit);
-        }
-        for (int fruit : basket2) {
-            freq.put(fruit, freq.getOrDefault(fruit, 0) + 1);
-            minCost = Math.min(minCost, fruit);
-        }
+    for (final int b : basket1)
+      count.merge(b, 1, Integer::sum);
 
-        List<Integer> swap1 = new ArrayList<>();
-        List<Integer> swap2 = new ArrayList<>();
-        
-        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
-            int fruit = entry.getKey();
-            int totalCount = entry.getValue();
-            if (totalCount % 2 != 0) {
-                return -1;
-            }
-        }
-        
-        Map<Integer, Integer> freq1 = new HashMap<>();
-        for (int fruit : basket1) {
-            freq1.put(fruit, freq1.getOrDefault(fruit, 0) + 1);
-        }
+    for (final int b : basket2)
+      count.merge(b, -1, Integer::sum);
 
-        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
-            int fruit = entry.getKey();
-            int count1 = freq1.getOrDefault(fruit, 0);
-            int halfTotal = entry.getValue() / 2;
-            
-            if (count1 > halfTotal) {
-                for (int i = 0; i < count1 - halfTotal; i++) {
-                    swap1.add(fruit);
-                }
-            }
-             else if (count1 < halfTotal) {
-                for (int i = 0; i < halfTotal - count1; i++) {
-                    swap2.add(fruit);
-                }
-            }
-        }
-
-        Collections.sort(swap1);
-        Collections.sort(swap2);
-
-        long cost = 0;
-        int numSwaps = swap1.size();
-
-        for (int i = 0; i < numSwaps; i++) {
-            cost += Math.min(Math.min(swap1.get(i), swap2.get(numSwaps - 1 - i)), 2 * minCost);
-        }
-        
-        return cost;
+    for (Map.Entry<Integer, Integer> entry : count.entrySet()) {
+      final Integer num = entry.getKey();
+      final Integer freq = entry.getValue();
+      if (freq % 2 != 0)
+        return -1;
+      for (int i = 0; i < Math.abs(freq) / 2; ++i)
+        swapped.add(num);
     }
+
+    final int minNum =
+        Math.min(Arrays.stream(basket1).min().getAsInt(), Arrays.stream(basket2).min().getAsInt());
+    Collections.sort(swapped);
+
+    for (int i = 0; i < swapped.size() / 2; ++i)
+      ans += Math.min(minNum * 2, swapped.get(i));
+    return ans;
+  }
 }
+
+
