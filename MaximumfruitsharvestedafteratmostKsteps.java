@@ -12,7 +12,9 @@
  *
  * We iterate the `right` pointer from `0` to `n-1`. For each `right`, we shrink the window by incrementing the `left` pointer until the travel cost is within `k`. We then update the maximum fruits collected.
  *
- * Time Complexity: O(N), where N is the number of fruits. The `left` and `right` pointers traverse the fruits array at most once.
+ * Time Complexity: O(N), where N is the number of fruits. 
+ * The `left` and `right` pointers traverse the fruits array at most once.
+ * 
  * Space Complexity: O(N) for the prefix sum array.
  */
 class Solution {
@@ -34,16 +36,19 @@ class Solution {
                 
                 if (startPos < leftPos) {
                     travelCost = rightPos - startPos;
-                } else if (startPos > rightPos) {
+                }
+                 else if (startPos > rightPos) {
                     travelCost = startPos - leftPos;
-                } else {
+                } 
+                else {
                     travelCost = Math.min((startPos - leftPos) + (rightPos - leftPos), (rightPos - startPos) + (rightPos - leftPos));
                 }
 
                 if (travelCost <= k) {
                     maxFruits = Math.max(maxFruits, prefixSums[right + 1] - prefixSums[left]);
                     break;
-                } else {
+                }
+                 else {
                     left++;
                 }
             }
