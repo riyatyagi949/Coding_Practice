@@ -41,6 +41,8 @@
  * - We need an additional 2D difference array of size O(n*m).
  */
 
+import java.util.*;
+
 class Solution {
     public ArrayList<ArrayList<Integer>> applyDiff2D(int[][] mat, int[][] opr) {
         int n = mat.length;
