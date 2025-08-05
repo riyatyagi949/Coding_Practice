@@ -32,4 +32,26 @@
     // Space Complexity: O(N) for the first approach, O(1) for the second.
     // The first approach uses a StringBuilder which can, in the worst case, store a string of length N. The second approach uses only a few variables, so its space complexity is O(1). We will implement the second, more optimal approach.
 
-   
+   class Solution {
+    public boolean isPalinSent(String s) {
+        StringBuilder cleaned = new StringBuilder();
+
+        for (char ch : s.toCharArray()) {
+            if (Character.isLetterOrDigit(ch)) {
+                cleaned.append(Character.toLowerCase(ch));
+            }
+        }
+
+        int left = 0;
+        int right = cleaned.length() - 1;
+
+        while (left < right) {
+            if (cleaned.charAt(left) != cleaned.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
