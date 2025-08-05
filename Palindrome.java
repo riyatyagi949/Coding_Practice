@@ -32,33 +32,4 @@
     // Space Complexity: O(N) for the first approach, O(1) for the second.
     // The first approach uses a StringBuilder which can, in the worst case, store a string of length N. The second approach uses only a few variables, so its space complexity is O(1). We will implement the second, more optimal approach.
 
-   class Solution {
-       public boolean isPalindromeSentence(String s) {
-        if (s == null) {
-            return false;
-        }
-
-        int left = 0;
-        int right = s.length() - 1;
-
-        while (left < right) {
-            char leftChar = s.charAt(left);
-            char rightChar = s.charAt(right);
-
-            if (!Character.isLetterOrDigit(leftChar)) {
-                left++;
-            } else if (!Character.isLetterOrDigit(rightChar)) {
-                right--;
-            } else {
-                if (Character.toLowerCase(leftChar) != Character.toLowerCase(rightChar)) {
-                    return false;
-                }
-                left++;
-                right--;
-            }
-        }
-        return true;
-    }
-}
-    
-
+   
