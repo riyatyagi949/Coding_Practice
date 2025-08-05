@@ -50,8 +50,10 @@
         int n = fruits.length;
         boolean[] usedBaskets = new boolean[n];
         int unplacedFruits = 0;
+
         for (int i = 0; i < n; i++) {
             boolean placed = false;
+            
             for (int j = 0; j < n; j++) {
                 if (!usedBaskets[j] && baskets[j] >= fruits[i]) {
                     usedBaskets[j] = true;
