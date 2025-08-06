@@ -58,25 +58,3 @@
 
 import java.util.Arrays;
 
-class Solution {
-    public int fruitsIntoBasketsIII(int[] fruits, int[] baskets) {
-        Arrays.sort(fruits);
-        Arrays.sort(baskets);
-
-        int placedFruits = 0;
-        int fruitPointer = 0;
-        int basketPointer = 0;
-
-        while (fruitPointer < fruits.length && basketPointer < baskets.length) {
-            if (baskets[basketPointer] >= fruits[fruitPointer]) {
-                placedFruits++;
-                fruitPointer++;
-                basketPointer++;
-            } else {
-                basketPointer++;
-            }
-        }
-
-        return fruits.length - placedFruits;
-    }
-}
