@@ -40,6 +40,31 @@
 // Time Complexity: O(n), where n is the length of the Roman numeral string, as we iterate through the string once.
 // Space Complexity: O(1), as we only use a constant amount of extra space for the map/switch.
 
-import java.util.HashMap;
-import java.util.Map;
-
+class Solution {
+    public int romanToDecimal(String s) {
+        int total = 0;
+        int prev = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            int curr = value(s.charAt(i));
+            if (curr < prev) {
+                total -= curr;
+            } else {
+                total += curr;
+            }
+            prev = curr;
+        }
+        return total;
+    }
+    private int value(char c) {
+        switch(c) {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return 0;
+        }
+    }
+}
