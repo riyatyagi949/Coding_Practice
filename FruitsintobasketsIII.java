@@ -56,8 +56,6 @@
 // Time Complexity: O(n log n) due to sorting.
 // Space Complexity: O(1) if sorting is in-place, or O(n) otherwise.
 
-import java.util.Arrays;
-
 class SegmentTree {
     int[] nums;
     int[] tr;
@@ -88,7 +86,8 @@ class SegmentTree {
         int mid = (l + r) >> 1;
         if (i <= mid) {
             modify(u << 1, l, mid, i, v);
-        } else {
+        }
+         else {
             modify(u << 1 | 1, mid + 1, r, i, v);
         }
         pushup(u);
@@ -122,7 +121,8 @@ class Solution {
             int i = tree.query(1, 1, n, x);
             if (i < 0) {
                 ans++;
-            } else {
+            } 
+            else {
                 tree.modify(1, 1, n, i, 0);
             }
         }
