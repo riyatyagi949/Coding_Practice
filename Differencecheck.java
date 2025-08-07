@@ -17,32 +17,3 @@ Converting each string takes constant time, and iterating through the sorted arr
 Space Complexity:
 O(N) to store the integer array of converted time values.
 */
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-class Solution {
-    static int solve(String arr[]) {
-        List<Integer> secondsList = new ArrayList<>();
-        for (String time : arr) {
-            String[] parts = time.split(":");
-            int hours = Integer.parseInt(parts[0]);
-            int minutes = Integer.parseInt(parts[1]);
-            int seconds = Integer.parseInt(parts[2]);
-            int totalSeconds = hours * 3600 + minutes * 60 + seconds;
-            secondsList.add(totalSeconds);
-        }
-
-        Collections.sort(secondsList);
-
-        int minDiff = Integer.MAX_VALUE;
-        for (int i = 1; i < secondsList.size(); i++) {
-            minDiff = Math.min(minDiff, secondsList.get(i) - secondsList.get(i - 1));
-        }
-
-        int wrapAroundDiff = (24 * 3600) - (secondsList.get(secondsList.size() - 1) - secondsList.get(0));
-        minDiff = Math.min(minDiff, wrapAroundDiff);
-
-        return minDiff;
-    }
-}
