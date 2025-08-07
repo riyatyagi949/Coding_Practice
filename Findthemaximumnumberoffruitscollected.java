@@ -13,7 +13,7 @@
      * correctly handle the overlapping fruits. The key insight comes from analyzing the movement rules and the
      * "exactly n - 1 moves" constraint.
      *
-     * 1.  **Analyze Child 1's Path:**
+     * 1. Analyze Child 1's Path:
      * - Child 1 moves from (0, 0) to (n - 1, n - 1) in `n - 1` steps.
      * - A path from (0, 0) to (n - 1, n - 1) requires `n - 1` increments in the row index and `n - 1` increments in the column index.
      * - The moves are `(i + 1, j + 1)`, `(i + 1, j)`, and `(i, j + 1)`.
@@ -24,7 +24,7 @@
      * - This means Child 1's path is fixed: `(0, 0) -> (1, 1) -> ... -> (n - 1, n - 1)`.
      * - We can simply calculate the sum of fruits along this path.
      *
-     * 2.  **Analyze Child 2's Path:**
+     * 2. Analyze Child 2's Path:
      * - Child 2 moves from (0, n - 1) to (n - 1, n - 1) in `n - 1` steps.
      * - The moves are `(i + 1, j - 1)`, `(i + 1, j)`, and `(i + 1, j + 1)`.
      * - Each move increments the row index by exactly 1.
@@ -35,7 +35,7 @@
      * - `dp[i][j] = fruits[i][j] + max(dp[i-1][j+1], dp[i-1][j], dp[i-1][j-1])`.
      * - This DP calculation is for a single path.
      *
-     * 3.  **Analyze Child 3's Path:**
+     * 3.  Analyze Child 3's Path:
      * - Child 3 moves from (n - 1, 0) to (n - 1, n - 1) in `n - 1` steps.
      * - The moves are `(i - 1, j + 1)`, `(i, j + 1)`, and `(i + 1, j + 1)`.
      * - Each move increments the column index by exactly 1.
@@ -45,7 +45,7 @@
      * - Let `dp[i][j]` be the maximum fruits collected to reach room `(i, j)`.
      * - `dp[i][j] = fruits[i][j] + max(dp[i+1][j-1], dp[i][j-1], dp[i-1][j-1])`.
      *
-     * **Handling Overlaps:**
+     * Handling Overlaps:
      * The three paths are distinct except at the start and end points. The start points are unique. The end point `(n - 1, n - 1)` is common. The fruits at `(n - 1, n - 1)` will be counted once. The problem states that if two or more children enter the same room, fruits are collected once. This means we should calculate the sum of fruits for each path and then subtract the fruits from any overlapping rooms.
      *
      * - Child 1's path is the main diagonal.
@@ -62,11 +62,13 @@
      *
      * The provided solution is a simplified approach, which might be correct under the assumption that the three optimal paths do not intersect (other than at the final cell). The `getTopLeft` function calculates the fruits along the main diagonal. The `getTopRight` and `getBottomLeft` functions calculate the maximum fruits for a single path using dynamic programming, but they do not account for fruits already collected by other children. The provided solution adds these three path sums, assuming that the paths (except for the endpoint) are disjoint. This is likely due to the hard constraint of `n-1` moves.
      *
+     * 
      * Time Complexity:
      * - `getTopLeft` is O(N).
      * - `getTopRight` and `getBottomLeft` use a nested loop with a constant number of inner loops, resulting in O(N^2).
      * - The overall time complexity is **O(N^2)**.
      *
+     * 
      * Space Complexity:
      * - The DP tables `dp` for `getTopRight` and `getBottomLeft` are of size N x N.
      * - The overall space complexity is **O(N^2)**.
