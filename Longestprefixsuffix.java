@@ -1,4 +1,3 @@
-class Solution {
     /**
      * Problem Statement:
      * Given a string `s`, of lowercase English alphabets, find the length of the longest proper prefix which is also a suffix.
@@ -22,7 +21,10 @@ class Solution {
      * O(N) to store the `lps` array.
      * * Optimal Solution:
      */
-    int lps(String s) {
+
+
+    class Solution {
+        int lps(String s) {
         int n = s.length();
         int[] lps = new int[n];
         int len = 0;
