@@ -27,42 +27,4 @@
      * O(n^2) to store the memoization table. For large `n`, it's O(1) due to the threshold optimization.
      * * Optimal Solution:
      */
-    class Solution {
-
-    double[][] memo;
-
-    public double soupServings(int n) {
-        if (n >= 4800) {
-            return 1.0;
-        }
-        int units = (n + 24) / 25;
-        memo = new double[units + 1][units + 1];
-        return solve(units, units);
-    }
-
-    private double solve(int a, int b) {
-        if (a <= 0 && b <= 0) {
-            return 0.5;
-        }
-        if (a <= 0) {
-            return 1.0;
-        }
-        if (b <= 0) {
-            return 0.0;
-        }
-
-        if (memo[a][b] != 0.0) {
-            return memo[a][b];
-        }
-
-        double prob = 0.25 * (
-            solve(a - 4, b) +
-            solve(a - 3, b - 1) +
-            solve(a - 2, b - 2) +
-            solve(a - 1, b - 3)
-        );
-
-        memo[a][b] = prob;
-        return prob;
-    }
-}
+    
