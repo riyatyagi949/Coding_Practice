@@ -19,11 +19,11 @@
      * O(N), where N is the length of the string `s`. The algorithm iterates through the string once to build the LPS array. The `while` loop inside the `for` loop doesn't make it O(N^2) because the total number of times `len` is decremented is bounded by the number of times it's incremented, which is at most N.
      * * Space Complexity:
      * O(N) to store the `lps` array.
+     * 
+     * 
      * * Optimal Solution:
      */
-
-
-    class Solution {
+class Solution {
         int lps(String s) {
         int n = s.length();
         int[] lps = new int[n];
@@ -35,10 +35,12 @@
                 len++;
                 lps[i] = len;
                 i++;
-            } else {
+            } 
+            else {
                 if (len != 0) {
                     len = lps[len - 1];
-                } else {
+                } 
+                else {
                     lps[i] = 0;
                     i++;
                 }
