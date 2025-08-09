@@ -13,6 +13,8 @@
 // The solution first checks if n is greater than 0. Then, it uses the bitwise AND trick to check if it's a power of two.
 // Time Complexity: O(1)
 // Space Complexity: O(1)
+
+// Optimal Solution - 
 class Solution {
     public boolean isPowerOfTwo(int n) {
         if (n <= 0) {
