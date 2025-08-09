@@ -21,7 +21,8 @@
 class Solution {
     int getLongestPrefix(String s) {
         int n = s.length();
-        if (n <= 1) return -1;
+        if (n <= 1)
+         return -1;
 
         int[] z = new int[n];
         int l = 0, r = 0;
@@ -34,7 +35,8 @@ class Solution {
             }
         }
         for (int k = n - 1; k >= 1; k--) {
-            if (z[k] >= n - k) return k;
+            if (z[k] >= n - k)
+             return k;
         }
         return -1;
     }
