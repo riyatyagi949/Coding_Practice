@@ -11,6 +11,7 @@
 // The AND operation then cancels out all bits, resulting in 0.
 // For example, if n = 8 (1000 in binary), n-1 = 7 (0111 in binary). 8 & 7 = 0.
 // The solution first checks if n is greater than 0. Then, it uses the bitwise AND trick to check if it's a power of two.
+
 // Time Complexity: O(1)
 // Space Complexity: O(1)
 
