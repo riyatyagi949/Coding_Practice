@@ -18,6 +18,7 @@
 // Time Complexity: O(N), where N is the length of the string, as the Z-algorithm runs in linear time.
 // Space Complexity: O(N), for storing the Z-array.
 
+// Optimal Solution-
 class Solution {
     int getLongestPrefix(String s) {
         int n = s.length();
