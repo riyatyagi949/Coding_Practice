@@ -34,33 +34,20 @@ Space Complexity:
 The solution uses only a few variables for indices and the count, so the space complexity is $O(1)$.
 */
 class Solution {
-    public int countPalindromicSubstrings(String s) {
-        int count = 0;
+    public int countPS(String s) {
         int n = s.length();
-        
-        for (int i = 0; i < n; i++) {
-            // Odd length palindromes
-            int left = i, right = i;
+        int count = 0;
+
+        for (int center = 0; center < 2 * n - 1; center++) {
+            int left = center / 2;
+            int right = left + center % 2;
             while (left >= 0 && right < n && s.charAt(left) == s.charAt(right)) {
-                if (right - left + 1 >= 2) {
-                    count++;
-                }
-                left--;
-                right++;
-            }
-            
-            // Even length palindromes
-            left = i;
-            right = i + 1;
-            while (left >= 0 && right < n && s.charAt(left) == s.charAt(right)) {
-                if (right - left + 1 >= 2) {
-                    count++;
-                }
+                if (right - left + 1 >= 2) 
+                count++;
                 left--;
                 right++;
             }
         }
-        
         return count;
     }
 }
