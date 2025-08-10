@@ -39,7 +39,7 @@ class Solution {
         }
         return false;
     }
-    private String countDigits(int n) {
+     private String countDigits(int n) {
         char[] count = new char[10];
         while (n > 0) {
             count[n % 10]++;
