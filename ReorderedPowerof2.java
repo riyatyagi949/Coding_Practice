@@ -28,34 +28,23 @@
  * Since the number of powers of two up to $10^9$ is small (around 30), and each count is an array of size 10, the space used is constant. $O(30 \times 10)$.
  * So, the space complexity is $O(1)$.
  */
+import java.util.*;
+
 class Solution {
     public boolean reorderedPowerOf2(int n) {
-        int[] n_counts = countDigits(n);
-        for (int i = 0; i < 30; i++) {
-            int powerOfTwo = 1 << i;
-            int[] powerOfTwo_counts = countDigits(powerOfTwo);
-            if (areEqual(n_counts, powerOfTwo_counts)) {
-                return true;
-            }
+        String target = countDigits(n);
+        for (int i = 0; i < 31; i++) {
+            if (target.equals(countDigits(1 << i)))
+             return true;
         }
         return false;
     }
-
-    private int[] countDigits(int n) {
-        int[] counts = new int[10];
+    private String countDigits(int n) {
+        char[] count = new char[10];
         while (n > 0) {
-            counts[n % 10]++;
+            count[n % 10]++;
             n /= 10;
         }
-        return counts;
-    }
-
-    private boolean areEqual(int[] arr1, int[] arr2) {
-        for (int i = 0; i < 10; i++) {
-            if (arr1[i] != arr2[i]) {
-                return false;
-            }
-        }
-        return true;
+        return new String(count);
     }
 }
