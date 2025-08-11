@@ -39,3 +39,86 @@
 // Space Complexity:
 // O(N) for the two auxiliary arrays.
 
+class Solution {
+    public int maxSum(String s) {
+        int n = s.length();
+        if (n < 2) 
+        return 0;
+
+        int[] d1 = manacherOdd(s);
+        int[] maxLenAtEnd = getMaxLengthOddPalindromesEndingAt(s, d1);
+        
+        int[] leftMax = new int[n];
+        for (int i = 0; i < n; i++) {
+            leftMax[i] = maxLenAtEnd[i];
+            if (i > 0) {
+                leftMax[i] = Math.max(leftMax[i], leftMax[i - 1]);
+            }
+        }
+        StringBuilder sb = new StringBuilder(s);
+        String rs = sb.reverse().toString();
+        int[] d1r = manacherOdd(rs);
+        int[] maxLenAtEndReversed = getMaxLengthOddPalindromesEndingAt(rs, d1r);
+        
+        int[] maxLenAtStart = new int[n];
+        for (int i = 0; i < n; i++) {
+            maxLenAtStart[i] = maxLenAtEndReversed[n - 1 - i];
+        }
+        int[] rightMax = new int[n];
+        for (int i = n - 1; i >= 0; i--) {
+            rightMax[i] = maxLenAtStart[i];
+            if (i < n - 1) {
+                rightMax[i] = Math.max(rightMax[i], rightMax[i + 1]);
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n - 1; i++) {
+            if (leftMax[i] > 0 && rightMax[i+1] > 0) {
+                ans = Math.max(ans, leftMax[i] + rightMax[i + 1]);
+            }
+        }
+        return ans;
+    }
+   private int[] manacherOdd(String s) {
+        int n = s.length();
+        int[] d = new int[n];
+        int l = 0, r = -1;
+        for (int i = 0; i < n; i++) {
+            int k = (i > r) ? 1 : Math.min(d[l + r - i], r - i + 1);
+            while (i - k >= 0 && i + k < n && s.charAt(i - k) == s.charAt(i + k)) {
+                k++;
+            }
+            d[i] = k--;
+            if (i + k > r) {
+                l = i - k;
+                r = i + k;
+            }
+        }
+        return d;
+    }
+    private int[] getMaxLengthOddPalindromesEndingAt(String s, int[] d) {
+        int n = s.length();
+        int[] maxLenAtEnd = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            maxLenAtEnd[i] = 1;
+        }
+
+        for (int i = 0; i < n; i++) {
+            int radius = d[i];
+            int length = 2 * radius - 1;
+            int end = i + radius - 1;
+            if (end < n) {
+                maxLenAtEnd[end] = Math.max(maxLenAtEnd[end], length);
+            }
+        }
+
+        for (int i = n - 2; i >= 0; i--) {
+            if (maxLenAtEnd[i+1] > 2) {
+                 maxLenAtEnd[i] = Math.max(maxLenAtEnd[i], maxLenAtEnd[i+1] - 2);
+            }
+        }
+        
+        return maxLenAtEnd;
+    }
+}
