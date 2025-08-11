@@ -25,6 +25,8 @@
 // - The `powers` array will have at most log n elements.
 // - The `prefixProducts` array will also have at most log n elements.
 
+import java.util.*;
+
 class Solution {
     static final int MOD = 1_000_000_007;
 
