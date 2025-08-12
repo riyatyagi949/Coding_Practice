@@ -34,12 +34,10 @@ class Solution {
             if (powerVal > n) {
                 break;
             }
-
             for (int j = n; j >= powerVal; j--) {
                 dp[j] = (dp[j] + dp[j - powerVal]) % MOD;
             }
         }
-
         return dp[n];
     }
 }
