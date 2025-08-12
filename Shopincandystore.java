@@ -56,7 +56,6 @@ class Solution {
             maxBuyPtr--;
             maxFreePtr += k;
         }
-        
-        return new int[]{minCost, maxCost};
+         return new int[]{minCost, maxCost};
     }
 }
