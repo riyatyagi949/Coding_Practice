@@ -28,34 +28,33 @@
 // Space Complexity: The space complexity is O(1) if the sorting is done in-place. If the sorting algorithm requires additional space, it would be O(
 // logN) or O(N) depending on the implementation.
 
-
-
 // Optimal Solution
-import java.util.Arrays;
+import java.util.*;
 
 class Solution {
-    public int[] candyStore(int[] prices, int k) {
+    public ArrayList<Integer> minMaxCandy(int[] prices, int k) {
+        ArrayList<Integer> ans = new ArrayList<>();
         Arrays.sort(prices);
-        
-        int n = prices.length;
-        
+
         int minCost = 0;
-        int minBuyPtr = 0;
-        int minFreePtr = n - 1;
-        while (minBuyPtr <= minFreePtr) {
-            minCost += prices[minBuyPtr];
-            minBuyPtr++;
-            minFreePtr -= k;
+        int start = 0, end = prices.length - 1;
+        while (start <= end) {
+            minCost += prices[start];
+            start++; 
+            end -= k; 
         }
-        
+
         int maxCost = 0;
-        int maxBuyPtr = n - 1;
-        int maxFreePtr = 0;
-        while (maxBuyPtr >= maxFreePtr) {
-            maxCost += prices[maxBuyPtr];
-            maxBuyPtr--;
-            maxFreePtr += k;
+        start = 0; end = prices.length - 1;
+        while (start <= end) {
+            maxCost += prices[end]; 
+            end--;
+            start += k; 
         }
-         return new int[]{minCost, maxCost};
+
+        ans.add(minCost);
+        ans.add(maxCost);
+
+        return ans;
     }
 }
