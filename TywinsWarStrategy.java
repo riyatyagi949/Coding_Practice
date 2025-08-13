@@ -67,7 +67,6 @@
             currentLucky++;
             i++;
         }
-
-        return soldiersAdded;
+         return soldiersAdded;
     }
 }
