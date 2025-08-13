@@ -30,12 +30,10 @@
         if (n <= 0) {
             return false;
         }
-
         while (n % 3 == 0) {
             n /= 3;
         }
-
-       return n == 1;
+        return n == 1;
       } 
  }
 
@@ -47,8 +45,9 @@
 //  * Space Complexity: O(1)
 //  */
 
- 
-class SolutionOptimal {
+// 2 nd Optimal Solution - 
+
+ class SolutionOptimal {
     public boolean isPowerOfThree(int n) {
         return n > 0 && 1162261467 % n == 0;
     }
