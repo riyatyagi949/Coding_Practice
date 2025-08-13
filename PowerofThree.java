@@ -22,6 +22,8 @@
      */
 //    Time Complexity: O(log base 3 of n)
 //    Space Complexity: O(1)
+
+// 1 st Solution - 
  
  class Solution {
           public boolean isPowerOfThree(int n) {
@@ -36,7 +38,6 @@
        return n == 1;
       } 
  }
-
 
 //  * Optimal Solution (without loops/recursion):
 //  * The optimal solution leverages the fact that the largest power of three that can be stored in a signed 32-bit integer is 3^19 = 1162261467.
