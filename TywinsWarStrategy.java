@@ -38,9 +38,10 @@
     // by always choosing the troops that require the fewest additional soldiers to become lucky.
     // Sorting the costs and picking the smallest ones ensures this greedy strategy is optimal.
 
+    // Optimal Solution -
     import java.util.*;
 
-    class Solution {
+ class Solution {
     public int minSoldiers(int[] arr, int k) {
         int n = arr.length;
         int neededLucky = (n + 1) / 2; 
