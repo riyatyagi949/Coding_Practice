@@ -69,7 +69,8 @@ class Solution {
         while (i <= mid && j <= high) {
             if (nums[i] <= nums[j]) {
                 temp[k++] = nums[i++];
-            } else {
+            }
+             else {
                 temp[k++] = nums[j++];
             }
         }
