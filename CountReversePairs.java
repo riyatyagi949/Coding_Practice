@@ -10,9 +10,9 @@
 // A more efficient approach is to use a divide and conquer strategy, similar to Merge Sort. The core idea is to count the reverse pairs while merging the sorted subarrays.
 //
 // Let's break down the process:
-// 1. **Divide**: Split the array into two halves recursively until we have subarrays of size 1.
-// 2. **Conquer**: Sort the two halves.
-// 3. **Combine (and count)**: This is the crucial step. While merging the two sorted halves, we count the reverse pairs.
+// 1. Divide: Split the array into two halves recursively until we have subarrays of size 1.
+// 2. Conquer: Sort the two halves.
+// 3. Combine (and count): This is the crucial step. While merging the two sorted halves, we count the reverse pairs.
 //
 // Let the two sorted halves be `left` and `right`.
 // We iterate through the `left` array with a pointer `i`. For each element `arr[i]`, we need to find how many elements `arr[j]` in the `right` array satisfy `arr[i] > 2 * arr[j]`.
