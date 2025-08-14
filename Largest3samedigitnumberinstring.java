@@ -14,6 +14,7 @@
 // O(1) - We are not using any extra data structures that grow with the input size. We only store a few constant-size strings.
 
 // Optimal Solution:
+
 class Solution {
     public String largestGoodInteger(String num) {
         String maxGood = "";
