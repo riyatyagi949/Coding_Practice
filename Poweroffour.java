@@ -17,6 +17,7 @@
 // Space Complexity: O(1)
 // The solution does not use any extra space that scales with the input size.
 
+// Optimal Solution - 
 class Solution {
     public boolean isPowerOfFour(int n) {
         if (n <= 0) {
