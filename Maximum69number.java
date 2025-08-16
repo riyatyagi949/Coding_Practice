@@ -27,8 +27,7 @@
  * 1 <= num <= 10^4
  * num consists of only 6 and 9 digits.
  */
-class Solution {
-    /**
+/**
      * Approach:
      * To obtain the maximum possible number, we should aim to change the most significant digit that is currently a '6' to a '9'.
      * A '9' in a more significant position contributes more to the value of the number than a '9' in a less significant position.
@@ -45,14 +44,4 @@ class Solution {
      * Space Complexity: O(log10(num))
      * The space complexity is determined by the storage required for the string or character array representation of `num`, which is proportional to the number of digits.
      */
-    public int maximum69Number (int num) {
-        char[] s = String.valueOf(num).toCharArray();
-        for (int i = 0; i < s.length; i++) {
-            if (s[i] == '6') {
-                s[i] = '9';
-                break;
-            }
-        }
-        return Integer.parseInt(new String(s));
-    }
-}
+
