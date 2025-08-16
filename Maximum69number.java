@@ -52,7 +52,7 @@ class Solution {
         
         for (int i = 0; i < digits.length; i++) {
             if (digits[i] == '6') {
-                digits[i] = '9'; // change the first '6' to '9'
+                digits[i] = '9';
                 break; // only one change allowed
             }
         }
