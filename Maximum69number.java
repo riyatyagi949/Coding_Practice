@@ -53,7 +53,7 @@ class Solution {
         for (int i = 0; i < digits.length; i++) {
             if (digits[i] == '6') {
                 digits[i] = '9';
-                break; // only one change allowed
+                break; 
             }
         }
         return Integer.parseInt(new String(digits));
