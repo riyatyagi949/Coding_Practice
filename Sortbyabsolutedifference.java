@@ -35,29 +35,16 @@
 // Time Complexity: O(N log N), where N is the size of the array, due to the sorting operation.
 // Space Complexity: O(N), for converting the primitive int array to an Integer array.
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 class Solution {
-    public int[] sortArr(int[] arr, int x) {
-        Integer[] newArr = new Integer[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            newArr[i] = arr[i];
-        }
+    public void rearrange(int[] arr, int x) {
+        Integer[] temp = Arrays.stream(arr).boxed().toArray(Integer[]::new);
 
-        Arrays.sort(newArr, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer a, Integer b) {
-                int diffA = Math.abs(a - x);
-                int diffB = Math.abs(b - x);
-                return Integer.compare(diffA, diffB);
-            }
+        Arrays.sort(temp, (a, b) -> {
+            
+            int diffA = Math.abs(a - x);
+            int diffB = Math.abs(b - x);
+            return diffA == diffB ? 0 : diffA - diffB;
         });
-
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = newArr[i];
-        }
-
-        return arr;
+        for (int i = 0; i < arr.length; i++) arr[i] = temp[i];
     }
 }
