@@ -36,6 +36,8 @@
  * Space Complexity: O(n), to store the `dp` array.
  */
 
+//Optimal Solution - 
+
 class Solution {
     public double new21Game(int n, int k, int maxPts) {
         if (k == 0 || n >= k + maxPts) {
@@ -51,7 +53,8 @@ class Solution {
             dp[i] = s / maxPts;
             if (i < k) {
                 s += dp[i];
-            } else {
+            }
+             else {
                 ans += dp[i];
             }
             if (i >= maxPts) {
