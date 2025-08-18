@@ -55,3 +55,34 @@
 // Space Complexity: The space complexity is dominated by the recursion stack, which goes as deep as the number of cards. For n=4, it's O(1).
 
 // Optimal Solution-
+class Solution {
+    public boolean judgePoint24(int[] cards) {
+        double[] nums = new double[cards.length];
+        for (int i = 0; i < cards.length; i++) nums[i] = cards[i];
+        return solve(nums);
+    }
+
+    private boolean solve(double[] nums) {
+        int n = nums.length;
+        if (n == 1) return Math.abs(nums[0] - 24) < 1e-6;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                double[] next = new double[n - 1];
+                int idx = 0;
+                for (int k = 0; k < n; k++) {
+                    if (k != i && k != j) next[idx++] = nums[k];
+                }
+                for (double val : compute(nums[i], nums[j])) {
+                    next[n - 2] = val;
+                    if (solve(next)) 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private double[] compute(double a, double b) {
+        return new double[]{a + b, a - b, b - a, a * b, a / b, b / a};
+    }
+}
