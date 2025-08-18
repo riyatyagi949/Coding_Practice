@@ -28,26 +28,3 @@
 // Space Complexity: O(n)
 
 // Optimal Solution:
-class Solution {
-    public int hIndex(int[] citations) {
-        int n = citations.length;
-        int[] counts = new int[n + 1];
-
-        for (int c : citations) {
-            if (c >= n) {
-                counts[n]++;
-            } else {
-                counts[c]++;
-            }
-        }
-
-        int papersCount = 0;
-        for (int i = n; i >= 0; i--) {
-            papersCount += counts[i];
-            if (papersCount >= i) {
-                return i;
-            }
-        }
-        return 0;
-    }
-}
