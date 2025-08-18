@@ -28,6 +28,8 @@
 // Space Complexity: O(n)
 
 // Optimal Solution:
+import java.util.*;
+
 class Solution {
     public int hIndex(int[] citations) {
         Arrays.sort(citations);
