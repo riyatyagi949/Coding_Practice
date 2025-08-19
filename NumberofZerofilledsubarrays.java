@@ -18,3 +18,25 @@
 // Space Complexity: O(1)
 // We only use a few variables for counting.
 
+// Optimal Solution - 
+class Solution {
+    public long zeroFilledSubarray(int[] nums) {
+        long count = 0;   
+         // total result
+        long streak = 0;  
+         // current consecutive zero count
+
+        for (int num : nums) {
+            if (num == 0) {
+                streak++;      
+                   // extend streak
+                count += streak;
+                  // add all subarrays ending here
+            } else {
+                streak = 0;     
+                  // reset when non-zero
+            }
+        }
+        return count;
+    }
+}
