@@ -27,7 +27,6 @@ class Solution {
         for (int num : nums) {
             if (num == 0) {
                 streak++;      
-                   // extend streak
                 count += streak;
                   // add all subarrays ending here
             } 
