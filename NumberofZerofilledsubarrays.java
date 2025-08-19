@@ -28,7 +28,6 @@ class Solution {
             if (num == 0) {
                 streak++;      
                 count += streak;
-                  // add all subarrays ending here
             } 
             else {
                 streak = 0;     
