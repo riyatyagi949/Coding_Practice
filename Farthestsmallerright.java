@@ -45,12 +45,14 @@ class Solution {
         for (int i = n - 2; i >= 0; i--) {
             if (arr[i] < arr[minSuffixIndex[i + 1]]) {
                 minSuffixIndex[i] = i;
-            } else {
+            } 
+            else {
                 minSuffixIndex[i] = minSuffixIndex[i + 1];
             }
         }
 
         List<Integer> result = new ArrayList<>();
+
         for (int i = 0; i < n; i++) {
             int currentFarthest = -1;
             int j = i + 1;
@@ -59,7 +61,8 @@ class Solution {
                 if (arr[candidateIndex] < arr[i]) {
                     currentFarthest = candidateIndex;
                     j = candidateIndex + 1;
-                } else {
+                } 
+                else {
                     j = candidateIndex + 1;
                 }
             }
