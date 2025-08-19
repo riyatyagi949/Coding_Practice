@@ -31,7 +31,6 @@ class Solution {
             } 
             else {
                 streak = 0;     
-                  // reset when non-zero
             }
         }
         return count;
