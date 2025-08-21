@@ -12,6 +12,8 @@
 // Space Complexity:
 // The space complexity is O(m * n) to store the `heights` matrix.
 
+// Optimal Solution - 
+
 class Solution {
     public int numSubmat(int[][] mat) {
         int m = mat.length;
