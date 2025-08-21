@@ -16,6 +16,7 @@
 // The space complexity is O(1) if the array is sorted in-place.
 
 // Optimal  Solution - 
+import java.util.*;
 
 class Solution {
     public int maxMinDiff(int[] arr, int k) {
