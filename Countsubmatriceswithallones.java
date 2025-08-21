@@ -22,7 +22,8 @@ class Solution {
             for (int j = 0; j < n; j++) {
                 if (mat[i][j] == 1) {
                     heights[i][j] = (i > 0) ? heights[i - 1][j] + 1 : 1;
-                } else {
+                } 
+                else {
                     heights[i][j] = 0;
                 }
             }
