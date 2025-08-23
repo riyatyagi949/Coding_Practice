@@ -73,3 +73,5 @@
 // Space Complexity:
 // The space complexity is `O(1)` besides the input grid, as we are only using a few variables to store split points and areas.
 
+// Optimal Solution -
+
