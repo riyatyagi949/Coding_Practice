@@ -27,3 +27,5 @@
  * * Space Complexity: O(1).
  * - We only use a few variables for the binary search and the helper function. No extra data structures are needed that scale with the input size.
  */
+
+//  Optimal solution - 
