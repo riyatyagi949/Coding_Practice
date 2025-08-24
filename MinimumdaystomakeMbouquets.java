@@ -29,3 +29,46 @@
  */
 
 //  Optimal solution - 
+class Solution {
+    public int minDaysBloom(int[] arr, int k, int m) {
+        if ((long) m * k > arr.length)
+        return -1;
+        
+        int low = Integer.MAX_VALUE, high = Integer.MIN_VALUE;
+        for (int day : arr) {
+            low = Math.min(low, day);
+            high = Math.max(high, day);
+        }
+        
+        int ans = -1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            
+            if (canMake(arr, k, m, mid)) {
+                ans = mid;
+                high = mid - 1;
+            }
+            else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+    
+    private boolean canMake(int[] arr, int k, int m, int days) {
+        int count = 0, bouquets = 0;
+        for (int bloom : arr) {
+            if (bloom <= days) {
+                count++;
+                if (count == k) {
+                    bouquets++;
+                    count = 0;
+                }
+            }
+            else {
+                count = 0;
+            }
+        }
+        return bouquets >= m;
+    }
+}
