@@ -82,10 +82,12 @@ class Solution {
                 if (col == 0 && row < m - 1) {
                     row++;
                     goingUp = true;
-                } else if (row == m - 1) {
+                } 
+                else if (row == m - 1) {
                     col++;
                     goingUp = true;
-                } else {
+                } 
+                else {
                     row++;
                     col--;
                 }
