@@ -68,14 +68,17 @@ class Solution {
                 if (row == 0 && col < n - 1) {
                     col++;
                     goingUp = false;
-                } else if (col == n - 1) {
+                } 
+                else if (col == n - 1) {
                     row++;
                     goingUp = false;
-                } else {
+                } 
+                else {
                     row--;
                     col++;
                 }
-            } else { // going down
+            } 
+            else {
                 if (col == 0 && row < m - 1) {
                     row++;
                     goingUp = true;
