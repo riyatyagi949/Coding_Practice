@@ -26,3 +26,5 @@
 // Time Complexity: The solution involves a single pass through the dimensions array. If N is the number of rectangles, the time complexity is O(N).
 
 // Space Complexity: We are using a few variables to store the maximum values, which is constant space. Therefore, the space complexity is O(1).
+
+// Optimal  Solution - 
