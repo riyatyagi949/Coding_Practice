@@ -36,7 +36,7 @@ class Solution {
         
         for (int[] rect : dimensions) {
             int length = rect[0], width = rect[1];
-            int diagonalSq = length * length + width * width; // diagonal²
+            int diagonalSq = length * length + width * width; 
             int area = length * width;
             
             if (diagonalSq > maxDiagonal) {
