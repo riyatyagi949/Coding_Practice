@@ -42,7 +42,8 @@ class Solution {
             if (diagonalSq > maxDiagonal) {
                 maxDiagonal = diagonalSq;
                 maxArea = area;
-            } else if (diagonalSq == maxDiagonal && area > maxArea) {
+            } 
+            else if (diagonalSq == maxDiagonal && area > maxArea) {
                 maxArea = area;
             }
         }
