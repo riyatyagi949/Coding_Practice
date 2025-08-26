@@ -27,7 +27,6 @@ class Solution {
             }
             j++;
         }
-
         return i == s1.length();
     }
 }
