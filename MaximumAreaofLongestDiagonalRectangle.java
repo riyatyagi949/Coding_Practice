@@ -28,3 +28,25 @@
 // Space Complexity: We are using a few variables to store the maximum values, which is constant space. Therefore, the space complexity is O(1).
 
 // Optimal  Solution - 
+
+class Solution {
+    public int areaOfMaxDiagonal(int[][] dimensions) {
+        int maxDiagonal = 0;
+        int maxArea = 0;
+        
+        for (int[] rect : dimensions) {
+            int length = rect[0], width = rect[1];
+            int diagonalSq = length * length + width * width; // diagonal²
+            int area = length * width;
+            
+            if (diagonalSq > maxDiagonal) {
+                maxDiagonal = diagonalSq;
+                maxArea = area;
+            } else if (diagonalSq == maxDiagonal && area > maxArea) {
+                maxArea = area;
+            }
+        }
+        
+        return maxArea;
+    }
+}
