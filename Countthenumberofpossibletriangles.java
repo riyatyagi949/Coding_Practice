@@ -36,7 +36,8 @@ class Solution {
                 if (nums[i] + nums[j] > nums[k]) {
                     count += (j - i);
                     j--;
-                } else {
+                }
+                 else {
                     i++;
                 }
             }
