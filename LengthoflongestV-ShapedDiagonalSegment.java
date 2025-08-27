@@ -17,3 +17,4 @@
 // Space Complexity: O(n * m)
 // We use four 2D DP tables of size `n x m` to store the lengths of the straight diagonal segments.
 
+// Optimal solution -
