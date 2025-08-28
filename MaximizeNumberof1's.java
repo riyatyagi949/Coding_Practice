@@ -36,7 +36,6 @@ class Solution {
             maxLength = Math.max(maxLength, j - i + 1);
             j++;
         }
-
         return maxLength;
     }
 }
