@@ -77,3 +77,45 @@
  */
 import java.util.*;
 
+class Solution {
+    public int[][] sortMatrix(int[][] grid) {
+        int n = grid.length;
+        Map<Integer, List<Integer>> diagMap = new HashMap<>();
+
+        // Step 1: Collect elements by diagonal key (i - j)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int key = i - j;
+                diagMap.computeIfAbsent(key, k -> new ArrayList<>()).add(grid[i][j]);
+            }
+        }
+
+        // Step 2: Sort diagonals accordingly
+        for (int key : diagMap.keySet()) {
+            List<Integer> list = diagMap.get(key);
+            if (key >= 0) {
+                 // bottom-left + main diagonal
+                list.sort(Collections.reverseOrder()); 
+                // descending
+            } 
+            else {
+                 // top-right
+                Collections.sort(list); 
+                // ascending
+            }
+        }
+
+        // Step 3: Put sorted values back
+        Map<Integer, Integer> idxMap = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int key = i - j;
+                int idx = idxMap.getOrDefault(key, 0);
+                grid[i][j] = diagMap.get(key).get(idx);
+                idxMap.put(key, idx + 1);
+            }
+        }
+
+        return grid;
+    }
+}
