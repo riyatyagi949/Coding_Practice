@@ -82,7 +82,6 @@ class Solution {
         int n = grid.length;
         Map<Integer, List<Integer>> diagMap = new HashMap<>();
 
-        // Step 1: Collect elements by diagonal key (i - j)
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 int key = i - j;
