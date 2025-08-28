@@ -26,7 +26,6 @@ class Solution {
             if (arr[j] == 0) {
                 zeroCount++;
             }
-
             while (zeroCount > k) {
                 if (arr[i] == 0) {
                     zeroCount--;
