@@ -104,8 +104,6 @@ class Solution {
                 // ascending
             }
         }
-
-        // Step 3: Put sorted values back
         Map<Integer, Integer> idxMap = new HashMap<>();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -115,7 +113,6 @@ class Solution {
                 idxMap.put(key, idx + 1);
             }
         }
-
         return grid;
     }
 }
