@@ -89,8 +89,6 @@ class Solution {
                 diagMap.computeIfAbsent(key, k -> new ArrayList<>()).add(grid[i][j]);
             }
         }
-
-        // Step 2: Sort diagonals accordingly
         for (int key : diagMap.keySet()) {
             List<Integer> list = diagMap.get(key);
             if (key >= 0) {
