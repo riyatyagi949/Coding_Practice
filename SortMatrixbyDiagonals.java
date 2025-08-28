@@ -94,14 +94,10 @@ class Solution {
         for (int key : diagMap.keySet()) {
             List<Integer> list = diagMap.get(key);
             if (key >= 0) {
-                 // bottom-left + main diagonal
                 list.sort(Collections.reverseOrder()); 
-                // descending
             } 
             else {
-                 // top-right
                 Collections.sort(list); 
-                // ascending
             }
         }
         Map<Integer, Integer> idxMap = new HashMap<>();
