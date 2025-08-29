@@ -42,7 +42,8 @@
  * No extra space is required to store data.
  */
 
-// Optimal  Solution -
+// Optimal Solution in Java-
+
 class Solution {
     public long flowerGame(int n, int m) {
         long odd_n = (n + 1) / 2;
