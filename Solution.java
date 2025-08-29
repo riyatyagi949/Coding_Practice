@@ -20,3 +20,41 @@
 // We use a frequency map to store character counts, which takes constant space as the alphabet size is fixed.
 
 // Optimal Solution:
+class Solution {
+    public static String smallestWindow(String s, String p) {
+        if (s.length() < p.length()) return "";
+
+        int[] need = new int[256];
+        int[] have = new int[256];
+        
+        for (char c : p.toCharArray()) {
+            need[c]++;
+        }
+
+        int required = p.length(); 
+        int formed = 0;         
+        int left = 0, minLen = Integer.MAX_VALUE, start = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char c = s.charAt(right);
+            have[c]++;
+
+            if (need[c] > 0 && have[c] <= need[c]) {
+                formed++;
+            }
+            while (formed == required) {
+                if (right - left + 1 < minLen) {
+                    minLen = right - left + 1;
+                    start = left;
+                }
+                char leftChar = s.charAt(left);
+                have[leftChar]--;
+                if (need[leftChar] > 0 && have[leftChar] < need[leftChar]) {
+                    formed--;
+                }
+                left++;
+            }
+        }
+        return (minLen == Integer.MAX_VALUE) ? "" : s.substring(start, start + minLen);
+    }
+}
