@@ -20,6 +20,7 @@
 // We use a frequency map to store character counts, which takes constant space as the alphabet size is fixed.
 
 // Optimal Solution:
+
 class Solution {
     public static String smallestWindow(String s, String p) {
         if (s.length() < p.length()) return "";
