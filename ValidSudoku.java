@@ -31,6 +31,7 @@
 // Space Complexity: O(N^2). We use three arrays of hash sets, each of which can potentially store up to 9 elements. Therefore, the space required is proportional to the number of cells.
 
 // Optimal Solution in Java-
+import java.util.*;
 
 class Solution {
     public boolean isValidSudoku(char[][] board) {
