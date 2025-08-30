@@ -32,35 +32,32 @@
 
 // Optimal Solution in Java-
 
-// class Solution {
-//     public boolean isValidSudoku(char[][] board) {
-//         HashSet<Character>[] rows = new HashSet[9];
-//         HashSet<Character>[] cols = new HashSet[9];
-//         HashSet<Character>[] boxes = new HashSet[9];
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        HashSet<Character>[] rows = new HashSet[9];
+        HashSet<Character>[] cols = new HashSet[9];
+        HashSet<Character>[] boxes = new HashSet[9];
         
-//         for (int i = 0; i < 9; i++) {
-//             rows[i] = new HashSet<Character>();
-//             cols[i] = new HashSet<Character>();
-//             boxes[i] = new HashSet<Character>();
-//         }
+        for (int i = 0; i < 9; i++) {
+            rows[i] = new HashSet<Character>();
+            cols[i] = new HashSet<Character>();
+            boxes[i] = new HashSet<Character>();
+        }
         
-//         for (int r = 0; r < 9; r++) {
-//             for (int c = 0; c < 9; c++) {
-//                 char current = board[r][c];
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                char current = board[r][c];
                 
-//                 if (current == '.') {
-//                     continue;
-//                 }
+                if (current == '.') {
+                    continue;
+                }
+                int boxIndex = (r / 3) * 3 + (c / 3);
                 
-//                 // Calculate the index for the 3x3 sub-box
-//                 int boxIndex = (r / 3) * 3 + (c / 3);
-                
-//                 if (!rows[r].add(current) || !cols[c].add(current) || !boxes[boxIndex].add(current)) {
-//                     return false;
-//                 }
-//             }
-//         }
-        
-//         return true;
-//     }
-// }
+                if (!rows[r].add(current) || !cols[c].add(current) || !boxes[boxIndex].add(current)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
