@@ -13,3 +13,4 @@
 // Space Complexity:
 // The space complexity is O(1) as we are only using a few variables to store the pointers and the maximum area, without using any additional data structures.
 
+// Optimal Solution in Java-
