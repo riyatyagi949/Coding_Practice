@@ -25,6 +25,8 @@
 // Space Complexity:
 // The space complexity is O(1) if we don't consider the input board. The space used by the recursion stack is at most O(n*n) where n is the side length of the grid (n=9), as we make a recursive call for each cell. Therefore, the space complexity is O(n^2).
 
+// Optimal Solution in Java-
+
 class Solution {
     public void solveSudoku(char[][] board) {
         solve(board);
@@ -65,7 +67,7 @@ class Solution {
 
             if (board[row][i] == c) 
             return false;
-            
+
             if (board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c)
              return false;
         }
