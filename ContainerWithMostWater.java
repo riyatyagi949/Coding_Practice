@@ -13,24 +13,3 @@
 // Space Complexity:
 // The space complexity is O(1) as we are only using a few variables to store the pointers and the maximum area, without using any additional data structures.
 
-class Solution {
-    public long maxArea(int[] arr) {
-        int left = 0;
-        int right = arr.length - 1;
-        long maxArea = 0;
-
-        while (left < right) {
-            int currentHeight = Math.min(arr[left], arr[right]);
-            int currentWidth = right - left;
-            long currentArea = (long) currentHeight * currentWidth;
-            maxArea = Math.max(maxArea, currentArea);
-
-            if (arr[left] < arr[right]) {
-                left++;
-            } else {
-                right--;
-            }
-        }
-        return maxArea;
-    }
-}
