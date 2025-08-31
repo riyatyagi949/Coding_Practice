@@ -14,3 +14,24 @@
 // The space complexity is O(1) as we are only using a few variables to store the pointers and the maximum area, without using any additional data structures.
 
 // Optimal Solution in Java-
+class Solution {
+    public int maxWater(int arr[]) {
+        int left = 0, right = arr.length - 1;
+        int maxArea = 0;
+
+        while (left < right) {
+            int height = Math.min(arr[left], arr[right]);
+            int width = right - left;
+            int area = height * width;
+            maxArea = Math.max(maxArea, area);
+
+            if (arr[left] < arr[right]) {
+                left++;
+            } 
+            else {
+                right--;
+            }
+        }
+        return maxArea;
+    }
+}
