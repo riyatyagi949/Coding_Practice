@@ -45,3 +45,65 @@
 // The `freqMap` stores at most `K` entries, as there can be at most `K` distinct frequencies. Each `TreeSet` can contain multiple elements, but the total number of elements across all `TreeSets` is at most `K`.
 
 // Optimal  Solution -
+class Solution {
+    public int sumOfModes(int[] arr, int k) {
+        int n = arr.length;
+        int sum = 0;
+
+        java.util.Map<Integer, Integer> freq = new java.util.HashMap<>();
+        java.util.Map<Integer, java.util.TreeSet<Integer>> groups = new java.util.HashMap<>();
+        int maxFreq = 0;
+
+        for (int i = 0; i < k; i++) {
+            maxFreq = addElement(arr[i], freq, groups, maxFreq);
+        }
+        sum += groups.get(maxFreq).first();
+
+        for (int i = k; i < n; i++) {
+            maxFreq = removeElement(arr[i - k], freq, groups, maxFreq);
+            maxFreq = addElement(arr[i], freq, groups, maxFreq);
+            sum += groups.get(maxFreq).first();
+        }
+
+        return sum;
+    }
+
+    private int addElement(int num, java.util.Map<Integer, Integer> freq,
+                           java.util.Map<Integer, java.util.TreeSet<Integer>> groups,
+                           int maxFreq) {
+        int oldFreq = freq.getOrDefault(num, 0);
+        int newFreq = oldFreq + 1;
+        freq.put(num, newFreq);
+
+        if (oldFreq > 0) {
+            groups.get(oldFreq).remove(num);
+            if (groups.get(oldFreq).isEmpty()) groups.remove(oldFreq);
+        }
+
+        groups.computeIfAbsent(newFreq, x -> new java.util.TreeSet<>()).add(num);
+        return Math.max(maxFreq, newFreq);
+    }
+
+    private int removeElement(int num, java.util.Map<Integer, Integer> freq,
+                              java.util.Map<Integer, java.util.TreeSet<Integer>> groups,
+                              int maxFreq) {
+        int oldFreq = freq.get(num);
+        int newFreq = oldFreq - 1;
+
+        groups.get(oldFreq).remove(num);
+        if (groups.get(oldFreq).isEmpty()) groups.remove(oldFreq);
+
+        if (newFreq > 0) {
+            freq.put(num, newFreq);
+            groups.computeIfAbsent(newFreq, x -> new java.util.TreeSet<>()).add(num);
+        } 
+        else {
+            freq.remove(num);
+        }
+
+        while (maxFreq > 0 && !groups.containsKey(maxFreq)) {
+            maxFreq--;
+        }
+        return maxFreq;
+    }
+}
