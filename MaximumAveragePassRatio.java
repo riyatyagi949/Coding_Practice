@@ -23,6 +23,8 @@
 // Space Complexity:
 // O(N), for storing the classes in the priority queue.
 
+// Optimal Solution -
+
 import java.util.*;
 class Solution {
     public double maxAverageRatio(int[][] classes, int extraStudents) {
