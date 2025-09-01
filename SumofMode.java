@@ -44,3 +44,4 @@
 // The `countMap` stores at most `K` elements.
 // The `freqMap` stores at most `K` entries, as there can be at most `K` distinct frequencies. Each `TreeSet` can contain multiple elements, but the total number of elements across all `TreeSets` is at most `K`.
 
+// Optimal  Solution -
