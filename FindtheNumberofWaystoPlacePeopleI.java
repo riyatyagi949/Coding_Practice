@@ -59,6 +59,7 @@
 // Optimal  Solution in Java-
 
 import java.util.*;
+
 class Solution {
   public int numberOfPairs(int[][] points) {
     int ans = 0;
