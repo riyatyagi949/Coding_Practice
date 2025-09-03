@@ -13,3 +13,38 @@ O(1), as we are only using a few extra pointers (current, next_node, and last) t
 
 Optimal Solution:
 */
+
+class Node {
+    int data;
+    Node next;
+    Node prev;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+
+class Solution {
+    public Node reverse(Node head) {
+        if (head == null || head.next == null) return head;
+
+        Node curr = head;
+        Node prevNode = null;
+
+        while (curr != null) {
+            prevNode = curr.prev;
+            curr.prev = curr.next;
+            curr.next = prevNode;
+            curr = curr.prev; 
+        }
+
+        if (prevNode != null) {
+            head = prevNode.prev; 
+        }
+
+        return head;
+    }
+}
