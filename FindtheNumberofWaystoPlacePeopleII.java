@@ -38,3 +38,5 @@
 
 // - Time Complexity: The dominant operation is the nested loop, which runs in `O(N^2)`. The initial sort takes `O(N log N)`, which is less significant. Therefore, the total time complexity is `O(N^2)`.
 // - Space Complexity: The solution uses an in-place sort and a few variables, resulting in an auxiliary space complexity of git`O(1)`.
+
+// Optimal Solution in Java-
