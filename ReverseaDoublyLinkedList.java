@@ -13,22 +13,3 @@ O(1), as we are only using a few extra pointers (current, next_node, and last) t
 
 Optimal Solution:
 */
-class Solution {
-    public static Node reverseDLL(Node head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-
-        Node current = head;
-        Node last = null;
-
-        while (current != null) {
-            last = current.prev;
-            current.prev = current.next;
-            current.next = last;
-            current = current.prev;
-        }
-
-        return last.prev;
-    }
-}
