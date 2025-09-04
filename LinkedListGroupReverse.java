@@ -27,6 +27,6 @@ O(N), where N is the number of nodes in the linked list. We traverse the list ex
 Space Complexity:
 O(1). We are performing the reversal in-place and only using a few extra pointers, which require constant space.
 
-Optimal Solution:
+Optimal Solution in Java:
 */
 
