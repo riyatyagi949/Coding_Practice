@@ -29,7 +29,7 @@
 // O(1)
 // No additional data structures are used. The solution only requires a few variables to store the distances, which is constant space.
 
-// Optimal Solution:
+// Optimal Solution in Java:
 class Solution {
     public int findClosestPerson(int x, int y, int z) {
         int dist1 = Math.abs(x - z);
