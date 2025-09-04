@@ -25,8 +25,6 @@ class Node {
         this.prev = null;
     }
 }
-
-
 class Solution {
     public Node reverse(Node head) {
         if (head == null || head.next == null) return head;
