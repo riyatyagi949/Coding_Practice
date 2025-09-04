@@ -30,3 +30,49 @@ O(1). We are performing the reversal in-place and only using a few extra pointer
 Optimal Solution in Java:
 */
 
+class Node
+{
+    int data;
+    Node next;
+    Node(int key)
+    {
+        data = key;
+        next = null;
+    }
+}
+class Solution {
+    public Node reverseKGroup(Node head, int k) {
+        if (head == null || k == 1) 
+        return head;
+
+        Node dummy = new Node(0);
+        dummy.next = head;
+        Node prevGroupEnd = dummy;
+        Node curr = head;
+
+        while (curr != null) {
+            Node groupStart = curr;
+            int count = 0;
+            Node temp = curr;
+            while (temp != null && count < k) {
+                temp = temp.next;
+                count++;
+            }
+
+            Node prev = temp, next = null;
+            Node node = groupStart;
+            while (count-- > 0) {
+                next = node.next;
+                node.next = prev;
+                prev = node;
+                node = next;
+            }
+            prevGroupEnd.next = prev;
+            prevGroupEnd = groupStart;
+            curr = temp;
+        }
+        return dummy.next;
+    }
+}
+
+
