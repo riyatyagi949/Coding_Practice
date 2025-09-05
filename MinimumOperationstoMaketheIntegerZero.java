@@ -26,9 +26,7 @@
 
 // Space Complexity: The space complexity is O(1). The solution uses a fixed number of variables (k, diff) and does not require any additional data structures whose size would scale with the input.
 
-
-
-
+// Optimal  Solution in Java-
  class Solution {
     public int makeTheIntegerZero(int num1, int num2) 
     {
