@@ -24,5 +24,5 @@ Time and Space Complexity:
 -   **Time Complexity: O(N)** where N is the number of nodes in the linked list. We traverse the list once to segregate the nodes into three separate lists.
 -   **Space Complexity: O(1)** as we are only using a few extra pointers and dummy nodes to manage the three lists. We are not using any extra space that scales with the size of the input list.
 
-Optimal Solution:
+Optimal Solution in Java:
 */
