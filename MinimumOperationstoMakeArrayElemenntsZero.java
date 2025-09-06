@@ -22,3 +22,4 @@
 // Space Complexity:
 // The space is dominated by the memoization maps. The number of unique keys in the maps is `O(Q * log(max_R))`, so the space complexity is `O(Q * log(max_R))`.
 
+// Optimal Solution in Java:
