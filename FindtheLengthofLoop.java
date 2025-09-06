@@ -19,7 +19,7 @@
 // Space Complexity: O(1)
 // The space complexity is O(1) as we only use a few extra pointers, regardless of the size of the linked list.
 
-// Optimal Solution:
+// Optimal Solution in Java:
 
 class Node {
     int data;
