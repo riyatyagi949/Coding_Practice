@@ -23,3 +23,33 @@
 // The space is dominated by the memoization maps. The number of unique keys in the maps is `O(Q * log(max_R))`, so the space complexity is `O(Q * log(max_R))`.
 
 // Optimal Solution in Java:
+class Solution {
+    public long minOperations(int[][] queries)
+     {
+        long result = 0;
+
+        for (int[] q : queries) 
+        {
+            long l = q[0], r = q[1];
+            long steps = 0;
+            long start = 1;
+            long end = 4;
+            int k = 1;
+
+            while (start <= r) {
+                long left = Math.max(l, start);
+                long right = Math.min(r, end - 1);
+                
+                if (left <= right) {
+                    long count = right - left + 1;
+                    steps += count * k;
+                }
+                start = end;
+                end *= 4;
+                k++;
+            }
+            result += (steps + 1) / 2;
+        }
+        return result;
+    }
+}
