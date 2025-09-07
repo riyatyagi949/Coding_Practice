@@ -27,3 +27,43 @@
 // The space complexity is O(k) because the min-heap will store at most k nodes at any given time (one from each linked list).
 
 // Optimal Solution in Java-
+import java.util.PriorityQueue;
+
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+ class Solution {
+    Node mergeKLists(Node[] arr) {
+        if (arr == null || arr.length == 0) return null;
+
+        PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.data - b.data);
+
+        for (Node head : arr) {
+            if (head != null) {
+                pq.offer(head);
+            }
+        }
+
+        Node dummy = new Node(0);
+        Node tail = dummy;
+
+        while (!pq.isEmpty()) {
+            Node curr = pq.poll();
+            tail.next = curr;
+            tail = tail.next;
+
+            if (curr.next != null) {
+                pq.offer(curr.next);
+            }
+        }
+
+        return dummy.next;
+    }
+}
