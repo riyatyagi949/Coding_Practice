@@ -20,17 +20,3 @@
 // Space Complexity:
 // The space complexity is O(n), as we need an array of size n to store the result.
 
-class Solution {
-    public int[] sumZero(int n) {
-        int[] result = new int[n];
-        int start = 0;
-        if (n % 2 != 0) {
-            result[start++] = 0;
-        }
-        for (int i = 1; start < n; i++) {
-            result[start++] = i;
-            result[start++] = -i;
-        }
-        return result;
-    }
-}
