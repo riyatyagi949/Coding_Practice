@@ -26,3 +26,4 @@
 // Space Complexity:
 // The space complexity is O(k) because the min-heap will store at most k nodes at any given time (one from each linked list).
 
+// Optimal Solution in Java-
