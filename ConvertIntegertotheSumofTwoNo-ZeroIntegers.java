@@ -28,20 +28,3 @@
 // We are only using a few variables to store the current numbers and do the checks.
 // The space used does not depend on the input size N.
 
-class Solution {
-    public int[] getNoZeroIntegers(int n) {
-        for (int i = 1; i < n; i++) {
-            int a = i;
-            int b = n - i;
-            if (isNoZero(a) && isNoZero(b)) {
-                return new int[]{a, b};
-            }
-        }
-        return new int[0];
-    }
-
-    private boolean isNoZero(int num) {
-        String s = String.valueOf(num);
-        return !s.contains("0");
-    }
-}
