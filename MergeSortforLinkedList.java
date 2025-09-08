@@ -28,4 +28,4 @@ Space Complexity:
 - This is due to the recursive call stack. The depth of the recursion is `log N` because the list is halved at each step.
 
 */
-
+// Optimal  Solution in Java - 
