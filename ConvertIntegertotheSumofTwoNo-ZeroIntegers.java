@@ -28,3 +28,4 @@
 // We are only using a few variables to store the current numbers and do the checks.
 // The space used does not depend on the input size N.
 
+// Optimal  Solution in Java - 
