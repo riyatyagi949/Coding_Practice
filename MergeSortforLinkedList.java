@@ -1,0 +1,94 @@
+/*
+Problem Statement:
+Given the head of a linked list, sort it using Merge Sort.
+
+Approach:
+Merge sort is a divide-and-conquer algorithm. For a linked list, this approach works very well.
+1.  **Divide:** Split the linked list into two halves. To find the middle of the list, we can use the fast and slow pointer approach. The slow pointer will reach the middle when the fast pointer reaches the end. We will break the list into two parts at this middle point.
+2.  **Conquer:** Recursively sort each of the two sub-lists. The base case for the recursion is when the list is empty or has only one node, as a single-node list is already sorted.
+3.  **Combine:** Merge the two sorted sub-lists into a single sorted list. This can be done by creating a new dummy head and iteratively picking the smaller node from the two sub-lists and appending it to the merged list.
+
+To implement this, we need a helper function to find the middle of the linked list and another helper function to merge two sorted linked lists.
+- `findMiddle(head)`: This function takes the head of a linked list and returns the middle node. It uses two pointers, `slow` and `fast`. `fast` moves two steps at a time, and `slow` moves one step. When `fast` reaches the end (or null), `slow` will be at the middle.
+- `merge(list1, list2)`: This function takes the heads of two sorted linked lists and merges them into a single sorted list. It uses a dummy node to simplify the logic of building the new list.
+
+The main `sortList` function will be recursive:
+- It handles the base case (list is null or has one node).
+- It finds the middle of the list and splits it into two halves.
+- It recursively calls `sortList` on both halves.
+- It merges the two sorted halves using the `merge` helper function.
+
+Time Complexity:
+- O(N log N).
+- The `log N` factor comes from the recursive splitting of the list (dividing it in half at each step).
+- The `N` factor comes from the merging step, where we traverse all N nodes in the current sub-lists.
+
+Space Complexity:
+- O(log N).
+- This is due to the recursive call stack. The depth of the recursion is `log N` because the list is halved at each step.
+
+*/
+
+class Solution {
+    public static class ListNode {
+        int data;
+        ListNode next;
+        ListNode(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public static ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode middle = findMiddle(head);
+        ListNode secondHalf = middle.next;
+        middle.next = null;
+
+        ListNode sortedFirstHalf = sortList(head);
+        ListNode sortedSecondHalf = sortList(secondHalf);
+
+        return merge(sortedFirstHalf, sortedSecondHalf);
+    }
+
+    private static ListNode findMiddle(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    private static ListNode merge(ListNode list1, ListNode list2) {
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+
+        while (list1 != null && list2 != null) {
+            if (list1.data <= list2.data) {
+                current.next = list1;
+                list1 = list1.next;
+            } else {
+                current.next = list2;
+                list2 = list2.next;
+            }
+            current = current.next;
+        }
+
+        if (list1 != null) {
+            current.next = list1;
+        }
+        if (list2 != null) {
+            current.next = list2;
+        }
+
+        return dummy.next;
+    }
+}
