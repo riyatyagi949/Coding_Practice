@@ -40,3 +40,32 @@
 // We use two arrays of size `n+1` to store the counts for each day.
 
 // Optimal  Solution in Java - 
+class Solution {
+    public int peopleAwareOfSecret(int n, int delay, int forget) {
+        int mod = 1_000_000_007;
+        long[] dp = new long[n + 1];
+        long[] share = new long[n + 2];
+
+        dp[1] = 1;
+        share[1 + delay] += 1;
+        share[1 + forget] -= 1;
+        long currSharers = 0;
+
+        for (int day = 2; day <= n; day++) {
+            currSharers = (currSharers + share[day]) % mod;
+            dp[day] = currSharers;
+            
+            if (dp[day] > 0) {
+                int start = day + delay;
+                int end = day + forget;
+                if (start <= n) share[start] = (share[start] + dp[day]) % mod;
+                if (end <= n) share[end] = (share[end] - dp[day] + mod) % mod;
+            }
+        }
+        long result = 0;
+        for (int day = n - forget + 1; day <= n; day++) {
+            result = (result + dp[day]) % mod;
+        }
+        return (int) result;
+    }
+}
