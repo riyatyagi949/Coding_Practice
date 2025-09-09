@@ -41,6 +41,7 @@
 // Time Complexity: O(N log N) due to sorting, where N is the number of mice (or holes).
 // Space Complexity: O(1) if sorting is done in-place, or O(N) if a new array is used for sorting.
 
+// Optimal Solution in Java - 
 import java.util.Arrays;
 
 class Solution {
