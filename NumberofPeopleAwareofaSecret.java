@@ -39,3 +39,4 @@
 // Space Complexity: O(n)
 // We use two arrays of size `n+1` to store the counts for each day.
 
+// Optimal  Solution in Java - 
