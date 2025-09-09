@@ -39,30 +39,3 @@
 // Space Complexity: O(n)
 // We use two arrays of size `n+1` to store the counts for each day.
 
-class Solution {
-    public int peopleAwareOfSecret(int n, int delay, int forget) {
-        int MOD = 1_000_000_007;
-
-        long[] newlyInfected = new long[n + 1];
-        long sharable = 0;
-        long total = 0;
-
-        newlyInfected[1] = 1;
-        
-        for (int i = 2; i <= n; i++) {
-            if (i > delay) {
-                sharable = (sharable + newlyInfected[i - delay]) % MOD;
-            }
-            if (i > forget) {
-                sharable = (sharable - newlyInfected[i - forget] + MOD) % MOD;
-            }
-            newlyInfected[i] = sharable;
-        }
-
-        for (int i = n; i > n - forget; i--) {
-            total = (total + newlyInfected[i]) % MOD;
-        }
-        
-        return (int) total;
-    }
-}
