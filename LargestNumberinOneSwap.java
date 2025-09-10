@@ -14,27 +14,3 @@
 // We are converting the string to a character array to perform the swap, which requires O(n) space.
 
 // Optimal Solution:
-class Solution {
-    public String solve(String s) {
-        char[] arr = s.toCharArray();
-        int n = arr.length;
-        
-        for (int i = 0; i < n; i++) {
-            int maxIndex = i;
-            for (int j = i + 1; j < n; j++) {
-                if (arr[j] >= arr[maxIndex]) {
-                    maxIndex = j;
-                }
-            }
-            
-            if (arr[maxIndex] > arr[i]) {
-                char temp = arr[i];
-                arr[i] = arr[maxIndex];
-                arr[maxIndex] = temp;
-                return new String(arr);
-            }
-        }
-        
-        return s;
-    }
-}
