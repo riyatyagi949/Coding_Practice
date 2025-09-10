@@ -14,3 +14,30 @@
 // We are converting the string to a character array to perform the swap, which requires O(n) space.
 
 // Optimal Solution in  Java:
+class Solution {
+    public String largestSwap(String s) {
+        char[] arr = s.toCharArray();
+        int n = arr.length;
+
+        int[] lastIndex = new int[10];
+        for (int i = 0; i < n; i++) {
+            lastIndex[arr[i] - '0'] = i;
+        }
+
+        for (int i = 0; i < n; i++) {
+            int currentDigit = arr[i] - '0';
+
+            for (int d = 9; d > currentDigit; d--) {
+                if (lastIndex[d] > i) {
+                    char temp = arr[i];
+                    arr[i] = arr[lastIndex[d]];
+                    arr[lastIndex[d]] = temp;
+                    
+                    return new String(arr);
+                }
+            }
+        }
+        return s;
+    }
+}
+
