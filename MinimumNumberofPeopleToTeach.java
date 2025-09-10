@@ -43,6 +43,8 @@
 // - O(F): For storing friendships.
 // The `knowsLanguage` 2D array dominates, making the complexity O(m*n).
 
+// Optimal  Solution in Java - 
+
 import java.util.*;
 
 class Solution {
