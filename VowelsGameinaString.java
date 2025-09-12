@@ -31,3 +31,16 @@
  * Space Complexity: O(1). We only use a constant amount of extra space for the vowel counter.
  */
 // Optimal Solution in Java - 
+class Solution {
+    public boolean doesAliceWin(String s) {
+        for (char c : s.toCharArray()) {
+            if (isVowel(c)) {
+                return true; 
+            }
+        }
+        return false;
+    }
+    private boolean isVowel(char c) {
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+}
