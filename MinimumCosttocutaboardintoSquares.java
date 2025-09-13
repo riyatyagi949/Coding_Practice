@@ -43,49 +43,45 @@
  * Space Complexity: O(1) if sorting is done in-place, or O(n + m) if auxiliary space is needed for sorting.
  */
 
-import java.util.Arrays;
-import java.util.Collections;
+//  Optimal  Solution in Java - 
+import java.util.*;
+
 
 class Solution {
-    public int minimumCostOfCutting(int n, int m, int[] x, int[] y) {
-        // Sort both cost arrays in descending order.
-        Integer[] x_box = Arrays.stream(x).boxed().toArray(Integer[]::new);
-        Integer[] y_box = Arrays.stream(y).boxed().toArray(Integer[]::new);
-        Arrays.sort(x_box, Collections.reverseOrder());
-        Arrays.sort(y_box, Collections.reverseOrder());
+    public static int minCost(int n, int m, int[] x, int[] y) {
+        Arrays.sort(x);
+        Arrays.sort(y);
+        
+        int i = x.length - 1; 
+        int j = y.length - 1; 
 
-        int totalCost = 0;
-        int horizontalSegments = 1;
-        int verticalSegments = 1;
-        int i = 0, j = 0;
-
-        // Greedily choose the most expensive cut at each step.
-        while (i < x_box.length && j < y_box.length) {
-            if (x_box[i] >= y_box[j]) {
-                // Perform a vertical cut with the higher cost.
-                totalCost += x_box[i] * horizontalSegments;
+        int horizontalSegments = 1, verticalSegments = 1;
+        int cost = 0;
+        
+        while (i >= 0 && j >= 0) {
+            if (x[i] > y[j]) {
+                cost += x[i] * horizontalSegments;
                 verticalSegments++;
-                i++;
-            } else {
-                // Perform a horizontal cut with the higher cost.
-                totalCost += y_box[j] * verticalSegments;
+                i--;
+            } 
+            else {
+                cost += y[j] * verticalSegments;
                 horizontalSegments++;
-                j++;
+                j--;
             }
         }
-
-        // Add remaining vertical cuts.
-        while (i < x_box.length) {
-            totalCost += x_box[i] * horizontalSegments;
-            i++;
+            while (i >= 0) {
+            cost += x[i] * horizontalSegments;
+            verticalSegments++;
+            i--;
         }
-
-        // Add remaining horizontal cuts.
-        while (j < y_box.length) {
-            totalCost += y_box[j] * verticalSegments;
-            j++;
+        while (j >= 0) {
+            cost += y[j] * verticalSegments;
+            horizontalSegments++;
+            j--;
         }
-
-        return totalCost;
+        return cost;
     }
 }
+
+
