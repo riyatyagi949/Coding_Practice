@@ -29,3 +29,29 @@
  */
 // Optimal Solution in Java - 
 import java.util.*;
+
+class Solution {
+    public int maxFreqSum(String s) {
+        Set<Character> vowels = new HashSet<>(Arrays.asList('a','e','i','o','u'));
+        int[] freq = new int[26];
+        
+        for (char c : s.toCharArray()) {
+            freq[c - 'a']++;
+        }
+        
+        int maxVowelFreq = 0, maxConsFreq = 0;
+        
+        for (int i = 0; i < 26; i++) {
+            char ch = (char) ('a' + i);
+            if (freq[i] > 0) {
+                if (vowels.contains(ch)) {
+                    maxVowelFreq = Math.max(maxVowelFreq, freq[i]);
+                } 
+                else {
+                    maxConsFreq = Math.max(maxConsFreq, freq[i]);
+                }
+            }
+        }
+    return maxVowelFreq + maxConsFreq;
+    }
+}
