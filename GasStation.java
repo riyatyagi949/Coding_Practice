@@ -30,6 +30,9 @@
  * Time Complexity: O(n). We perform a single pass through the arrays.
  * Space Complexity: O(1). We use only a few variables to track the state.
  */
+
+//  Optimal Solution in Java - 
+
 class Solution {
     public int startStation(int[] gas, int[] cost) {
         int n = gas.length;
