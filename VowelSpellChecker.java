@@ -44,6 +44,8 @@
 
 //  Optimal Solution in Java - 
 
+import java.util.*;
+
 class Solution {
     public String[] spellchecker(String[] wordlist, String[] queries) {
         Set<String> exactWords = new HashSet<>();
