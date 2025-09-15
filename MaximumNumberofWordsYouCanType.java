@@ -27,6 +27,8 @@
  *
  * Space Complexity: O(1) because the space required for the `isBroken` array is constant (26), regardless of the input size.
  */
+// Optimal  Solution  in Java - 
+
 class Solution {
     public int canBeTypedWords(String text, String brokenLetters) {
         boolean[] isBroken = new boolean[26];
