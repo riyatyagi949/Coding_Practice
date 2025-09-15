@@ -165,3 +165,4 @@
  * Time Complexity: O(N), where N is the length of `pat`. We iterate through `pat` once.
  * Space Complexity: O(1). We use a constant amount of extra space for pointers and counters.
  */
+// Optimal Solution in Java-
