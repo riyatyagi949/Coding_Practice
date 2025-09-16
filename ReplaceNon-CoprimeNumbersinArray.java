@@ -38,3 +38,41 @@
  * Space Complexity: O(N) to store the elements in the stack, where `N` is the length of the input array.
  */
 // Optimal Solution in Java - 
+import java.util.*;
+
+class Solution {
+    public List<Integer> replaceNonCoprimes(int[] nums) {
+        Stack<Integer> stack = new Stack<>();
+        
+        for (int num : nums) {
+            int curr = num;
+            
+            while (!stack.isEmpty()) {
+                int top = stack.peek();
+                int g = gcd(top, curr);
+                
+                if (g > 1)
+                 { 
+                    stack.pop();
+                    curr = lcm(top, curr, g);
+                } 
+                else {
+                    break;
+                }
+            }
+             stack.push(curr);
+        }
+    return new ArrayList<>(stack);
+    }
+        private int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+    private int lcm(int a, int b, int g) {
+        return (int)((long)a / g * b);
+    }
+}
