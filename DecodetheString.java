@@ -24,6 +24,41 @@
  * Space Complexity: O(max_k * max_depth), where `max_k` is the maximum value of a number `k` and `max_depth` is the maximum nesting depth of the brackets. In the worst case, the stacks could store all numbers and strings, which can be proportional to the length of the input string and the number of repetitions. Given the constraints, the stack size is manageable.
  */
 
-//  Optimal  Solution  in Java - 
+// Optimal  Solution  in Java - 
 import java.util.Stack;
 
+class Solution {
+    static String decodeString(String s) {
+        Stack<Integer> countStack = new Stack<>();
+        Stack<StringBuilder> strStack = new Stack<>();
+        StringBuilder currStr = new StringBuilder();
+        
+        int num = 0;
+
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                num = num * 10 + (c - '0'); 
+            } 
+            else if (c == '[') {
+                countStack.push(num);
+                strStack.push(currStr);
+                currStr = new StringBuilder();
+                num = 0;
+            } 
+            else if (c == ']') {
+                int repeatTimes = countStack.pop();
+                StringBuilder decoded = strStack.pop();
+                
+                for (int i = 0; i < repeatTimes; i++) {
+                    decoded.append(currStr);
+                }
+                currStr = decoded;
+            }
+            else {
+                currStr.append(c);
+            }
+        }
+
+        return currStr.toString();
+    }
+}
