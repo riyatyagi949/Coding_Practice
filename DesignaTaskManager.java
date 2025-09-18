@@ -65,3 +65,69 @@
 
 // Optimal Solution in Java -
 import java.util.*;
+
+class TaskManager {
+    private static class Task {
+        int priority, taskId, userId;
+        Task(int u, int t, int p) {
+            userId = u; taskId = t; priority = p;
+        }
+    }
+
+    private PriorityQueue<Task> pq;
+    private Map<Integer, Task> map;
+
+    public TaskManager(List<List<Integer>> tasks) {
+        pq = new PriorityQueue<>((a, b) ->
+         {
+            if (a.priority != b.priority)
+                return b.priority - a.priority;
+            return b.taskId - a.taskId;
+        });
+        map = new HashMap<>();
+
+        for (List<Integer> t : tasks) {
+            int userId = t.get(0), taskId = t.get(1), priority = t.get(2);
+            Task task = new Task(userId, taskId, priority);
+            pq.offer(task);
+            map.put(taskId, task);
+        }
+    }
+
+    public void add(int userId, int taskId, int priority) {
+        Task task = new Task(userId, taskId, priority);
+        pq.offer(task);
+        map.put(taskId, task);
+    }
+
+    public void edit(int taskId, int newPriority) {
+        Task old = map.get(taskId);
+        if (old == null) 
+        return;
+
+        Task updated = new Task(old.userId, taskId, newPriority);
+        map.put(taskId, updated);
+        pq.offer(updated);
+    }
+
+    public void rmv(int taskId) {
+        map.remove(taskId);
+    }
+
+    public int execTop() {
+        while (!pq.isEmpty()) 
+        {
+            Task top = pq.peek();
+            Task valid = map.get(top.taskId);
+
+            if (valid == null || valid.priority != top.priority || valid.userId != top.userId) {
+                pq.poll();
+                continue;
+            }
+            pq.poll();
+            map.remove(top.taskId);
+            return top.userId;
+        }
+        return -1;
+    }
+}
