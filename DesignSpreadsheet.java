@@ -39,3 +39,50 @@
  * - O(rows * 26) to store the spreadsheet grid.
  */
 // Optimal Solution in Java - 
+
+class Spreadsheet {
+    private int[][] grid;
+    private int rows;
+
+    public Spreadsheet(int rows) {
+        this.rows = rows;
+        this.grid = new int[rows][26]; 
+    }
+    
+    public void setCell(String cell, int value) {
+        int[] rc = parseCell(cell);
+        grid[rc[0]][rc[1]] = value;
+    }
+    
+    public void resetCell(String cell) {
+        int[] rc = parseCell(cell);
+        grid[rc[0]][rc[1]] = 0;
+    }
+    
+    public int getValue(String formula)
+     {
+        String exp = formula.substring(1);
+        String[] parts = exp.split("\\+");
+
+        return getOperandValue(parts[0]) + getOperandValue(parts[1]);
+    }
+    
+    private int[] parseCell(String cell) {
+        char colChar = cell.charAt(0);
+        int col = colChar - 'A';
+        int row = Integer.parseInt(cell.substring(1)) - 1;
+        return new int[]{row, col};
+    }
+    
+    private int getOperandValue(String op) {
+        if (Character.isDigit(op.charAt(0)))
+         {
+            return Integer.parseInt(op);
+
+        } 
+        else {
+            int[] rc = parseCell(op);
+            return grid[rc[0]][rc[1]];
+        }
+    }
+}
