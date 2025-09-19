@@ -36,6 +36,8 @@
  * Time Complexity: O(n), where `n` is the length of the string. We perform a single pass through the string.
  * Space Complexity: O(1), as we only use a few integer variables for counters, regardless of the string length.
  */
+// Optimal Solution in Java - 
+
 class Solution {
     public int minAddToMakeValid(String s) {
         int insertions = 0;
@@ -45,10 +47,12 @@ class Solution {
             if (c == '(') {
                 balance++;
             } 
-            else { // c == ')'
+            else
+             { // c == ')'
                 if (balance > 0) {
                     balance--;
-                } else {
+                } 
+                else {
                     insertions++;
                 }
             }
