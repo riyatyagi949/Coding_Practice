@@ -37,89 +37,49 @@
 import java.util.Stack;
 
 class Solution {
-    /**
-     * Finds the index of the next greater element to the right for each element.
-     * @param arr The input array.
-     * @param nge An array to store the results.
-     * @param n The size of the array.
-     */
-    static void findnge(int arr[], int nge[], int n) {
-        Stack<Integer> st = new Stack<>();
-        // Iterate from right to left to find the next greater element.
-        for (int i = n - 1; i >= 0; i--) {
-            // Pop elements from the stack that are smaller than or equal to the current element.
-            while (!st.isEmpty() && arr[st.peek()] <= arr[i]) {
+    static void findnge(int arr[],int nge[],int n)
+    {
+        Stack<Integer>st=new Stack<>();
+        for(int i=n-1;i>=0;i--)
+        {
+            while(!st.isEmpty() && arr[st.peek()]<=arr[i])
+            {
                 st.pop();
             }
-            // If the stack is empty, there is no greater element to the right.
-            if (st.isEmpty()) {
-                nge[i] = n;
-            } else {
-                // The top of the stack is the index of the next greater element.
-                nge[i] = st.peek();
-            }
-            // Push the current index onto the stack.
+            if(st.isEmpty())nge[i]=n;
+            else nge[i]=st.peek();
             st.push(i);
         }
     }
-
-    /**
-     * Finds the index of the previous greater element to the left for each element.
-     * @param arr The input array.
-     * @param pge An array to store the results.
-     * @param n The size of the array.
-     */
-    static void findpge(int arr[], int pge[], int n) {
-        Stack<Integer> st = new Stack<>();
-        // Iterate from left to right to find the previous greater element.
-        for (int i = 0; i < n; i++) {
-            // Pop elements from the stack that are smaller than or equal to the current element.
-            while (!st.isEmpty() && arr[st.peek()] <= arr[i]) {
+    static void findpge(int arr[],int pge[],int n)
+    {
+        Stack<Integer>st=new Stack<>();
+        for(int i=0;i<n;i++)
+        {
+            while(!st.isEmpty() && arr[st.peek()]<=arr[i])
+            {
                 st.pop();
             }
-            // If the stack is empty, there is no greater element to the left.
-            if (st.isEmpty()) {
-                pge[i] = -1;
-            } else {
-                // The top of the stack is the index of the previous greater element.
-                pge[i] = st.peek();
-            }
-            // Push the current index onto the stack.
+            if(st.isEmpty())pge[i]=-1;
+            else pge[i]=st.peek();
             st.push(i);
         }
     }
-
-    /**
-     * Main method to find the length of the longest subarray with the given condition.
-     * @param arr The input array.
-     * @return The length of the longest valid subarray.
-     */
     public static int longestSubarray(int[] arr) {
-        int n = arr.length;
-        int nge[] = new int[n];
-        int pge[] = new int[n];
+        int n=arr.length;
+        int nge[]=new int[n];
+        int pge[]=new int[n];
+        findnge(arr,nge,n);
+        findpge(arr,pge,n);
         
-        // Find the next and previous greater elements for all elements.
-        findnge(arr, nge, n);
-        findpge(arr, pge, n);
-        
-        int ans = 0;
-        
-        // Iterate through the array to check the condition for each element.
-        for (int i = 0; i < n; i++) {
-            int l = pge[i];
-            int r = nge[i];
-            
-            // Calculate the length of the subarray where arr[i] is the maximum.
-            int length = r - l - 1;
-            
-            // Check if the maximum element is less than or equal to the subarray's length.
-            if (arr[i] <= length) {
-                // If the condition is met, update the answer with the maximum length found.
-                ans = Math.max(ans, length);
-            }
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            int l=pge[i];
+            int r=nge[i];
+            if(r-l-1>=arr[i])ans=Math.max(ans,r-l-1);
         }
-        
         return ans;
     }
 }
+
