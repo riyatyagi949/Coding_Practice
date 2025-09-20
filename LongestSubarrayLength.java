@@ -22,3 +22,4 @@
  * Time Complexity: O(n log n), dominated by the sorting step. The subsequent linear scan takes O(n) time.
  * Space Complexity: O(1) for in-place sorting of primitive types.
  */
+// Optimal Solution in Java - 
