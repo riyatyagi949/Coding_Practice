@@ -57,3 +57,113 @@
  */
 // Optimal Solution in Java - 
 import java.util.*;
+
+class Router {
+    private int memoryLimit;
+    private Deque<int[]> queue; 
+    private Set<String> seen;   
+
+    private Map<Integer, List<Integer>> timeMap;
+    private Map<Integer, List<Integer>> prefixMap;
+
+    public Router(int memoryLimit) {
+        this.memoryLimit = memoryLimit;
+        this.queue = new ArrayDeque<>();
+        this.seen = new HashSet<>();
+        this.timeMap = new HashMap<>();
+        this.prefixMap = new HashMap<>();
+    }
+
+    public boolean addPacket(int source, int destination, int timestamp) {
+        String key = source + "-" + destination + "-" + timestamp;
+        if (seen.contains(key))
+         return false;
+
+        if (queue.size() == memoryLimit) {
+            int[] old = queue.pollFirst();
+            String oldKey = old[0] + "-" + old[1] + "-" + old[2];
+            seen.remove(oldKey);
+
+            List<Integer> times = timeMap.get(old[1]);
+            List<Integer> prefix = prefixMap.get(old[1]);
+            int idx = Collections.binarySearch(times, old[2]);
+
+            for (int i = idx; i < prefix.size(); i++) {
+                prefix.set(i, prefix.get(i) - 1);
+            }
+            if (prefix.get(prefix.size() - 1) == 0) {
+                timeMap.remove(old[1]);
+                prefixMap.remove(old[1]);
+            }
+        }
+
+        queue.offerLast(new int[]{source, destination, timestamp});
+        seen.add(key);
+
+        timeMap.putIfAbsent(destination, new ArrayList<>());
+        prefixMap.putIfAbsent(destination, new ArrayList<>());
+
+        List<Integer> times = timeMap.get(destination);
+        List<Integer> prefix = prefixMap.get(destination);
+
+        times.add(timestamp);
+        if (prefix.isEmpty()) prefix.add(1);
+        else prefix.add(prefix.get(prefix.size() - 1) + 1);
+
+        return true;
+    }
+
+    public int[] forwardPacket() {
+        if (queue.isEmpty()) return new int[]{};
+
+        int[] packet = queue.pollFirst();
+        String key = packet[0] + "-" + packet[1] + "-" + packet[2];
+        seen.remove(key);
+
+        List<Integer> times = timeMap.get(packet[1]);
+        List<Integer> prefix = prefixMap.get(packet[1]);
+        int idx = Collections.binarySearch(times, packet[2]);
+
+        for (int i = idx; i < prefix.size(); i++) {
+            prefix.set(i, prefix.get(i) - 1);
+        }
+        if (prefix.get(prefix.size() - 1) == 0) {
+            timeMap.remove(packet[1]);
+            prefixMap.remove(packet[1]);
+        }
+
+        return packet;
+    }
+
+    public int getCount(int destination, int startTime, int endTime) {
+        if (!timeMap.containsKey(destination)) return 0;
+
+        List<Integer> times = timeMap.get(destination);
+        List<Integer> prefix = prefixMap.get(destination);
+
+        int hi = upperBound(times, endTime);
+        if (hi < 0) 
+        return 0;
+
+        int lo = upperBound(times, startTime - 1);
+
+        int total = prefix.get(hi);
+        int before = lo >= 0 ? prefix.get(lo) : 0;
+        return total - before;
+    }
+    private int upperBound(List<Integer> arr, int target) {
+        int l = 0, r = arr.size() - 1, ans = -1;
+        
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            if (arr.get(m) <= target) {
+                ans = m;
+                l = m + 1;
+            }
+             else {
+                r = m - 1;
+            }
+        }
+        return ans;
+    }
+}
