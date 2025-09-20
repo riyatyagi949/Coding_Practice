@@ -33,6 +33,7 @@
  * Time Complexity: O(n). We iterate through the array three times: once for PGE, once for NGE, and once to check the condition. Each of these loops is linear.
  * Space Complexity: O(n) to store the `nge` and `pge` arrays, as well as the stack.
  */
+// Optimal Solution in Java-
 
 import java.util.Stack;
 
