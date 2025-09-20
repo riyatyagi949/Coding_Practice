@@ -23,6 +23,7 @@
  * Space Complexity: O(1) for in-place sorting of primitive types.
  */
 // Optimal Solution in Java - 
+import java.util.*;
 
 class Solution {
     static void findnge(int arr[],int nge[],int n)
