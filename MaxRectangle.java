@@ -26,5 +26,7 @@
  * Time Complexity: O(M * N), where M is the number of rows and N is the number of columns. We iterate through each cell of the matrix once. For each row, we compute the histogram and then find the largest rectangle in it, both of which take O(N) time.
  * Space Complexity: O(N) to store the heights of the histogram and the monotonic stack.
  */
+// Optimal Solution in Java -
+
 import java.util.Stack;
 
