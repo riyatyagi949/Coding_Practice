@@ -59,3 +59,82 @@
 
 import java.util.*;
 
+class MovieRentingSystem {
+    Map<Integer, TreeSet<MovieInfo>> available;
+    Map<String, Integer> priceMap;
+    TreeSet<MovieInfo> rented;
+
+    public MovieRentingSystem(int n, int[][] entries) {
+        available = new HashMap<>();
+        priceMap = new HashMap<>();
+        rented = new TreeSet<>();
+
+        for (int[] e : entries) {
+            int shop = e[0], movie = e[1], price = e[2];
+            priceMap.put(shop + "#" + movie, price);
+
+            available.putIfAbsent(movie, new TreeSet<>());
+            available.get(movie).add(new MovieInfo(shop, movie, price));
+        }
+    }
+     public List<Integer> search(int movie) {
+        List<Integer> res = new ArrayList<>();
+        if (!available.containsKey(movie))
+         return res;
+
+        for (MovieInfo mi : available.get(movie)) {
+            res.add(mi.shop);
+            if (res.size() == 5) break;
+        }
+        return res;
+    }
+    public void rent(int shop, int movie) {
+        int price = priceMap.get(shop + "#" + movie);
+        MovieInfo mi = new MovieInfo(shop, movie, price);
+
+        available.get(movie).remove(mi);
+        rented.add(mi);
+    }
+     public void drop(int shop, int movie) {
+        int price = priceMap.get(shop + "#" + movie);
+        MovieInfo mi = new MovieInfo(shop, movie, price);
+
+        rented.remove(mi);
+        available.get(movie).add(mi);
+    }
+     public List<List<Integer>> report() {
+        List<List<Integer>> res = new ArrayList<>();
+        int count = 0;
+        for (MovieInfo mi : rented) {
+            res.add(Arrays.asList(mi.shop, mi.movie));
+            if (++count == 5) break;
+        }
+        return res;
+    }
+    class MovieInfo implements Comparable<MovieInfo> {
+        int shop, movie, price;
+
+        public MovieInfo(int shop, int movie, int price) {
+            this.shop = shop;
+            this.movie = movie;
+            this.price = price;
+        }
+          public int compareTo(MovieInfo other) {
+            if (this.price != other.price) 
+            return this.price - other.price;
+            if (this.shop != other.shop)
+            return this.shop - other.shop;
+            return this.movie - other.movie;
+        }
+        public boolean equals(Object o) {
+            if (!(o instanceof MovieInfo)) 
+            return false;
+            MovieInfo other = (MovieInfo) o;
+            return shop == other.shop && movie == other.movie && price == other.price;
+        }
+        public int hashCode() {
+            return Objects.hash(shop, movie, price);
+        }
+    }
+}
+
