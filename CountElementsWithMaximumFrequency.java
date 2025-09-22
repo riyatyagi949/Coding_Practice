@@ -29,6 +29,8 @@
  *
  * Space Complexity: O(1) because we use a fixed-size array (101 elements) for frequency counting, regardless of the input size `n`.
  */
+// Optimal Solution in Java -
+
 class Solution {
     public int maxFrequencyElements(int[] nums) {
         int[] freq = new int[101]; // Since 1 <= nums[i] <= 100
