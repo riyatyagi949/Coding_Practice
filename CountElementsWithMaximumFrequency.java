@@ -35,7 +35,6 @@ class Solution {
     public int maxFrequencyElements(int[] nums) {
         int[] freq = new int[101]; 
 
-        // Step 1: Count frequencies and find the maximum frequency in one pass
         int maxFreq = 0;
         for (int num : nums) {
             freq[num]++;
