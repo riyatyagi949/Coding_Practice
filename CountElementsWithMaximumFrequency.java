@@ -48,7 +48,6 @@ class Solution {
                 totalFreq += count;
             }
         }
-
         return totalFreq;
     }
 }
