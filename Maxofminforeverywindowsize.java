@@ -45,63 +45,57 @@
  */
 import java.util.Arrays;
 import java.util.Stack;
+import java.util.ArrayList;
 
 class Solution {
-    // Function to find the maximum of minimums for every window size
-    public int[] maxOfMin(int[] arr, int n) {
-        // Arrays to store the index of the next and previous smaller element
-        int[] left = new int[n];
-        int[] right = new int[n];
-        
-        // Initialize right array with n (a sentinel value) and left array with -1
+    public ArrayList<Integer> maxOfMins(int[] arr) {
+        int n = arr.length;
+        int[] left = new int[n];   
+        int[] right = new int[n]; 
+
         Arrays.fill(left, -1);
         Arrays.fill(right, n);
-        
-        Stack<Integer> s = new Stack<>();
 
-        // Find previous smaller element for each element
+        Stack<Integer> st = new Stack<>();
+
         for (int i = 0; i < n; i++) {
-            while (!s.empty() && arr[s.peek()] >= arr[i]) {
-                s.pop();
+            while (!st.isEmpty() && arr[st.peek()] >= arr[i]) {
+                st.pop();
             }
-            if (!s.empty()) {
-                left[i] = s.peek();
+            if (!st.isEmpty()) {
+                left[i] = st.peek();
             }
-            s.push(i);
+            st.push(i);
         }
 
-        // Clear the stack for the next pass
-        s.clear();
+        st.clear();
 
-        // Find next smaller element for each element
         for (int i = n - 1; i >= 0; i--) {
-            while (!s.empty() && arr[s.peek()] >= arr[i]) {
-                s.pop();
+            while (!st.isEmpty() && arr[st.peek()] >= arr[i]) {
+                st.pop();
             }
-            if (!s.empty()) {
-                right[i] = s.peek();
+            if (!st.isEmpty()) {
+                right[i] = st.peek();
             }
-            s.push(i);
+            st.push(i);
         }
 
-        // Initialize the result array, filled with 0s
-        int[] ans = new int[n];
-        
-        // Fill the ans array with possible maximums of minimums.
-        // For each arr[i], the window size for which it is the minimum is right[i] - left[i] - 1.
+        int[] ans = new int[n + 1];
+        Arrays.fill(ans, Integer.MIN_VALUE);
+
         for (int i = 0; i < n; i++) {
             int len = right[i] - left[i] - 1;
-            // Update the answer for this window size with the maximum value found so far.
-            // Since `arr[i]` is a minimum in a window of size `len`, it can be the max_of_min for that size.
-            ans[len - 1] = Math.max(ans[len - 1], arr[i]);
+            ans[len] = Math.max(ans[len], arr[i]);
         }
-
-        // Propagate the maximums from larger window sizes to smaller ones.
-        // The max_of_min for a window of size k must be at least the max_of_min for a window of size k+1.
-        for (int i = n - 2; i >= 0; i--) {
+        for (int i = n - 1; i >= 1; i--) {
             ans[i] = Math.max(ans[i], ans[i + 1]);
         }
 
-        return ans;
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            res.add(ans[i]);
+        }
+
+        return res;
     }
 }
