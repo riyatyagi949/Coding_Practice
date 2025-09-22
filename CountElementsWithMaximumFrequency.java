@@ -42,8 +42,6 @@ class Solution {
                 maxFreq = freq[num];
             }
         }
-
-        // Step 2: Sum the frequencies of elements that have the maximum frequency
         int totalFreq = 0;
         for (int count : freq) {
             if (count == maxFreq) {
