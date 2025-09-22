@@ -33,7 +33,7 @@
 
 class Solution {
     public int maxFrequencyElements(int[] nums) {
-        int[] freq = new int[101]; // Since 1 <= nums[i] <= 100
+        int[] freq = new int[101]; 
 
         // Step 1: Count frequencies and find the maximum frequency in one pass
         int maxFreq = 0;
