@@ -22,3 +22,16 @@
  * This is for the auxiliary stack used to store the queue elements. In the worst case, the stack will hold all N elements.
  */
 // Optimal Solution in Java - 
+import java.util.*;
+
+class Solution {
+    public void reverseQueue(Queue<Integer> q) 
+    {
+        if (q.isEmpty()) {
+            return;
+        }
+        int element = q.poll();  
+        reverseQueue(q);        
+        q.add(element);       
+    }
+}
