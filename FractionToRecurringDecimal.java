@@ -39,6 +39,8 @@
  *
  * Space Complexity: O(log(denominator)) to store the remainders in the HashMap. In the worst case, we might store up to `denominator - 1` remainders.
  */
+// Optimal Solution in Java - 
+
 import java.util.HashMap;
 import java.util.Map;
 
