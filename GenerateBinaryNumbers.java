@@ -42,6 +42,8 @@
  * The space is required to store the result array and the queue. The queue can hold up to `O(n)` strings in the worst case (the last level of the BFS tree),
  * and the result list will store `n` strings. The length of each string is at most `log(n)`. So, the total space is `O(n * log n)`.
  */
+// Optimal Solution in Java - 
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
