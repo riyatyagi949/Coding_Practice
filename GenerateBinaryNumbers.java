@@ -48,3 +48,23 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+class Solution {
+    public ArrayList<String> generateBinary(int n) {
+        ArrayList<String> result = new ArrayList<>();
+        Queue<String> q = new LinkedList<>();
+        
+        q.add("1");
+
+        while (n-- > 0) {
+            String curr = q.poll();
+            result.add(curr);
+            
+            q.add(curr + "0");
+            q.add(curr + "1");
+        }
+        
+        return result;
+    }
+}
+
+
