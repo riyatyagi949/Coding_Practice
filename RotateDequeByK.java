@@ -18,5 +18,7 @@
  * Time Complexity: O(k % n), which simplifies to O(min(k, n)). Since the constraints on `k` and `n` are up to 10^5, this is highly efficient.
  * Space Complexity: O(1) as the rotations are performed in-place on the deque, and no extra data structures are used.
  */
+// Optimal Solution in Java - 
+
 import java.util.Deque;
 
