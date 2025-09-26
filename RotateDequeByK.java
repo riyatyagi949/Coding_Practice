@@ -20,5 +20,40 @@
  */
 // Optimal Solution in Java - 
 
-import java.util.Deque;
+import java.util.*;;
+
+class Solution {
+    public static void rotateDeque(Deque<Integer> dq, int type, int k) {
+        int n = dq.size();
+        if (n == 0) 
+        return;
+        
+        k = k % n; 
+        if (k == 0) 
+        return;
+        
+        List<Integer> list = new ArrayList<>(dq);
+        dq.clear();
+        
+        if (type == 1) 
+        { 
+            for (int i = n - k; i < n; i++)
+            {
+                dq.addLast(list.get(i));
+            }
+            for (int i = 0; i < n - k; i++) {
+                dq.addLast(list.get(i));
+            }
+        } 
+        else if (type == 2) { 
+            for (int i = k; i < n; i++) {
+                dq.addLast(list.get(i));
+            }
+            for (int i = 0; i < k; i++) {
+                dq.addLast(list.get(i));
+            }
+        }
+    }
+}
+
 
