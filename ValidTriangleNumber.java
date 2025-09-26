@@ -38,3 +38,4 @@
  * Time Complexity: O(n^2). The dominant part is the nested loops structure: an outer loop runs $n$ times, and the inner two-pointer mechanism runs a total of $O(n)$ steps for each outer loop iteration, resulting in $O(n^2)$. Sorting takes $O(n \log n)$.
  * Space Complexity: O(1) if sorting is done in-place, or $O(\log n)$ to $O(n)$ depending on the space complexity of the sorting algorithm used by the language implementation.
  */
+// Optimal Solution  in Java - 
