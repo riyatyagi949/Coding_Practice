@@ -41,4 +41,31 @@
  * Time Complexity: O(n). We iterate through the array once, and all Queue/Deque operations (add, remove, size) take O(1) time.
  * Space Complexity: O(k). In the worst case, the Deque can store up to $k$ indices (if $k$ flips are started consecutively).
  */
+// Optimal  Solution in Java -
+class Solution {
+    public int kBitFlips(int[] arr, int k) {
+        int n = arr.length;
+        int[] isFlipped = new int[n];
+        int flip = 0;  
+        int result = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (i >= k)
+            {
+                flip ^= isFlipped[i - k];
+            }
+
+            if ((arr[i] ^ flip) == 0) {
+                if (i + k > n) 
+                return -1;  
+                
+                isFlipped[i] = 1; 
+                flip ^= 1;    
+                result++;
+            }
+        }
+        return result;
+    }
+}
 
