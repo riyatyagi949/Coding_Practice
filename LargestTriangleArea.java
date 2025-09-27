@@ -26,3 +26,4 @@
  * Time Complexity: O(n^3). We use three nested loops, each iterating up to `n` times. Given $n \le 50$, $50^3 = 125,000$ operations, which is very fast.
  * Space Complexity: O(1). We use only a few constant-size variables for area calculation and iteration.
  */
+// Optimal  Solution in Java -
