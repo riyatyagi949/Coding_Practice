@@ -43,7 +43,8 @@
  */
 // Optimal  Solution in Java -
 class Solution {
-    public int kBitFlips(int[] arr, int k) {
+    public int kBitFlips(int[] arr, int k) 
+    {
         int n = arr.length;
         int[] isFlipped = new int[n];
         int flip = 0;  
