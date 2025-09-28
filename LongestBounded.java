@@ -30,5 +30,7 @@
  * Time Complexity: O(n), where n is the length of the array. Although there are nested loops, each element is added to the deques once and removed from the deques at most once. The left and right pointers also traverse the array at most once. This results in amortized O(1) operations per element.
  * Space Complexity: O(n) in the worst case, for storing all array elements in the deques (e.g., if the array is entirely sorted) and for storing the result subarray.
  */
+// Optimal Solution in Java -
+
 import java.util.*;
 
