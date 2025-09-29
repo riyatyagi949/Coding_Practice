@@ -55,3 +55,38 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+class Solution {
+    public int maxSubarrSum(int[] arr, int a, int b) {
+        int n = arr.length;
+        long[] prefix = new long[n + 1];
+        
+        for (int i = 0; i < n; i++) {
+            prefix[i + 1] = prefix[i] + arr[i];
+        }
+        
+        long ans = Long.MIN_VALUE;
+        Deque<Integer> dq = new ArrayDeque<>();
+        
+        for (int r = a - 1; r < n; r++) {
+            int lMin = r - b + 1;
+            int lMax = r - a + 1;
+            
+            if (lMax >= 0) {
+                while (!dq.isEmpty() && prefix[dq.peekLast()] >= prefix[lMax]) {
+                    dq.pollLast();
+                }
+                dq.offerLast(lMax);
+            }
+            
+            while (!dq.isEmpty() && dq.peekFirst() < lMin) {
+                dq.pollFirst();
+            }
+                if (!dq.isEmpty()) {
+                ans = Math.max(ans, prefix[r + 1] - prefix[dq.peekFirst()]);
+            }
+        }
+        return (int) ans;
+    }
+}
+
+
