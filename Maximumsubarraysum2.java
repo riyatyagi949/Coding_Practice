@@ -50,6 +50,7 @@
  * Time Complexity: O(n). We calculate prefix sums in O(n). Each index is added to and removed from the deque at most once, making the loop O(n).
  * Space Complexity: O(n) for the prefix sum array and the deque, which in the worst case can store up to `n` indices.
  */
+// Optimal Solution in Java -
 
 import java.util.ArrayDeque;
 import java.util.Deque;
