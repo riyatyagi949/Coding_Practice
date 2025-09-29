@@ -39,3 +39,4 @@
  * Time Complexity: O(n^3). There are $O(n^2)$ DP states ($dp[i][j]$), and the calculation of each state involves a loop over $k$ from $i+1$ to $j-1$, which takes $O(n)$ time.
  * Space Complexity: O(n^2) to store the $n \times n$ DP table.
  */
+// Optimal Solution in Java -
