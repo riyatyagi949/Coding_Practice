@@ -28,6 +28,8 @@
  * - O(2^n * n) space is needed to store the $2^n$ generated strings, each of length $n$.
  * - O(n) space is also used by the recursion stack for the depth of the recursive calls (the length of the string).
  */
+// Optimal Solution in Java - 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
