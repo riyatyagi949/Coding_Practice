@@ -19,30 +19,4 @@
  *
  * Space Complexity: O(1) (or O(n) depending on how the input is handled). Since we modify the input array in place, we use no extra space proportional to $n$ for new arrays, resulting in $O(1)$ auxiliary space.
  */
-class Solution {
-    public int triangularSum(int[] nums) {
-        int n = nums.length;
-
-        // If the array already has only one element, return it.
-        if (n == 1) {
-            return nums[0];
-        }
-
-        // The outer loop simulates the steps, reducing the effective size of the array by 1 each time.
-        // The loop condition `size > 1` ensures the process stops when only one element remains.
-        // `size` represents the current effective length of the array being processed.
-        for (int size = n; size > 1; size--) {
-            // The inner loop calculates the new array elements.
-            // It iterates up to `size - 1` because the new array will have `size - 1` elements.
-            for (int i = 0; i < size - 1; i++) {
-                // Calculate the new element: (nums[i] + nums[i+1]) % 10.
-                // This result is stored in nums[i], effectively overwriting the value that is no longer needed
-                // for the next iteration (as the array shrinks).
-                nums[i] = (nums[i] + nums[i + 1]) % 10;
-            }
-        }
-
-        // After the process terminates, the triangular sum is the single element remaining at index 0.
-        return nums[0];
-    }
-}
+// Optimal Solution in Java -
