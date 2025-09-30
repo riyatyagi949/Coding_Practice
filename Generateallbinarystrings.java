@@ -31,6 +31,20 @@
 // Optimal Solution in Java - 
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
+class Solution {
+    public ArrayList<String> binstr(int n) {
+        ArrayList<String> result = new ArrayList<>();
+        generate(n, "", result);
+        return result;
+    }
+    private void generate(int n, String curr, ArrayList<String> result) {
+        if (curr.length() == n) {
+            result.add(curr);
+            return;
+        }
+        generate(n, curr + "0", result);
+        generate(n, curr + "1", result);
+    }
+}
 
