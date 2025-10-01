@@ -33,6 +33,8 @@
  * Space Complexity: O(n) for the auxiliary space used by the `used` array and the recursion stack depth. The space required to store the results is $O(n * \text{number of unique permutations})$.
  */
 
+//  Optimal Solution in Java - 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
