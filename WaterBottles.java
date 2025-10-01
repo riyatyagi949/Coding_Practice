@@ -25,3 +25,18 @@
  * Space Complexity: O(1). We use a constant amount of extra space for variables like `totalDrank`, `emptyBottles`, and `newFullBottles`.
  */
 // Optimal Solution in Java - 
+
+class Solution {
+    public int numWaterBottles(int numBottles, int numExchange) {
+        int total = numBottles; 
+        int empty = numBottles;  
+        
+        while (empty >= numExchange) 
+        {
+            int newBottles = empty / numExchange;   
+            total += newBottles;
+            empty = empty % numExchange + newBottles; 
+        }
+        return total;
+    }
+}
