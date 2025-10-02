@@ -47,3 +47,28 @@
  * Space Complexity: O(k) for storing the current combination list and the depth of the recursion stack. O(Total Valid Combinations * k) for the final result list.
  */
 // Optimal Solution in Java - 
+
+class Solution {
+    public ArrayList<ArrayList<Integer>> combinationSum(int n, int k) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        backtrack(1, n, k, new ArrayList<>(), result);
+        return result;
+    }
+     private void backtrack(int start, int target, int k, ArrayList<Integer> temp, ArrayList<ArrayList<Integer>> result) {
+        if (temp.size() == k && target == 0)
+        {
+            result.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        if (temp.size() > k || target < 0) 
+        return;
+        
+        for (int i = start; i <= 9; i++) 
+        {
+            temp.add(i);
+            backtrack(i + 1, target - i, k, temp, result);
+            temp.remove(temp.size() - 1);
+        }
+    }
+}
