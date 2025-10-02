@@ -45,3 +45,19 @@
  * Space Complexity: O(1). Only a few integer variables are used for tracking state.
  */
 // Optimal Solution in Java - 
+
+class Solution {
+    public int maxBottlesDrunk(int numBottles, int numExchange) {
+        int drank = numBottles;
+        int empty = numBottles;
+        
+        while (empty >= numExchange) {
+            empty -= numExchange;
+            numExchange++;
+            
+            drank++;
+            empty++;
+        }
+        return drank;
+    }
+}
