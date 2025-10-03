@@ -40,3 +40,43 @@
  * Space Complexity: O(n) for the recursion stack depth (equal to the number of digits) and $O(n \cdot 4^n)$ to store the list of all generated words.
  */
 // Optimal Solution in Java - 
+
+class Solution {
+    public ArrayList<String> possibleWords(int[] arr) {
+        ArrayList<String> result = new ArrayList<>();
+        if (arr == null || arr.length == 0) return result;
+        
+        String[] keypad = {
+            "",    // 0
+            "",    // 1
+            "abc", // 2
+            "def", // 3
+            "ghi", // 4
+            "jkl", // 5
+            "mno", // 6
+            "pqrs",// 7
+            "tuv", // 8
+            "wxyz" // 9
+        };
+        
+        backtrack(arr, 0, "", result, keypad);
+        return result;
+    }
+    
+    private void backtrack(int[] arr, int index, String current, ArrayList<String> result, String[] keypad) {
+        if (index == arr.length) {
+            if (!current.isEmpty()) 
+            result.add(current);
+            return;
+        }
+            if (arr[index] == 0 || arr[index] == 1) {
+            backtrack(arr, index + 1, current, result, keypad);
+            return;
+        }
+        
+        String letters = keypad[arr[index]];
+        for (char c : letters.toCharArray()) {
+            backtrack(arr, index + 1, current + c, result, keypad);
+        }
+    }
+}
