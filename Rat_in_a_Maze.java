@@ -34,6 +34,8 @@
  * Time Complexity: O(4^(n^2)). In the worst case, from every cell, we explore 4 directions, and there are n^2 cells. This is an exponential complexity, which is acceptable given the small constraint n <= 5 ($5^2 = 25$ cells).
  * Space Complexity: O(n^2) to store the `visited` array and O(n^2) for the recursion stack depth (since the maximum path length is $n^2$). O(L*P) where L is max path length and P is number of paths, for storing the result list.
  */
+// Optimal Solution in Java - 
+
 import java.util.ArrayList;
 import java.util.Collections;
 
