@@ -32,3 +32,14 @@
  * Space Complexity: O(n) due to the use of a copy of the `energy` array (`dp`). If the solution modified the input `energy` array directly, the space complexity would be O(1) auxiliary space (O(n) total, as the input size dominates). The provided solution uses O(n) space for the cloned array.
  */
 // Optimal Solution in Java-
+import java.util.*;
+
+class Solution {
+  public int maximumEnergy(int[] energy, int k)
+   {
+    int[] dp = energy.clone();
+    for (int i = energy.length - 1 - k; i >= 0; --i)
+      dp[i] += dp[i + k];
+    return Arrays.stream(dp).max().getAsInt();
+  }
+}
