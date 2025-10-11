@@ -34,12 +34,34 @@
  * Space Complexity: O(h), where `h` is the height of the tree, for the recursion stack space. In the worst case (skewed tree), $h=n$, so $O(n)$. In the best/average case (balanced tree), $h = \log n$, so $O(\log n)$.
  */
 // Optimal Solution in Java -
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- * int data;
- * TreeNode left;
- * TreeNode right;
- * TreeNode(int data) { this.data = data; }
- * }
- */
+
+class Node{
+    int data;
+    Node left, right;
+    Node(int d){
+        data=d;
+        left=right=null;
+    }
+}
+class Solution {
+    int maxSum; 
+    int findMaxSum(Node root) 
+    {
+        maxSum = Integer.MIN_VALUE;
+        maxPath(root);
+        return maxSum;
+    }
+     int maxPath(Node node) 
+     {
+        if (node == null)
+            return 0;
+        
+        int left = Math.max(0, maxPath(node.left));
+        int right = Math.max(0, maxPath(node.right));
+        
+        maxSum = Math.max(maxSum, node.data + left + right);
+        
+        return node.data + Math.max(left, right);
+    }
+}
+
