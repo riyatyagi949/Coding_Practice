@@ -1,5 +1,5 @@
 /**
- * Problem Statement: Sum of Nodes in BST Range
+ * Problem Statement: Sum of Nodes in BST Range.
  * --------------------------------------------
  * Given the root of a Binary Search Tree (BST) and two integers l and r, 
  * the task is to find the sum of all node values that lie in the range [l, r], 
