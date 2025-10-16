@@ -63,3 +63,29 @@
  * always in the range [0, value - 1], the map will have at most 'value' entries.
  */
 // Optimal Solution in Java -
+import java.util.*;
+
+class Solution {
+    public int findSmallestInteger(int[] nums, int value) {
+        Map<Integer, Integer> count = new HashMap<>();
+
+        for (int num : nums) {
+            int rem = ((num % value) + value) % value;
+            count.put(rem, count.getOrDefault(rem, 0) + 1);
+        }
+
+        int mex = 0;
+        while (true)
+         {
+            int rem = mex % value;
+            if (count.getOrDefault(rem, 0) > 0)
+             {
+                count.put(rem, count.get(rem) - 1);
+                mex++;
+            } 
+            else {
+                return mex;
+            }
+        }
+    }
+}
