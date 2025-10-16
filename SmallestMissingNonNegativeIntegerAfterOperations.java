@@ -62,3 +62,4 @@
  * * The HashMap 'count' stores the frequencies of remainders. Since the remainder is 
  * always in the range [0, value - 1], the map will have at most 'value' entries.
  */
+// Optimal Solution in Java -
