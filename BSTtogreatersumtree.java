@@ -52,3 +52,35 @@
  * - For a skewed BST (worst case), H = O(N).
  */
 // Optimal Solution in Java - 
+
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int data){
+        this.data = data;
+        left=null;
+        right=null;
+    }
+} 
+class Solution {
+    static int sum = 0;
+
+    public static void transformTree(Node root) {
+        sum = 0;
+        helper(root);
+    }
+    private static void helper(Node root) {
+        if (root == null)
+        return;
+
+        helper(root.right);
+
+        int original = root.data;
+        root.data = sum;
+        sum += original;
+
+        helper(root.left);
+    }
+}
+
