@@ -44,3 +44,103 @@
  * * Note: If using Morris Traversal, the auxiliary space complexity would be O(1).
  */
 // Optimal Solution in Java -  
+
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+class Solution {
+    private int countNodes(Node root) {
+        int count = 0;
+        Node curr = root;
+        
+        while (curr != null) {
+            if (curr.left == null)
+            {
+                count++;
+                curr = curr.right;
+            } 
+            else 
+            {
+                Node pre = curr.left;
+                while (pre.right != null && pre.right != curr) 
+                {
+                    pre = pre.right;
+                }
+                
+                if (pre.right == null) 
+                {
+                    pre.right = curr;
+                    curr = curr.left;
+                } 
+                else
+                {
+                    pre.right = null;
+                    count++;
+                    curr = curr.right;
+                }
+            }
+        }
+        return count;
+    }
+
+    public int findMedian(Node root) {
+        if (root == null)
+        return 0;
+
+        int count = countNodes(root);
+        int currCount = 0;
+        Node curr = root;
+        Node prev = null;
+        int median = 0;
+
+        while (curr != null) 
+        {
+            if (curr.left == null) 
+            {
+                currCount++;
+
+                if (count % 2 != 0 && currCount == (count + 1) / 2)
+                    median = curr.data;
+                else if (count % 2 == 0 && currCount == count / 2)
+                    median = curr.data;
+
+                curr = curr.right;
+            } 
+            else
+            {
+                Node pre = curr.left;
+                while (pre.right != null && pre.right != curr)
+                {
+                    pre = pre.right;
+                }
+
+                if (pre.right == null)
+                {
+                    pre.right = curr;
+                    curr = curr.left;
+                } 
+                else 
+                {
+                    pre.right = null;
+                    currCount++;
+
+                    if (count % 2 != 0 && currCount == (count + 1) / 2)
+                        median = curr.data;
+                    else if (count % 2 == 0 && currCount == count / 2)
+                        median = curr.data;
+
+                    curr = curr.right;
+                }
+            }
+        }
+        return median;
+    }
+}
