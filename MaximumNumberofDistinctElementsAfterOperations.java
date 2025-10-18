@@ -55,3 +55,25 @@
  * - The algorithm uses only a few variables ('lastUsedTarget', 'distinctCount', etc.) regardless of the input size, resulting in O(1) auxiliary space complexity.
  */
 // Optimal Solution in Java - 
+import java.util.*;
+
+class Solution {
+    public int maxDistinctElements(int[] nums, int k) {
+        Arrays.sort(nums);
+        int count = 0;
+        long last = Long.MIN_VALUE; 
+
+        for (int num : nums) 
+        {
+            long left = (long) num - k;
+            long right = (long) num + k;
+            long candidate = Math.max(last + 1, left);
+
+            if (candidate <= right) {
+                count++;
+                last = candidate;
+            }
+        }
+        return count;
+    }
+}
