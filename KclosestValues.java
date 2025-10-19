@@ -39,10 +39,7 @@
  * - The dominant term is O(N).
  */
 // Optimal Solution in Java-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
-
+import java.util.*;
 class Node {
     int data;
     Node left;
