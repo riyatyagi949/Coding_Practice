@@ -26,3 +26,4 @@
  * - We use a single integer variable 'x' to store the running total. 
  * - The space used does not depend on the input size N.
  */
+// Optimal Solution in Java - 
