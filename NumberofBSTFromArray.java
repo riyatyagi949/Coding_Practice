@@ -64,3 +64,24 @@
  */
 // Optimal Solution in Java-
 import java.util.*;
+
+class Solution {
+    public ArrayList<Integer> countBSTs(int[] arr) {
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        int[] catalan = {1, 1, 2, 5, 14, 42, 132};
+        
+        for (int i = 0; i < arr.length; i++) {
+            int leftSize = 0, rightSize = 0;
+            
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[j] < arr[i])
+                leftSize++;
+                else if (arr[j] > arr[i]) 
+                rightSize++;
+            }
+            result.add(catalan[leftSize] * catalan[rightSize]);
+        }
+        return result;
+    }
+}
