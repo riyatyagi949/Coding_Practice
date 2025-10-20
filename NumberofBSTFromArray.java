@@ -62,3 +62,5 @@
  * - O(N) for the final 'result' array.
  * - The total auxiliary space is O(N).
  */
+// Optimal Solution in Java-
+import java.util.*;
