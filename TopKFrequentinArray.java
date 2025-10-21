@@ -62,3 +62,28 @@
  * * Overall Complexity: O(D). Since D <= N, this is often stated as O(N).
  */
 // Optimal Solution in Java - 
+import java.util.*;
+
+class Solution {
+    public ArrayList<Integer> topKFreq(int[] arr, int k) {
+        HashMap<Integer, Integer> freq = new HashMap<>();
+        for (int num : arr) {
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
+        }
+
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(freq.entrySet());
+
+        Collections.sort(list, (a, b) -> {
+            if (!b.getValue().equals(a.getValue())) 
+            return b.getValue() - a.getValue();
+            return b.getKey() - a.getKey();
+        });
+
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            result.add(list.get(i).getKey());
+        }
+
+        return result;
+    }
+}
