@@ -68,3 +68,34 @@
  */
 // Optimal Solution in Java -
 import java.util.*;
+
+class Solution {
+    public boolean isPossible(int[] arr, int k) {
+        Map<Integer, Integer> freq = new HashMap<>();
+        Map<Integer, Integer> need = new HashMap<>();
+
+        for (int x : arr) {
+            freq.put(x, freq.getOrDefault(x, 0) + 1);
+        }
+        for (int x : arr) {
+            if (freq.get(x) == 0) continue; 
+
+            if (need.getOrDefault(x, 0) > 0) {
+                need.put(x, need.get(x) - 1);
+                need.put(x + 1, need.getOrDefault(x + 1, 0) + 1);
+            } 
+            else {
+                for (int next = x; next < x + k; next++) {
+                    if (freq.getOrDefault(next, 0) <= 0) {
+                        return false;
+                    }
+                    freq.put(next, freq.get(next) - 1);
+                }
+                need.put(x + k, need.getOrDefault(x + k, 0) + 1);
+                continue;
+            }
+            freq.put(x, freq.get(x) - 1);
+        }
+        return true;
+    }
+}
