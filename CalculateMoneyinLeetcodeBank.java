@@ -59,4 +59,4 @@
  * O(1) (Constant Space)
  * - The solution uses a fixed, small amount of memory for variables regardless of the input size 'n'.
  */
- 
+//  Optimal Solution in Java -
