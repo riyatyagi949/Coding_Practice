@@ -60,3 +60,18 @@
  * - The solution uses a fixed, small amount of memory for variables regardless of the input size 'n'.
  */
 //  Optimal Solution in Java -
+
+class Solution {
+    public int totalMoney(int n) {
+        int weeks = n / 7;
+        int extraDays = n % 7;
+        int total = 0;
+
+        total += weeks * 28 + 7 * weeks * (weeks - 1) / 2;
+
+        for (int i = 1; i <= extraDays; i++) {
+            total += weeks + i;
+        }
+        return total;
+    }
+}
