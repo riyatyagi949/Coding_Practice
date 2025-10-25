@@ -50,3 +50,27 @@
  */ 
 // Optimal Solution in Java - 
 import java.util.*;
+
+class Solution {
+    public int minOperations(int[] arr) {
+        double sum = 0;
+        PriorityQueue<Double> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+
+        for (int num : arr) {
+            sum += num;
+            maxHeap.add((double) num);
+        }
+        double target = sum / 2;
+        double reduced = 0;
+        int ops = 0;
+
+        while (reduced < target) {
+            double largest = maxHeap.poll();
+            double half = largest / 2;
+            reduced += half;
+            maxHeap.add(half);
+            ops++;
+        }
+        return ops;
+    }
+}
