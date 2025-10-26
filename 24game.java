@@ -1,4 +1,3 @@
-// 24 Game
 // Problem Description
 // You are given an array of four integers, cards, with each number in the range [1, 9]. The goal is to determine if you can use these four numbers, along with the standard operators +, -, *, /, and parentheses, to form a mathematical expression that evaluates to 24.
 
