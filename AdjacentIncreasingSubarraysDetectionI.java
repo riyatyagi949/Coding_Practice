@@ -15,8 +15,7 @@
  * * Constraints:
  * 2 <= nums.length <= 100
  * 1 < 2 * k <= nums.length
- */
-/**
+ *//**
      * Optimal Solution: Sliding Window with Pre-calculation (or direct check)
      * ---------------------------------------------------------------------
      * The problem requires us to find a starting index 'a' such that the window 
