@@ -46,3 +46,48 @@
  */
 // Optimal Solution in Java -
 import java.util.*;
+
+class Solution {
+    public int diameter(int V, int[][] edges) {
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < V; i++) adj.add(new ArrayList<>());
+        for (int[] e : edges) {
+            adj.get(e[0]).add(e[1]);
+            adj.get(e[1]).add(e[0]);
+        }
+        int farthestNode = bfsToFindFarthest(V, adj, 0)[0];
+        int diameter = bfsToFindFarthest(V, adj, farthestNode)[1];
+
+        return diameter;
+    }
+    private int[] bfsToFindFarthest(int V, List<List<Integer>> adj, int start)
+    {
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] visited = new boolean[V];
+        int[] dist = new int[V];
+
+        q.add(start);
+        visited[start] = true;
+
+        while (!q.isEmpty()) {
+            int node = q.poll();
+            for (int neighbor : adj.get(node)) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    dist[neighbor] = dist[node] + 1;
+                    q.add(neighbor);
+                }
+            }
+        }
+        int farthestNode = start;
+        int maxDist = 0;
+        for (int i = 0; i < V; i++) {
+            if (dist[i] > maxDist) {
+                maxDist = dist[i];
+                farthestNode = i;
+            }
+        }
+        return new int[]{farthestNode, maxDist};
+    }
+}
+
