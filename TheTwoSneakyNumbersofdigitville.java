@@ -44,4 +44,23 @@
  * - Overall space complexity: O(n).
  */
 // Optimal Solution in Java - 
-import java.util.*;
+class Solution {
+    public int[] getSneakyNumbers(int[] nums) {
+        int n = nums.length;
+        boolean[] seen = new boolean[n];
+        int[] result = new int[2];
+        int index = 0;
+
+        for (int num : nums)
+         {
+            if (seen[num])
+             {
+                result[index++] = num;
+            } 
+            else {
+                seen[num] = true;
+            }
+        }
+        return result;
+    }
+}
