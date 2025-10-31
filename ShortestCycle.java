@@ -51,3 +51,53 @@
  */
 // Optimal Solution in Java - 
 import java.util.*;
+
+class Solution {
+    public int shortCycle(int V, int[][] edges) {
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < V; i++) adj.add(new ArrayList<>());
+        for (int[] e : edges) {
+            adj.get(e[0]).add(e[1]);
+            adj.get(e[1]).add(e[0]);
+        }
+        int shortestCycle = Integer.MAX_VALUE;
+
+        for (int start = 0; start < V; start++) {
+            int[] dist = new int[V];
+            Arrays.fill(dist, -1);
+            int[] parent = new int[V];
+            Arrays.fill(parent, -1);
+
+            Queue<Integer> q = new LinkedList<>();
+            q.add(start);
+            dist[start] = 0;
+
+            while (!q.isEmpty()) {
+                int u = q.poll();
+
+                for (int v : adj.get(u)) {
+                    if (dist[v] == -1) { 
+                        dist[v] = dist[u] + 1;
+                        parent[v] = u;
+                        q.add(v);
+                    }
+                    else if (parent[u] != v) {
+                        int cycleLength = dist[u] + dist[v] + 1;
+                        shortestCycle = Math.min(shortestCycle, cycleLength);
+                    }
+                }
+            }
+        }
+        return (shortestCycle == Integer.MAX_VALUE) ? -1 : shortestCycle;
+    }
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int V1 = 7;
+        int[][] edges1 = {{0,5},{0,6},{5,1},{6,1},{6,2},{2,3},{3,4},{1,4}};
+        System.out.println(sol.shortCycle(V1, edges1)); 
+
+        int V2 = 7;
+        int[][] edges2 = {{0,5},{0,6},{1,2},{1,4},{1,5},{1,6},{2,6},{2,3},{3,4}};
+        System.out.println(sol.shortCycle(V2, edges2)); 
+    }
+}
