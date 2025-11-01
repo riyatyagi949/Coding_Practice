@@ -34,6 +34,8 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+// Optimal Solution in Java -
+
 class Solution {
     public ListNode modifiedList(int[] nums, ListNode head) {
         int max = -1;
