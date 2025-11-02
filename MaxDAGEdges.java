@@ -56,8 +56,6 @@
 // Optimal Solution in Java - 
 import java.util.*;
 
-import java.util.*;
-
 class Solution {
     public int maxEdgesToAdd(int V, int[][] edges) {
         boolean[][] adj = new boolean[V][V];
