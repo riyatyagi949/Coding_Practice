@@ -55,3 +55,46 @@
  */
 // Optimal Solution in Java - 
 import java.util.*;
+
+import java.util.*;
+
+class Solution {
+    public int maxEdgesToAdd(int V, int[][] edges) {
+        boolean[][] adj = new boolean[V][V];
+        int[] indegree = new int[V];
+
+        for (int[] e : edges) {
+            adj[e[0]][e[1]] = true;
+            indegree[e[1]]++;
+        }
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < V; i++) 
+        {
+            if (indegree[i] == 0) q.offer(i);
+        }
+        List<Integer> topo = new ArrayList<>();
+        while (!q.isEmpty()) {
+            int node = q.poll();
+            topo.add(node);
+            for (int v = 0; v < V; v++) 
+            {
+                if (adj[node][v])
+                {
+                    indegree[v]--;
+                    if (indegree[v] == 0) q.offer(v);
+                }
+            }
+        }
+        int count = 0;
+        for (int i = 0; i < V; i++)
+        {
+            for (int j = i + 1; j < V; j++) 
+            {
+                int u = topo.get(i);
+                int v = topo.get(j);
+                if (!adj[u][v]) count++;
+            }
+        }
+        return count;
+    }
+}
