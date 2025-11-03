@@ -57,3 +57,49 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+class Solution {
+    public ArrayList<Integer> safeNodes(int V, int[][] edges) 
+    {
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < V; i++) 
+        adj.add(new ArrayList<>());
+        
+        for (int[] edge : edges) 
+        adj.get(edge[0]).add(edge[1]);
+
+        List<List<Integer>> revGraph = new ArrayList<>();
+        for (int i = 0; i < V; i++) 
+        revGraph.add(new ArrayList<>());
+
+        int[] indegree = new int[V];
+        for (int u = 0; u < V; u++)
+        {
+            for (int v : adj.get(u))
+            {
+                revGraph.get(v).add(u);
+                indegree[u]++;
+            }
+        }
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < V; i++)
+        {
+            if (indegree[i] == 0) q.add(i);
+        }
+        ArrayList<Integer> safeNodes = new ArrayList<>();
+        while (!q.isEmpty())
+        {
+            int node = q.poll();
+            safeNodes.add(node);
+            
+            for (int neighbor : revGraph.get(node))
+            {
+                indegree[neighbor]--;
+                if (indegree[neighbor] == 0) q.add(neighbor);
+            }
+        }
+        Collections.sort(safeNodes);
+        return safeNodes;
+    }
+}
+
