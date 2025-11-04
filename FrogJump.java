@@ -51,3 +51,28 @@
  * - We avoid creating the O(N) auxiliary DP array.
  */
 // Optimal Solution in Java -
+
+class Solution {
+    int minCost(int[] height) {
+        int n = height.length;
+        if (n == 1)
+        return 0;
+        
+        int prev = 0; 
+        int prev2 = 0; 
+
+        for (int i = 1; i < n; i++)
+        {
+            int oneStep = prev + Math.abs(height[i] - height[i - 1]);
+            int twoStep = Integer.MAX_VALUE;
+            if (i > 1) 
+            {
+                twoStep = prev2 + Math.abs(height[i] - height[i - 2]);
+            }
+            int curr = Math.min(oneStep, twoStep);
+            prev2 = prev;
+            prev = curr;
+        }
+        return prev;
+    }
+}
