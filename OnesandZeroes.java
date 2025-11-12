@@ -38,9 +38,9 @@ class Solution{
      {
         int[][] dp = new int[m + 1][n + 1];
         
-        for (String s : strs) {
-            
-            int zeros = 0, ones = 0;
+        for (String s : strs)
+         {
+        int zeros = 0, ones = 0;
             for (char c : s.toCharArray())
              {
                 if (c == '0')
