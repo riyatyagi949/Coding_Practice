@@ -51,3 +51,23 @@
  * - This leads to O(3) or O(1) space complexity.
  */
 // Optimal Solution in Java -
+
+class Solution {
+    public int maxSumDivThree(int[] nums) {
+        int[] dp = new int[3]; 
+
+        for (int num : nums)
+             {
+            int[] temp = dp.clone();  
+
+            for (int r = 0; r < 3; r++) 
+                {
+                int newSum = temp[r] + num;
+                int newRemainder = newSum % 3;
+                dp[newRemainder] = Math.max(dp[newRemainder], newSum);
+            }
+        }
+         return dp[0];  
+    }
+}
+
