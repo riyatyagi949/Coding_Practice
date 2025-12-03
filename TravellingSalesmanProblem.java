@@ -47,4 +47,44 @@
  * O(N * 2^N), where N is the number of cities.
  * - This space is required to store the memoization table `dp[1 << N][N]`.
  */
-// Code - 
+// Optimal Solution Code - 
+
+class Solution {
+    private int n;
+    private int[][] cost;
+    private int[][] dp;
+
+    public int tsp(int[][] cost) {
+        this.n = cost.length;
+        this.cost = cost;
+
+        dp = new int[1 << n][n];
+
+        for (int i = 0; i < (1 << n); i++)
+            Arrays.fill(dp[i], -1);
+            return solve(1, 0);
+    }
+    private int solve(int mask, int pos) {
+        if (mask == (1 << n) - 1)
+        {
+            return cost[pos][0];
+        }
+        if (dp[mask][pos] != -1) 
+        return dp[mask][pos];
+
+        int ans = Integer.MAX_VALUE;
+
+        for (int city = 0; city < n; city++) 
+        {
+            if ((mask & (1 << city)) == 0) 
+            { 
+                int newMask = mask | (1 << city);
+                int newCost = cost[pos][city] + solve(newMask, city);
+                ans = Math.min(ans, newCost);
+            }
+        }
+        dp[mask][pos] = ans;
+        return ans;
+    }
+}
+
