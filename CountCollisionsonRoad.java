@@ -57,3 +57,26 @@
  * - Using the character array for clean iteration, the complexity is O(N).
  */
 // Code - 
+
+class Solution {
+    public int countCollisions(String directions) {
+        char[] arr = directions.toCharArray();
+        int n = arr.length;
+        int i = 0, j = n - 1;
+        int collisions = 0;
+
+        while (i < n && arr[i] == 'L')
+         i++;
+
+        while (j >= 0 && arr[j] == 'R') 
+        j--;
+
+        for (int k = i; k <= j; k++) 
+        {
+            if (arr[k] != 'S')
+            collisions++;
+        }
+
+        return collisions;
+    }
+}
