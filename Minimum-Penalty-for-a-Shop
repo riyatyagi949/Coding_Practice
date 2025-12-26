@@ -1,1 +1,77 @@
+/**
+ * PROBLEM STATEMENT: 2483. Minimum Penalty for a Shop
+ * --------------------------------------------------------------------------------
+ * You are given a customer visit log of a shop represented by a 0-indexed string 
+ * 'customers' consisting of 'N' (No customers) and 'Y' (Yes customers).
+ * * If the shop closes at the j-th hour (0 <= j <= n):
+ * 1. For every hour when the shop is OPEN (hour < j) and NO customers come ('N'), 
+ * the penalty increases by 1.
+ * 2. For every hour when the shop is CLOSED (hour >= j) and customers COME ('Y'), 
+ * the penalty increases by 1.
+ * * Goal: Return the earliest hour (0-indexed) at which the shop must be closed 
+ * to incur the minimum total penalty.
+ * * Example 1: customers = "YYNY" -> Output: 2
+ * Example 2: customers = "NNNNN" -> Output: 0
+ * --------------------------------------------------------------------------------
+ * * OPTIMAL SOLUTION: ONE-PASS / TWO-PASS PREFIX SUM LOGIC
+ * --------------------------------------------------------------------------------
+ * A naive approach would calculate the penalty for every possible closing hour,
+ * resulting in O(N^2). We can optimize this by calculating the penalty changes.
+ * * * Core Insight:
+ * If we close at hour 0, the penalty is simply the count of all 'Y's in the string
+ * (because the shop is closed for all hours and every 'Y' hour incurs a penalty).
+ * * As we move the closing time from hour 'i' to 'i+1':
+ * - If customers[i] was 'Y': The shop was closed at hour 'i', but now it's open.
+ * The penalty for this 'Y' disappears. Penalty decreases by 1.
+ * - If customers[i] was 'N': The shop was closed at hour 'i', but now it's open.
+ * The shop is now open during an 'N' hour. Penalty increases by 1.
+ * * * Algorithm Steps:
+ * 1. Calculate the initial penalty if we close at hour 0 (count all 'Y's).
+ * 2. Iterate through the string, updating the penalty based on the character at 
+ * the current hour.
+ * 3. Track the minimum penalty encountered and the earliest hour it occurred.
+ * --------------------------------------------------------------------------------
+ * * COMPLEXITY ANALYSIS:
+ * --------------------------------------------------------------------------------
+ * Time Complexity: O(N)
+ * - One pass to count initial 'Y's (can be optimized to one pass total with relative
+ * penalty tracking, but two passes are clearer and still O(N)).
+ * - One pass to iterate through the string to find the minimum penalty.
+ * * Space Complexity: O(1)
+ * - We only use a few integer variables to store current penalty, min penalty, 
+ * and the best hour.
+ * --------------------------------------------------------------------------------
+ */
+Optimal Solution in Java - 
+
+class Solution {
+    public int bestClosingTime(String customers) {
+        int penalty = 0;
+
+        for (char c : customers.toCharArray())
+         {
+          if (c == 'Y') 
+          penalty++;
+        }
+        int minPenalty = penalty;
+        int bestHour = 0;
+
+        for (int i = 0; i < customers.length(); i++) 
+        {
+          if (customers.charAt(i) == 'Y') {
+                penalty--;
+            }
+             else {
+              penalty++;
+            }
+         if (penalty < minPenalty)
+          {
+             minPenalty = penalty;
+             bestHour = i + 1;
+            }
+        }
+        return bestHour;
+    }
+}
+
 
